@@ -38,7 +38,7 @@ AppAsset::register($this);
             'options' => ['class' => 'navbar-nav navbar-pull nav-pills'],
             #修改使用yii2-admin的菜单控制项
             'items' => [
-                // ['label' => '新闻管理', 'url' => ['/admin/news/index']]
+                ['label' => '产品管理', 'url' => ['/admin/product/index']]
             ],
         ]);
 

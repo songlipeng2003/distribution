@@ -6,6 +6,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'zh-CN',
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
@@ -63,6 +64,12 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
+        'generators' => [
+            'crud' => [
+                'class'     => 'yii\gii\generators\crud\Generator',
+                'templates' => ['admin' => '@app/generators/crud/admin']
+            ]
+        ],
     ];
 }
 
