@@ -7,4 +7,5 @@ return [
 
     // models
     'Products' => '商品',
+    'Orders' => '订单',
 ];
