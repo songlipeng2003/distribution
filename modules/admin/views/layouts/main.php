@@ -44,12 +44,12 @@ AppAsset::register($this);
             ],
         ]);
 
-        if (Yii::$app->user->isGuest) {
-            $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];
+        if (Yii::$app->admin->isGuest) {
+            $menuItems[] = ['label' => '登录', 'url' => ['/admin/account/login']];
         } else {
             $menuItems[] = [
-                'label' => '注销 (' . Yii::$app->user->identity->name . ')',
-                'url' => ['/site/logout'],
+                'label' => '注销 (' . Yii::$app->admin->identity->username . ')',
+                'url' => ['/admin/account/logout'],
                 'linkOptions' => ['data-method' => 'post'],
             ];
             $menuItems[] = ['label' => '修改密码', 'url' => ['/admin/account/change-password']];
