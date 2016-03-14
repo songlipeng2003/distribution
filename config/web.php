@@ -14,6 +14,9 @@ $config = [
         'user' => [
             'class' => 'app\modules\user\Module',
         ],
+        'weixin' => [
+            'class' => 'app\modules\weixin\Module',
+        ],
     ],
     'components' => [
         'request' => [
