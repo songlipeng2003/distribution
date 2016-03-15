@@ -17,6 +17,9 @@ $config = [
         'weixin' => [
             'class' => 'app\modules\weixin\Module',
         ],
+        'mobile' => [
+            'class' => 'app\modules\mobile\Module',
+        ],
     ],
     'components' => [
         'request' => [
