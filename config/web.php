@@ -61,7 +61,16 @@ $config = [
             'showScriptName' => false,
             'rules' => require(__DIR__ . '/db.php'),
         ],
-        
+
+        'view' => [
+            'theme' => [
+                'basePath' => '@app/themes/default',
+                'baseUrl' => '@web/themes/default',
+                'pathMap' => [
+                    '@app/views' => '@app/themes/default',
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];
