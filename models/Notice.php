@@ -52,7 +52,8 @@ class Notice extends ActiveRecord
         ];
     }
 
-    public function behaviors(){
+    public function behaviors()
+    {
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),

@@ -9,4 +9,5 @@ return [
     'Products' => '商品',
     'Orders' => '订单',
     'Notices' => '公告',
+    'Employees' => '员工'
 ];
