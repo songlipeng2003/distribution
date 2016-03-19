@@ -22,7 +22,7 @@ class Weixin
 
                 'log' => [
                     'level' => 'debug',
-                    'file'  => Yii::$app->basePath . '/runtime/tmp/weixin.log',
+                    'file'  => Yii::$app->basePath . '/runtime/logs/weixin.log',
                 ],
                 'oauth' => [
                     'scopes'   => ['snsapi_userinfo'],
