@@ -13,4 +13,5 @@ return [
     'Extracts' => '提现',
     'Weixin Users' => '微信用户',
     'Weixin Articles' => '微信文章',
+    'Weixin Groups' => '微信用户群组'
 ];

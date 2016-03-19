@@ -41,6 +41,7 @@ AppAsset::register($this);
                 ['label' => '产品管理', 'url' => ['/admin/product/index']],
                 ['label' => '订单管理', 'url' => ['/admin/order/index']],
                 ['label' => '公告管理', 'url' => ['/admin/notice/index']],
+                ['label' => '员工管理', 'url' => ['/admin/employee/index']],
                 ['label' => '提现管理', 'url' => ['/admin/extract/index']],
                 [
                     'label' => '微信管理', 
@@ -48,6 +49,7 @@ AppAsset::register($this);
                     'items' => [
                         ['label' => '微信菜单管理', 'url' => ['/weixin/admin/menu/index']],
                         ['label' => '微信用户管理', 'url' => ['/weixin/admin/weixin-user/index']],
+                        ['label' => '微信用户群组管理', 'url' => ['/weixin/admin/weixin-group/index']],
                         ['label' => '微信文章管理', 'url' => ['/weixin/admin/weixin-article/index']]
                     ]
                 ]
