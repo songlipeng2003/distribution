@@ -88,6 +88,10 @@ class Employee extends ActiveRecord implements IdentityInterface
                 $this->token = Yii::$app->getSecurity()->generateRandomString();
             }
 
+            if(sizeof($this->password)!=32){
+                $this->password = md5($this->password);
+            }
+
             return true;
         }
 

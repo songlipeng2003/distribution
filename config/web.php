@@ -14,6 +14,9 @@ $config = [
         'user' => [
             'class' => 'app\modules\user\Module',
         ],
+        'employee' => [
+            'class' => 'app\modules\employee\Module',
+        ],
         'weixin' => [
             'class' => 'app\modules\weixin\Module',
         ],
@@ -62,7 +65,7 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require(__DIR__ . '/db.php'),
+            'rules' => require(__DIR__ . '/route.php'),
         ],
 
         'view' => [
