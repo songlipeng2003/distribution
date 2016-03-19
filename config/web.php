@@ -26,9 +26,12 @@ $config = [
         'api' => [
             'class' => 'app\modules\api\Module',
         ],
-         'settings' => [
+        'settings' => [
             'class' => 'yii2mod\settings\Module',
-         ],
+        ],
+        'shop' => [
+            'class' => 'app\modules\shop\Module',
+        ],
     ],
     'components' => [
         'request' => [
