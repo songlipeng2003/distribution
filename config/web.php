@@ -32,6 +32,9 @@ $config = [
         'shop' => [
             'class' => 'app\modules\shop\Module',
         ],
+        'gridview' => [
+            'class' => '\kartik\grid\Module'
+        ]
     ],
     'components' => [
         'request' => [

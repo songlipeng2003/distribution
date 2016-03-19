@@ -11,4 +11,5 @@ return [
     'Notices' => '公告',
     'Employees' => '员工',
     'Extracts' => '提现',
+    'Weixin Users' => '微信用户',
 ];
