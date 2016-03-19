@@ -106,7 +106,7 @@ class Admin extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return $this->username;
     }
 
     /**
@@ -114,7 +114,7 @@ class Admin extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        return $this->username === $authKey;
     }
 
     /**
