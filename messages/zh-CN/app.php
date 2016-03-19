@@ -12,4 +12,5 @@ return [
     'Employees' => '员工',
     'Extracts' => '提现',
     'Weixin Users' => '微信用户',
+    'Weixin Articles' => '微信文章',
 ];
