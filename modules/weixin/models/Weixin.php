@@ -26,7 +26,7 @@ class Weixin
                 ],
                 'oauth' => [
                     'scopes'   => ['snsapi_userinfo'],
-                    'callback' => '/weixin/auth/login',
+                    'callback' => '/weixin/auth/callback',
                 ],
 
                 // /**

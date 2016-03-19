@@ -2,6 +2,8 @@
 
 namespace app\modules\weixin\controllers;
 
+use Yii;
+
 use yii\web\Controller;
 
 use app\models\User;
@@ -16,6 +18,8 @@ class AuthController extends Controller
         $oauth = $app->oauth;
         if(Yii::$app->user->isGuest){
             return $oauth->redirect();
+        }else{
+            $this->redirect("/shop/");
         }
     }
 
@@ -25,11 +29,11 @@ class AuthController extends Controller
         $oauth = $app->oauth;
         $oauthUser = $oauth->user();
         if($user){
-            $weixinUser = new WeixinUser({
+            $weixinUser = new WeixinUser([
                 'openid' => $oauthUser->getId(),
                 'nickname' => $oauthUser->getNickname(),
                 'avatar' => $oauthUser->getAvatar(),
-            });
+            ]);
             $weixinUser->save();
 
             // $token = $user->getToken();
