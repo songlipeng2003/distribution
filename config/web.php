@@ -23,6 +23,9 @@ $config = [
         'mobile' => [
             'class' => 'app\modules\mobile\Module',
         ],
+        'api' => [
+            'class' => 'app\modules\api\Module',
+        ],
     ],
     'components' => [
         'request' => [
