@@ -40,7 +40,8 @@ AppAsset::register($this);
             'items' => [
                 ['label' => '产品管理', 'url' => ['/admin/product/index']],
                 ['label' => '订单管理', 'url' => ['/admin/order/index']],
-                ['label' => '公告管理', 'url' => ['/admin/notice/index']]
+                ['label' => '公告管理', 'url' => ['/admin/notice/index']],
+                ['label' => '提现管理', 'url' => ['/admin/extract/index']]
             ],
         ]);
 
