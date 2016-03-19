@@ -26,6 +26,9 @@ $config = [
         'api' => [
             'class' => 'app\modules\api\Module',
         ],
+         'settings' => [
+            'class' => 'yii2mod\settings\Module',
+         ],
     ],
     'components' => [
         'request' => [
@@ -79,6 +82,9 @@ $config = [
                     '@app/views' => '@app/themes/default',
                 ],
             ],
+        ],
+        'settings' => [
+            'class' => 'yii2mod\settings\components\Settings',
         ],
     ],
     'params' => $params,

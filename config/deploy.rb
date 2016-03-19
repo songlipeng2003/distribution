@@ -57,8 +57,9 @@ namespace :deploy do
   task :migrate do
     on roles(:app) do
       within release_path do
-        # execute "cd #{release_path} && app./yii migrate --migrationPath=@yii/rbac/migrations --interactive=0"
-        # execute "cd #{release_path} && app./yii migrate --migrationPath=@mdm/admin/migrations --interactive=0"
+        # execute "cd #{release_path} && ./yii migrate --migrationPath=@yii/rbac/migrations --interactive=0"
+        # execute "cd #{release_path} && ./yii migrate --migrationPath=@mdm/admin/migrations --interactive=0"
+        execute "cd #{release_path} && ./yii migrate --migrationPath=@vendor/yii2mod/yii2-settings/migrations --interactive=0"
         execute "cd #{release_path} && ./yii migrate --interactive=0"
       end
     end
