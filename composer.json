@@ -25,7 +25,8 @@
         "yiisoft/yii2-jui": "^2.0",
         "yii2mod/yii2-settings": "^1.0",
         "npm-asset/underscore": "^1.8",
-        "bower-asset/angular": "^1.4.3"
+        "bower-asset/angular": "^1.4.3",
+        "bower-asset/amazeui": "^2.5"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

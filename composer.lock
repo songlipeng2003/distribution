@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c3dea8e27fd51d823d4dab766c413f70",
-    "content-hash": "7c7febb6fdf7225fe879f279f8a7adf2",
+    "hash": "7d0e8e1eb2affd360a02d5675a669b4c",
+    "content-hash": "d0d8adf1db6d1aa8174022f612f6dd0f",
     "packages": [
         {
             "name": "bower-asset/adminlte",
@@ -51,6 +51,59 @@
                 "responsive",
                 "template",
                 "theme"
+            ]
+        },
+        {
+            "name": "bower-asset/amazeui",
+            "version": "v2.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amazeui/amazeui.git",
+                "reference": "a50a9c67fd4d9d988705bcc171a22b78dd621220"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amazeui/amazeui/zipball/a50a9c67fd4d9d988705bcc171a22b78dd621220",
+                "reference": "a50a9c67fd4d9d988705bcc171a22b78dd621220",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/handlebars": "dev-default|*",
+                "bower-asset/jquery": "dev-default|*"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "dist/css/amazeui.css",
+                    "dist/css/amazeui.min.css",
+                    "dist/js/amazeui.js",
+                    "dist/js/amazeui.min.js"
+                ],
+                "bower-asset-ignore": [
+                    "/.*",
+                    "composer.json",
+                    "CONTRIBUTING.md",
+                    "docs",
+                    "vendor",
+                    "tools",
+                    "node_modules",
+                    "nodemon.json"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "The first crossing screen front-end framework in China, for developing mobile first, responsive web projects.",
+            "keywords": [
+                "css",
+                "framework",
+                "front-end",
+                "js",
+                "less",
+                "mobile-first",
+                "responsive",
+                "web",
+                "web-components"
             ]
         },
         {
@@ -287,6 +340,28 @@
             "description": "Font Awesome"
         },
         {
+            "name": "bower-asset/handlebars",
+            "version": "v4.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/handlebars.js.git",
+                "reference": "1e5029661491d012a69ccc2c370837cf362054db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/handlebars.js/zipball/1e5029661491d012a69ccc2c370837cf362054db",
+                "reference": "1e5029661491d012a69ccc2c370837cf362054db",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "handlebars.js"
+            },
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "bower-asset/jquery",
             "version": "2.2.1",
             "source": {
@@ -460,7 +535,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/cebe/markdown/54a2c49de31cc44e864ebf0500a35ef21d0010b2.zip",
+                "url": "https://packagist.phpcomposer.com/files/cebe/markdown/54a2c49de31cc44e864ebf0500a35ef21d0010b2.zip",
                 "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2",
                 "shasum": ""
             },
@@ -690,7 +765,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/ezyang/htmlpurifier/6f389f0f25b90d0b495308efcfa073981177f0fd.zip",
+                "url": "https://packagist.phpcomposer.com/files/ezyang/htmlpurifier/6f389f0f25b90d0b495308efcfa073981177f0fd.zip",
                 "reference": "6f389f0f25b90d0b495308efcfa073981177f0fd",
                 "shasum": ""
             },
@@ -1421,7 +1496,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/swiftmailer/swiftmailer/0697e6aa65c83edf97bb0f23d8763f94e3f11421.zip",
+                "url": "https://packagist.phpcomposer.com/files/swiftmailer/swiftmailer/0697e6aa65c83edf97bb0f23d8763f94e3f11421.zip",
                 "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421",
                 "shasum": ""
             },
@@ -2056,480 +2131,6 @@
             "time": "2015-05-29 06:29:14"
         },
         {
-            "name": "johnitvn/yii2-ajaxcrud",
-            "version": "2.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/johnitvn/yii2-ajaxcrud.git",
-                "reference": "3a27ede9e1f94173d4af69d8b688b611b1e28d43"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/johnitvn/yii2-ajaxcrud/3a27ede9e1f94173d4af69d8b688b611b1e28d43.zip",
-                "reference": "3a27ede9e1f94173d4af69d8b688b611b1e28d43",
-                "shasum": ""
-            },
-            "require": {
-                "kartik-v/yii2-editable": "^1.7.3",
-                "kartik-v/yii2-grid": "^3.0.4",
-                "kartik-v/yii2-mpdf": "^1.0.0",
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-bootstrap": "*",
-                "yiisoft/yii2-gii": "*"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "bootstrap": "johnitvn\\ajaxcrud\\Bootstrap"
-            },
-            "autoload": {
-                "psr-4": {
-                    "johnitvn\\ajaxcrud\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "John Martin",
-                    "email": "john.itvn@gmail.com",
-                    "homepage": "https://github.com/johnitvn?tab=repositories"
-                }
-            ],
-            "description": "Gii CRUD template for Single Page Ajax Administration for yii2",
-            "keywords": [
-                "ajax",
-                "crud",
-                "database",
-                "extension",
-                "gii",
-                "template",
-                "yii2"
-            ],
-            "time": "2016-02-23 09:33:41"
-        },
-        {
-            "name": "kartik-v/bootstrap-popover-x",
-            "version": "v1.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/bootstrap-popover-x.git",
-                "reference": "ce1d165af25f6e6caaf97083e20b5a3ad7c7b7c6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/kartik-v/bootstrap-popover-x/ce1d165af25f6e6caaf97083e20b5a3ad7c7b7c6.zip",
-                "reference": "ce1d165af25f6e6caaf97083e20b5a3ad7c7b7c6",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "kartik\\plugins\\popover\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD 3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "Bootstrap Popover Extended - Popover with modal behavior, styling enhancements and more.",
-            "homepage": "https://github.com/kartik-v/bootstrap-popover-x",
-            "keywords": [
-                "bootstrap",
-                "extended",
-                "jquery",
-                "modal",
-                "modal-popover",
-                "popover",
-                "popover-x"
-            ],
-            "time": "2015-03-18 13:08:39"
-        },
-        {
-            "name": "kartik-v/mpdf",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/mpdf.git",
-                "reference": "6ab0ae3a82673e514f168c8e6da02289e6d95f2c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/kartik-v/mpdf/6ab0ae3a82673e514f168c8e6da02289e6d95f2c.zip",
-                "reference": "6ab0ae3a82673e514f168c8e6da02289e6d95f2c",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=4.3.10"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "mpdf.php",
-                    "classes"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-1.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Ian N Back"
-                }
-            ],
-            "description": "A PHP class to generate PDF files from HTML with Unicode/UTF-8 and CJK support. This is a fork of the official mPDF library.",
-            "homepage": "http://www.mpdf1.com/mpdf/index.php",
-            "keywords": [
-                "pdf",
-                "php",
-                "utf-8"
-            ],
-            "time": "2015-05-05 07:34:49"
-        },
-        {
-            "name": "kartik-v/yii2-editable",
-            "version": "v1.7.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/yii2-editable.git",
-                "reference": "7c25b5bb6b21027eaf11b6ee4bba5c9f00cf04cd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/kartik-v/yii2-editable/7c25b5bb6b21027eaf11b6ee4bba5c9f00cf04cd.zip",
-                "reference": "7c25b5bb6b21027eaf11b6ee4bba5c9f00cf04cd",
-                "shasum": ""
-            },
-            "require": {
-                "kartik-v/yii2-krajee-base": "~1.7",
-                "kartik-v/yii2-popover-x": "~1.3"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "kartik\\editable\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "An enhanced editable widget for Yii 2.0 that allows easy editing of displayed data with numerous configuration possibilities.",
-            "homepage": "https://github.com/kartik-v/yii2-editable",
-            "keywords": [
-                "bootstrap",
-                "editable",
-                "input",
-                "jquery",
-                "popover",
-                "popover-x",
-                "widget"
-            ],
-            "time": "2015-12-27 16:31:06"
-        },
-        {
-            "name": "kartik-v/yii2-grid",
-            "version": "v3.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/yii2-grid.git",
-                "reference": "8cf8bb9ef3e9dc94933c54fcffdc91471de40ecf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/kartik-v/yii2-grid/8cf8bb9ef3e9dc94933c54fcffdc91471de40ecf.zip",
-                "reference": "8cf8bb9ef3e9dc94933c54fcffdc91471de40ecf",
-                "shasum": ""
-            },
-            "require": {
-                "kartik-v/yii2-krajee-base": "~1.7"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "kartik\\grid\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "Yii 2 GridView on steroids. Various enhancements and utilities for the Yii 2.0 GridView widget.",
-            "homepage": "https://github.com/kartik-v/yii2-grid",
-            "keywords": [
-                "extension",
-                "grid",
-                "widget",
-                "yii2"
-            ],
-            "time": "2016-01-14 07:03:28"
-        },
-        {
-            "name": "kartik-v/yii2-krajee-base",
-            "version": "1.8.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-                "reference": "0c274e31e4392cbafc5fe158eae81738794e02ce"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/kartik-v/yii2-krajee-base/0c274e31e4392cbafc5fe158eae81738794e02ce.zip",
-                "reference": "0c274e31e4392cbafc5fe158eae81738794e02ce",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2-bootstrap": "@dev"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "kartik\\base\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "Base library and foundation components for all Yii2 Krajee extensions.",
-            "homepage": "https://github.com/kartik-v/yii2-krajee-base",
-            "keywords": [
-                "base",
-                "extension",
-                "foundation",
-                "krajee",
-                "widget",
-                "yii2"
-            ],
-            "time": "2016-01-10 12:26:29"
-        },
-        {
-            "name": "kartik-v/yii2-mpdf",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/yii2-mpdf.git",
-                "reference": "4599a1d95d7e0afb3279322e302717b7e4f52dd3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/kartik-v/yii2-mpdf/4599a1d95d7e0afb3279322e302717b7e4f52dd3.zip",
-                "reference": "4599a1d95d7e0afb3279322e302717b7e4f52dd3",
-                "shasum": ""
-            },
-            "require": {
-                "kartik-v/mpdf": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "kartik\\mpdf\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD 3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "A Yii2 wrapper component for the mPDF library which generates PDF files from UTF-8 encoded HTML.",
-            "homepage": "https://github.com/kartik-v/yii2-mpdf",
-            "keywords": [
-                "component",
-                "extension",
-                "html",
-                "mpdf",
-                "pdf",
-                "utf8",
-                "yii2"
-            ],
-            "time": "2014-11-10 18:09:37"
-        },
-        {
-            "name": "kartik-v/yii2-popover-x",
-            "version": "v1.3.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/yii2-popover-x.git",
-                "reference": "38f2208cf92f8c4a7758f485575a881cade1970c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/kartik-v/yii2-popover-x/38f2208cf92f8c4a7758f485575a881cade1970c.zip",
-                "reference": "38f2208cf92f8c4a7758f485575a881cade1970c",
-                "shasum": ""
-            },
-            "require": {
-                "kartik-v/bootstrap-popover-x": "~1.4",
-                "kartik-v/yii2-krajee-base": "~1.7"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "kartik\\popover\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "An extended bootstrap 3.0 popover widget which combines both the bootstrap popover and modal features and includes various new styling enhancements.",
-            "homepage": "https://github.com/kartik-v/yii2-popover-x",
-            "keywords": [
-                "bootstrap",
-                "extended",
-                "jquery",
-                "modal",
-                "modal-popover",
-                "popover",
-                "popover-x"
-            ],
-            "time": "2016-01-12 16:59:09"
-        },
-        {
-            "name": "kartik-v/yii2-widget-select2",
-            "version": "v2.0.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-                "reference": "4d03239c1e28ef8d3b96ab7fe360f5cbda34fb69"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/kartik-v/yii2-widget-select2/4d03239c1e28ef8d3b96ab7fe360f5cbda34fb69.zip",
-                "reference": "4d03239c1e28ef8d3b96ab7fe360f5cbda34fb69",
-                "shasum": ""
-            },
-            "require": {
-                "kartik-v/yii2-krajee-base": "~1.7"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "kartik\\select2\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "Enhanced Yii2 wrapper for the Select2 jQuery plugin (sub repo split from yii2-widgets).",
-            "homepage": "https://github.com/kartik-v/yii2-widget-select2",
-            "keywords": [
-                "dropdown",
-                "extension",
-                "form",
-                "jquery",
-                "plugin",
-                "select2",
-                "widget",
-                "yii2"
-            ],
-            "time": "2016-02-17 11:49:30"
-        },
-        {
-            "name": "pheme/yii2-toggle-column",
-            "version": "0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phemellc/yii2-toggle-column.git",
-                "reference": "1b210a9c337bd842f80952cb2fe728b99bcad09b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/phemellc/yii2-toggle-column/1b210a9c337bd842f80952cb2fe728b99bcad09b.zip",
-                "reference": "1b210a9c337bd842f80952cb2fe728b99bcad09b",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "\\pheme\\grid\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Aris Karageorgos",
-                    "email": "aris@phe.me"
-                }
-            ],
-            "description": "Provides a toggle data column and action",
-            "keywords": [
-                "column",
-                "extension",
-                "toggle",
-                "yii2"
-            ],
-            "time": "2016-03-10 03:36:52"
-        },
-        {
             "name": "phpspec/php-diff",
             "version": "v1.0.2",
             "source": {
@@ -2539,7 +2140,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/phpspec/php-diff/30e103d19519fe678ae64a60d77884ef3d71b28a.zip",
+                "url": "https://packagist.phpcomposer.com/files/phpspec/php-diff/30e103d19519fe678ae64a60d77884ef3d71b28a.zip",
                 "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
                 "shasum": ""
             },
