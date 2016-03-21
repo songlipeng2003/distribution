@@ -34,7 +34,14 @@ $config = [
         ],
         'gridview' => [
             'class' => '\kartik\grid\Module'
-        ]
+        ],
+        'yii2images' => [
+            'class' => 'rico\yii2images\Module',
+            'imagesStorePath' => 'uploads/images/store', //path to origin images
+            'imagesCachePath' => 'uploads/images/cache', //path to resized copies
+            'graphicsLibrary' => 'GD', //but really its better to use 'Imagick' 
+            // 'placeHolderPath' => '@webroot/images/placeHolder.png',
+        ],
     ],
     'components' => [
         'request' => [

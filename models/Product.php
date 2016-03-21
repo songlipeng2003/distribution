@@ -7,6 +7,8 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
+use rico\yii2images\behaviors\ImageBehave;
+
 /**
  * This is the model class for table "product".
  *
@@ -23,6 +25,8 @@ use yii\db\ActiveRecord;
  */
 class Product extends ActiveRecord
 {
+    public $files;
+
     /**
      * @inheritdoc
      */
@@ -41,7 +45,8 @@ class Product extends ActiveRecord
             [['price'], 'number'],
             [['quantity', 'status'], 'integer'],
             [['content'], 'string'],
-            [['name', 'image'], 'string', 'max' => 255]
+            [['name', 'image'], 'string', 'max' => 255],
+            ['files', 'safe']
         ];
     }
 
@@ -64,7 +69,8 @@ class Product extends ActiveRecord
         ];
     }
 
-    public function behaviors(){
+    public function behaviors()
+    {
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
@@ -74,6 +80,18 @@ class Product extends ActiveRecord
                 ],
                 'value' => function() { return date('Y-m-d H:m:i'); }
             ],
+            'image' => [
+                'class' => ImageBehave::className(),
+            ]
         ];
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        if($this->files){
+            foreach($this->files as $file){
+                $this->attachImage(Yii::getAlias("@webroot") . $file);
+            }
+        }
     }
 }

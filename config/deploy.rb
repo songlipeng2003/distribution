@@ -59,6 +59,7 @@ namespace :deploy do
       within release_path do
         # execute "cd #{release_path} && ./yii migrate --migrationPath=@yii/rbac/migrations --interactive=0"
         # execute "cd #{release_path} && ./yii migrate --migrationPath=@mdm/admin/migrations --interactive=0"
+        execute "cd #{release_path} && ./yii migrate/up --migrationPath=@vendor/costa-rico/yii2-images/migrations"
         execute "cd #{release_path} && ./yii migrate --migrationPath=@vendor/yii2mod/yii2-settings/migrations --interactive=0"
         execute "cd #{release_path} && ./yii migrate --interactive=0"
       end

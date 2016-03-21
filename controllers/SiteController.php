@@ -3,14 +3,20 @@
 namespace app\controllers;
 
 use Yii;
+
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use yii\web\Response;
+
 use app\models\LoginForm;
 use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+    public $enableCsrfValidation = false;
+
     public function behaviors()
     {
         return [
@@ -29,6 +35,7 @@ class SiteController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
+                    'upload' => ['post'],
                 ],
             ],
         ];
@@ -49,7 +56,8 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        // return $this->render('index');
+        return $this->redirect(['/shop/']);
     }
 
     public function actionLogin()
@@ -90,5 +98,34 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionUpload()
+    {
+        $file = UploadedFile::getInstanceByName('Filedata');
+
+        $ext = $file->getExtension();
+        $fileTypes = array('jpg','jpeg','gif','png');
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+    
+        if (in_array($ext, $fileTypes)) {
+            $filename = uniqid() . '.' . $ext;
+            $path = Yii::getAlias("@webroot") . '/uploads/tmp/';
+            if(!file_exists($path)){
+                mkdir($path, 0777, true);
+            }
+            $file->saveAs($path . $filename);
+            
+            return [
+                'result' => 0,
+                'file' => '/uploads/tmp/' . $filename
+            ];
+        } else {
+            return [
+                'result' => 1,
+                'msg' => '非法的文件类型'
+            ];
+        }
     }
 }
