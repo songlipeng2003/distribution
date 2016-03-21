@@ -1,4 +1,4 @@
-<div class="shop-default-index">
+<div class="user-default-index">
     <h1><?= $this->context->action->uniqueId ?></h1>
     <p>
         This is the view content for action "<?= $this->context->action->id ?>".
