@@ -23,8 +23,6 @@ ShopAsset::register($this);
 
 <?= $content ?>
 
-<?= $this->render('../elements/bottom') ?>
-
 <?php $this->endBody() ?>
 </body>
 </html>
