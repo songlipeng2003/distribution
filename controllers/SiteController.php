@@ -56,23 +56,16 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        // return $this->render('index');
         return $this->redirect(['/shop/']);
     }
 
     public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->redirect(['/shop/']);
+        }else{
+            return $this->redirect(['weixin/auth/login']);
         }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
     }
 
     public function actionLogout()
