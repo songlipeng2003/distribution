@@ -10,6 +10,11 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+tr th{
+    width: 10%;
+}
+</style>
 <div class="product-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -35,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'quantity',
             'saledNumber',
             'status',
-            'content:ntext',
+            'content:html',
             'createdAt',
             'updatedAt',
         ],

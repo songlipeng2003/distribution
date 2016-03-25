@@ -5,6 +5,8 @@ use yii\bootstrap\ActiveForm;
 
 use kucha\ueditor\UEditor;
 
+use app\assets\UploadifyAsset;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -18,7 +20,23 @@ use kucha\ueditor\UEditor;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+    <div class="form-group field-product-price required">
+        <label class="control-label col-sm-3" for="product-price">图片</label>
+        <div class="col-sm-6">
+            <div id="images" class="row">
+                <?php foreach ($model->getImages() as $image) {
+                    if($image){ ?>
+                    <div class="col-sm-3 thumbnail" data-image-id="<?= $image->id ?>">
+                        <img src="<?= $image->getUrl('300px') ?>" alt="">
+                    </div>
+                <?php 
+                    }
+                } 
+                ?>
+            </div>
+            <button type="button" id="file-upload" class="btn btn-default">上传</button>
+        </div>
+    </div>
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
@@ -37,3 +55,9 @@ use kucha\ueditor\UEditor;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php 
+$this->registerJsFile('/js/admin/product.js', ['depends' => [
+    UploadifyAsset::className(),
+]]);
+?>

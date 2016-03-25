@@ -39,16 +39,29 @@ AppAsset::register($this);
             #修改使用yii2-admin的菜单控制项
             'items' => [
                 ['label' => '产品管理', 'url' => ['/admin/product/index']],
-                ['label' => '订单管理', 'url' => ['/admin/order/index']]
+                ['label' => '订单管理', 'url' => ['/admin/order/index']],
+                ['label' => '公告管理', 'url' => ['/admin/notice/index']],
+                ['label' => '员工管理', 'url' => ['/admin/employee/index']],
+                ['label' => '提现管理', 'url' => ['/admin/extract/index']],
+                [
+                    'label' => '微信管理', 
+                    'url' => '#',
+                    'items' => [
+                        ['label' => '微信菜单管理', 'url' => ['/weixin/admin/menu/index']],
+                        ['label' => '微信用户管理', 'url' => ['/weixin/admin/weixin-user/index']],
+                        ['label' => '微信用户群组管理', 'url' => ['/weixin/admin/weixin-group/index']],
+                        ['label' => '微信文章管理', 'url' => ['/weixin/admin/weixin-article/index']]
+                    ]
+                ]
             ],
         ]);
 
-        if (Yii::$app->user->isGuest) {
-            $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];
+        if (Yii::$app->admin->isGuest) {
+            $menuItems[] = ['label' => '登录', 'url' => ['/admin/account/login']];
         } else {
             $menuItems[] = [
-                'label' => '注销 (' . Yii::$app->user->identity->name . ')',
-                'url' => ['/site/logout'],
+                'label' => '注销 (' . Yii::$app->admin->identity->username . ')',
+                'url' => ['/admin/account/logout'],
                 'linkOptions' => ['data-method' => 'post'],
             ];
             $menuItems[] = ['label' => '修改密码', 'url' => ['/admin/account/change-password']];

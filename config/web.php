@@ -11,6 +11,37 @@ $config = [
         'admin' => [
             'class' => 'app\modules\admin\Module',
         ],
+        'user' => [
+            'class' => 'app\modules\user\Module',
+        ],
+        'employee' => [
+            'class' => 'app\modules\employee\Module',
+        ],
+        'weixin' => [
+            'class' => 'app\modules\weixin\Module',
+        ],
+        'mobile' => [
+            'class' => 'app\modules\mobile\Module',
+        ],
+        'api' => [
+            'class' => 'app\modules\api\Module',
+        ],
+        'settings' => [
+            'class' => 'yii2mod\settings\Module',
+        ],
+        'shop' => [
+            'class' => 'app\modules\shop\Module',
+        ],
+        'gridview' => [
+            'class' => '\kartik\grid\Module'
+        ],
+        'yii2images' => [
+            'class' => 'rico\yii2images\Module',
+            'imagesStorePath' => 'uploads/images/store', //path to origin images
+            'imagesCachePath' => 'uploads/images/cache', //path to resized copies
+            'graphicsLibrary' => 'GD', //but really its better to use 'Imagick' 
+            // 'placeHolderPath' => '@webroot/images/placeHolder.png',
+        ],
     ],
     'components' => [
         'request' => [
@@ -23,6 +54,12 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+        ],
+        'admin' => [
+            'class' => 'yii\web\User',
+            'identityClass' => 'app\models\Admin',
+            'enableAutoLogin' => true,
+            'loginUrl' => ['/admin/account/login']
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -47,9 +84,21 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require(__DIR__ . '/db.php'),
+            'rules' => require(__DIR__ . '/route.php'),
         ],
-        
+
+        'view' => [
+            'theme' => [
+                'basePath' => '@app/themes/default',
+                'baseUrl' => '@web/themes/default',
+                'pathMap' => [
+                    '@app/views' => '@app/themes/default',
+                ],
+            ],
+        ],
+        'settings' => [
+            'class' => 'yii2mod\settings\components\Settings',
+        ],
     ],
     'params' => $params,
 ];
