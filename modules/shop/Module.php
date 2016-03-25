@@ -13,6 +13,9 @@ class Module extends \yii\base\Module
         parent::init();
 
         $this->modules = [
+            'user' => [
+                'class' => 'app\modules\shop\modules\user\Module',
+            ],
             'admin' => [
                 'class' => 'app\modules\shop\modules\admin\Module',
             ],
