@@ -13,6 +13,8 @@ use yii\web\Response;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
+use app\components\Utils;
+
 class SiteController extends Controller
 {
     public $enableCsrfValidation = false;
@@ -61,10 +63,20 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
-        if (!\Yii::$app->user->isGuest) {
-            return $this->redirect(['/shop/']);
+        if(Utils::isInWeixin()){
+            if (!\Yii::$app->user->isGuest) {
+                return $this->redirect(['/shop/']);
+            }else{
+                return $this->redirect(['weixin/auth/login']);
+            }
         }else{
-            return $this->redirect(['weixin/auth/login']);
+            $model = new LoginForm();
+            if ($model->load(Yii::$app->request->post()) && $model->login()) {
+                return $this->goBack();
+            }
+            return $this->render('login', [
+                'model' => $model,
+            ]);
         }
     }
 
