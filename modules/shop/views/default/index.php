@@ -17,7 +17,7 @@ $this->title = Yii::$app->name;
     <div>
     <?=  $product->getImage() ? Html::a(Html::img($product->getImage()->getUrl('500px')), ['product/view', 'id' => $product->id]) : '' ?>
     </div>
-<? } ?>
+<?php } ?>
 
 <?= $this->render('../elements/bottom') ?>
 
