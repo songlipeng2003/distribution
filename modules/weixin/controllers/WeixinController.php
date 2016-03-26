@@ -10,6 +10,8 @@ use app\modules\weixin\models\Weixin;
 
 class WeixinController extends Controller
 {
+    public $enableCsrfValidation = false;
+
     public function actionIndex()
     {
         Weixin::messageHandler();
