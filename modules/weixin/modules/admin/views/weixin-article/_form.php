@@ -26,7 +26,9 @@ use kucha\ueditor\UEditor;
 
     <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->widget(UEditor::className(), []) ?>
+    <?php //$form->field($model, 'content')->widget(UEditor::className(), []) ?>
+
+    <?= $form->field($model, 'content')->textArea() ?>
 
     <div class="form-group">
         <div class="col-lg-offset-3 col-lg-11">

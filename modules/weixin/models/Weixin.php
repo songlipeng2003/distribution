@@ -65,33 +65,55 @@ class Weixin
         return $template->send();
     }
 
-    public function eventHandler($message){
-        if ($message->MsgType == 'event') {
-            $openid = $message->from;
-            switch ($message->Event) {
-                case 'subscribe':
-                    User::findAndCreate($openid);
-                    break;
-                case 'unsubscribe':
-                    # code...
-                    break;
-                case 'SCAN':
-                    # code...
-                    break;
-                case 'LOCATION':
-                    # code...
-                    break;
-                case 'CLICK':
-                    # code...
-                    break;
-                case 'VIEW':
-                    # code...
-                    break;
+    public static function messageHandler(){
+        $app = Weixin::getApplication();
+        $server = $app->server;
+        $server->setMessageHandler(function ($message) {
+            switch ($message->MsgType) {
+                case 'event':
+                    $openid = $message->from;
+                    switch ($message->Event) {
+                        case 'subscribe':
+                            User::findAndCreate($openid);
+                            break;
+                        case 'unsubscribe':
+                            # code...
+                            break;
+                        case 'SCAN':
+                            # code...
+                            break;
+                        case 'LOCATION':
+                            # code...
+                            break;
+                        case 'CLICK':
+                            # code...
+                            break;
+                        case 'VIEW':
+                            # code...
+                            break;
 
+                        default:
+                            # code...
+                            break;
+                    }
+                    break;
+                case 'text':
+                    $content = $message->Content;
+                    return WeixinRule::handleRule($content);
+                    break;
+                case 'image':
+                    # 图片消息...
+                    break;
+                case 'voice':
+                    # 语音消息...
+                    break;
+                // ... 其它消息
                 default:
                     # code...
                     break;
             }
-        }
+        });
+
+        $app->server->serve()->send();
     }
 }
