@@ -64,7 +64,7 @@ class WeixinRule extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function handleUrl($msg)
+    public static function handleRule($msg)
     {
         $weixinRule = WeixinRule::findOne(['keyword' => $msg]);
         if($weixinRule){
@@ -73,16 +73,22 @@ class WeixinRule extends \yii\db\ActiveRecord
 
             return $text;
         }else{
-            // 处理默认消息
-            $weixinRule = WeixinRule::findOne(['keyword' => '*']);
-            if($weixinRule){
-                $text = new Text();
-                $text->content = $weixinRule->weixinArticle->content;
-
-                return $text;
-            }
+            self::handleDefault();
         }
 
         return null;        
+    }
+
+    public static function handleDefault()
+    {
+        $weixinRule = WeixinRule::findOne(['keyword' => '*']);
+        if($weixinRule){
+            $text = new Text();
+            $text->content = $weixinRule->weixinArticle->content;
+
+            return $text;
+        }
+
+        return null;
     }
 }
