@@ -105,9 +105,9 @@ class Weixin
                     $weixinMessage->content = $content;
                     $weixinMessage->openid = $openid;
                     $weixinMessage->type = WeixinMessage::TYPE_RECEIVE;
-                    $weixinMessage->isReplay => false;
+                    $weixinMessage->isReplay = false;
                     $weixinMessage->save();
-                    
+
                     return WeixinRule::handleRule($content);
                     break;
                 case 'image':
