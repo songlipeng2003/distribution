@@ -109,7 +109,7 @@ class Weixin
                     break;
                 // ... 其它消息
                 default:
-                    return WeixinRule::handleDefault($content);
+                    return WeixinRule::handleDefault();
                     break;
             }
         });

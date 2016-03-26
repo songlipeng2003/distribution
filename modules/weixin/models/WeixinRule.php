@@ -7,6 +7,8 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
+use EasyWeChat\Message\Text;
+
 /**
  * This is the model class for table "weixinRule".
  *
@@ -64,6 +66,11 @@ class WeixinRule extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getWeixinArticle()
+    {
+        return $this->hasOne(WeixinArticle::className(), ['id' => 'weixinArticleId']);
+    }
+
     public static function handleRule($msg)
     {
         $weixinRule = WeixinRule::findOne(['keyword' => $msg]);
@@ -73,7 +80,7 @@ class WeixinRule extends \yii\db\ActiveRecord
 
             return $text;
         }else{
-            self::handleDefault();
+            return self::handleDefault();
         }
 
         return null;        
