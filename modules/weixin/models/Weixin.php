@@ -74,7 +74,7 @@ class Weixin
                     $openid = $message->from;
                     switch ($message->Event) {
                         case 'subscribe':
-                            User::findAndCreate($openid);
+                            WeixinRule::handleSubscribe($message);
                             break;
                         case 'unsubscribe':
                             # code...

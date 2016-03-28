@@ -86,6 +86,19 @@ class WeixinRule extends \yii\db\ActiveRecord
         return null;        
     }
 
+    public static function handleSubscribe($message)
+    {
+        $weixinRule = WeixinRule::findOne(['keyword' => '订阅']);
+        if($weixinRule){
+            $text = new Text();
+            $text->content = $weixinRule->weixinArticle->content;
+
+            return $text;
+        }
+
+        return null;
+    }
+
     public static function handleDefault()
     {
         $weixinRule = WeixinRule::findOne(['keyword' => '*']);
