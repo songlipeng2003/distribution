@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-$this->title = Yii::$app->name;
+$this->title = '吃货榜样';
 ?>
 <header data-am-widget="header"
       class="am-header am-header-default">
