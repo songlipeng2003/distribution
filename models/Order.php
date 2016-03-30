@@ -21,7 +21,7 @@ use yii\db\ActiveRecord;
  * @property string $payedAt
  * @property string $updatedAt
  */
-class Order extends ActiveRecord
+class Order extends BaseModel
 {
     const STATUS_UNPAYNED = 10;
     const STATUS_PAYNED = 20;
@@ -100,6 +100,19 @@ class Order extends ActiveRecord
             return true;
         }
 
+        return false;
+    }
+
+    public function pay()
+    {
+        return Yii::$app->db->transaction(function() use ($closeType){
+            $oldStatus = $this->status;
+            
+            $this->status = Order::STATUS_PAYNED;
+            $this->saveAndCheckResult();
+            return true;
+        });
+        
         return false;
     }
 }

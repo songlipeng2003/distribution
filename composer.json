@@ -27,7 +27,8 @@
         "npm-asset/underscore": "^1.8",
         "bower-asset/angular": "^1.4.3",
         "bower-asset/amazeui": "^2.5",
-        "costa-rico/yii2-images": "^1.0"
+        "costa-rico/yii2-images": "^1.0",
+        "pingplusplus/pingpp-php": "^2.1"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
