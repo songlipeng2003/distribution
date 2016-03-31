@@ -14,7 +14,7 @@ use yii\db\ActiveRecord;
  * @property integer $productId
  * @property integer $quantity
  * @property string $price
- * @property string $total_amount
+ * @property string $totalAmount
  * @property integer $status
  * @property string $remark
  * @property string $createdAt

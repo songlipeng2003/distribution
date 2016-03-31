@@ -22,5 +22,7 @@ class Module extends \yii\base\Module
         if(Yii::$app->user->isGuest){
             $action->controller->redirect(['/site/login']);
         }
+
+        return parent::beforeAction($action);
     }
 }

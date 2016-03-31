@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'productId',
             'quantity',
             'price',
-            'total_amount',
+            'totalAmount',
             'status',
             // 'remark',
             'createdAt',

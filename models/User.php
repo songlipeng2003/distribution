@@ -93,7 +93,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return md5($this->username . $this->password);
     }
 
     /**
@@ -113,5 +113,55 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return $this->password === $password;
+    }
+
+    public function getParent()
+    {
+        return $this->hasOne(User::className(), ['parentId' => 'id']);
+    }
+
+    public function getChildren()
+    {
+        return $this->hasMany(User::className(), ['id' => 'parentId']);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($inster, $changedAttributes);
+
+        if($insert){
+            if($this->parent){
+                $this->parent->updateLevel1Number();
+
+                if($this->parent->parent){
+                    $this->parent->parent->updateLevel1Number();
+
+                    if($this->parent->parent->parent){
+                        $this->parent->parent->parent->updateLevel1Number();
+                    }
+                }
+            }
+        }
+    }
+
+    public function calLevel1Number()
+    {
+        return $this->getChildren()->count();
+    }
+
+    public function calLevel2Number()
+    {
+        $sql = "SELECT COUNT(*) 
+            FROM user u LEFT JOIN user p on u.parent_id=p.id 
+            WHERE p.parent_id=" . $this->userId;
+        return $this->countBySql($sql);
+    }
+
+    public function calLevel3Number()
+    {
+        $sql = "SELECT COUNT(*) 
+            FROM user u LEFT JOIN user p on u.parent_id=p.id LEFT JOIN user p2 on p.parent_id=p2.id 
+            WHERE p2.parent_id=" . $this->userId;
+        return $this->countBySql($sql);
     }
 }

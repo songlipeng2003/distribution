@@ -24,7 +24,7 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'price') ?>
 
-    <?= $form->field($model, 'total_amount') ?>
+    <?= $form->field($model, 'totalAmount') ?>
 
     <?php // echo $form->field($model, 'status') ?>
 

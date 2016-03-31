@@ -14,7 +14,7 @@ $this->title = '个人中心';
         
     </div>
     <div class="am-u-sm-8">
-        <?=Yii::$app->user->isGuest ? '' : Yii::$app->user->name ?>
+        <?=Yii::$app->user->isGuest ? '' : Yii::$app->user->identity->username ?>
     </div>
 </div>
 
