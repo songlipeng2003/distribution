@@ -126,7 +126,7 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
     public function afterSave($insert, $changedAttributes)
     {
-        parent::afterSave($inster, $changedAttributes);
+        parent::afterSave($insert, $changedAttributes);
 
         if($insert){
             if($this->parent){

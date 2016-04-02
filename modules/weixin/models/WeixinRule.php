@@ -90,14 +90,6 @@ class WeixinRule extends \yii\db\ActiveRecord
 
     public static function handleSubscribe($message)
     {
-        $weixinRule = WeixinRule::findOne(['keyword' => '订阅']);
-        if($weixinRule){
-            $text = new Text();
-            $text->content = $weixinRule->weixinArticle->content;
-
-            return $text;
-        }
-
         $openid = $message->FromUserName;
         $eventKey = $message->EventKey;
         $parentId = $eventKey ? str_replace('qrscene_', '', $eventKey) : null;
@@ -136,6 +128,14 @@ class WeixinRule extends \yii\db\ActiveRecord
                 $user->weixin = $openid;
                 $user->save();
             }
+        }
+        
+        $weixinRule = WeixinRule::findOne(['keyword' => '订阅']);
+        if($weixinRule){
+            $text = new Text();
+            $text->content = $weixinRule->weixinArticle->content;
+
+            return $text;
         }
 
         return null;
