@@ -116,12 +116,12 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
     public function getParent()
     {
-        return $this->hasOne(User::className(), ['parentId' => 'id']);
+        return $this->hasOne(User::className(), ['id' => 'parentId']);
     }
 
     public function getChildren()
     {
-        return $this->hasMany(User::className(), ['id' => 'parentId']);
+        return $this->hasMany(User::className(), ['parentId' => 'id']);
     }
 
     public function afterSave($insert, $changedAttributes)
@@ -133,35 +133,34 @@ class User extends BaseModel implements \yii\web\IdentityInterface
                 $this->parent->updateLevel1Number();
 
                 if($this->parent->parent){
-                    $this->parent->parent->updateLevel1Number();
+                    $this->parent->parent->updateLevel2Number();
 
                     if($this->parent->parent->parent){
-                        $this->parent->parent->parent->updateLevel1Number();
+                        $this->parent->parent->parent->updateLevel3Number();
                     }
                 }
             }
         }
     }
 
-    public function calLevel1Number()
+    public function updateLevel1Number()
     {
-        return $this->getChildren()->count();
+        $number = $this->getChildren()->count();
+        return self::updateAll(['level1Number' => $number], ['id' => $this->id]);
     }
 
-    public function calLevel2Number()
+    public function updateLevel2Number()
     {
-        $sql = "SELECT COUNT(*) 
-            FROM user u LEFT JOIN user p on u.parent_id=p.id 
-            WHERE p.parent_id=" . $this->userId;
-        return $this->countBySql($sql);
+        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.parentId')->where(['parent.parentId' => $this->id])->count();
+        return self::updateAll(['level2Number' => $number], ['id' => $this->id]);
     }
 
-    public function calLevel3Number()
+    public function updateLevel3Number()
     {
-        $sql = "SELECT COUNT(*) 
-            FROM user u LEFT JOIN user p on u.parent_id=p.id LEFT JOIN user p2 on p.parent_id=p2.id 
-            WHERE p2.parent_id=" . $this->userId;
-        return $this->countBySql($sql);
+        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.parentId')
+            ->leftJoin('user AS parent2', 'parent2.id=parent.parentId')
+            ->where(['parent2.parentId' => $this->id])->count();
+        return self::updateAll(['level3Number' => $number], ['id' => $this->id]);
     }
 
     public function getOpenid()
