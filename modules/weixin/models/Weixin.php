@@ -54,7 +54,7 @@ class Weixin
     {
         $app = self::getApplication();
         $notice = $app->notice;
-        $template = $notice->template($templateId)->to($opendid)->data($data);
+        $template = $notice->template($templateId)->to($openid)->data($data);
         if($url){
             $template = $template->url($url);
         }
@@ -70,7 +70,7 @@ class Weixin
         $server = $app->server;
         $server->setMessageHandler(function ($message) {
             $openid = $message->FromUserName;
-            $weixinUser = WeixinUser::findOne(['openid' => $opendid]);
+            $weixinUser = WeixinUser::findOne(['openid' => $openid]);
             if($weixinUser){
                 $weixinUser->lastMessageAt = date('Y-m-d H:m:i');
                 $weixinUser->save();
