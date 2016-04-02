@@ -66,4 +66,17 @@ class WeixinUser extends \yii\db\ActiveRecord
             'updatedAt' => '更新时间',
         ];
     }
+
+    public function getSpreadUrl()
+    {
+        $app = Weixin::getApplication();
+        $qrcode = $app->qrcode;
+
+        $result = $qrcode->temporary($this->id, 6 * 24 * 3600);
+        // $ticket = $result->ticket;
+        // $expireSeconds = $result->expire_seconds;
+        $url = $result->url;
+
+        return $url;
+    }
 }

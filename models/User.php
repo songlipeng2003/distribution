@@ -7,6 +7,8 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
+use app\modules\weixin\models\WeixinUser;
+
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
@@ -163,5 +165,15 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             FROM user u LEFT JOIN user p on u.parent_id=p.id LEFT JOIN user p2 on p.parent_id=p2.id 
             WHERE p2.parent_id=" . $this->userId;
         return $this->countBySql($sql);
+    }
+
+    public function getOpenid()
+    {
+        return $this->weixin;
+    }
+
+    public function getWeixinUser()
+    {
+        return $this->hasOne(WeixinUser::className(), ['openid' => 'weixin']);
     }
 }

@@ -2,14 +2,22 @@
 
 namespace app\modules\user;
 
+use Yii;
+
 class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'app\modules\user\controllers';
 
-    public function init()
+    public function beforeAction($action)
     {
-        parent::init();
+        if(parent::beforeAction($action)){
+            if(Yii::$app->user->isGuest){
+                $action->controller->redirect(['/site/login']);
+            }
+            
+            return true;
+        }
 
-        // custom initialization code goes here
+        return false;
     }
 }
