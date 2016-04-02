@@ -5,7 +5,6 @@ namespace app\modules\weixin\models;
 use Yii;
 
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 
 use app\models\BaseModel;
 
@@ -76,10 +75,8 @@ class WeixinUser extends BaseModel
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'createdAt',
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updatedAt',
-                ],
+                'createdAtAttribute' => 'createdAt',
+                'updatedAtAttribute' => 'updatedAt',
                 'value' => function() { return date('Y-m-d H:m:i'); }
             ],
         ];

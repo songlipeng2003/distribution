@@ -5,11 +5,10 @@ namespace app\models;
 use Yii;
 
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 
 use app\modules\weixin\models\WeixinUser;
 
-class User extends ActiveRecord implements \yii\web\IdentityInterface
+class User extends BaseModel implements \yii\web\IdentityInterface
 {
     /**
      * @inheritdoc
@@ -45,10 +44,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'createdAt',
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updatedAt',
-                ],
+                'createdAtAttribute' => 'createdAt',
+                'updatedAtAttribute' => 'updatedAt',
                 'value' => function() { return date('Y-m-d H:m:i'); }
             ],
         ];
