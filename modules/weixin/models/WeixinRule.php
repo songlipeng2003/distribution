@@ -128,9 +128,9 @@ class WeixinRule extends \yii\db\ActiveRecord
             if(!$user){
                 $user = new User();
                 if($parentId){
-                    $parent = User::findOne($parentId);
+                    $parent = WeixinUser::findOne($parentId);
                     if($parent){
-                        $user->parentId = $parentId;
+                        $user->parentId = $parent->user->id;
                     }
                 }
                 $user->weixin = $openid;

@@ -7,6 +7,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 
 use app\models\BaseModel;
+use app\models\User;
 
 /**
  * This is the model class for table "weixinUser".
@@ -80,6 +81,11 @@ class WeixinUser extends BaseModel
                 'value' => function() { return date('Y-m-d H:m:i'); }
             ],
         ];
+    }
+
+    public function getUser()
+    {
+        return User::findOne(['openid' => $this->openid]);
     }
 
     public function getSpreadUrl()
