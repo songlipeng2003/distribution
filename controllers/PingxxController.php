@@ -10,6 +10,9 @@ use yii\web\Response;
 use Pingpp\Pingpp;
 use Pingpp\Event;
 use Pingpp\Charge;
+use Pingpp\RedEnvelope;
+
+use app\models\Extract;
 
 class PingxxController extends Controller
 {
@@ -31,6 +34,7 @@ class PingxxController extends Controller
         }
 
         $event = Event::retrieve($event->id);
+        $object = $event->data->object;
 
         if(!$event){
             header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request');
@@ -41,8 +45,6 @@ class PingxxController extends Controller
             case "charge.succeeded":
                 // 开发者在此处加入对支付异步通知的处理代码
                 header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
-
-                $object = $event->data->object;
 
                 $charge = Charge::retrieve($object->id);
 
@@ -57,14 +59,26 @@ class PingxxController extends Controller
                 // 开发者在此处加入对退款异步通知的处理代码
                 header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
 
-                $object = $event->data->object;
-
                 $charge = Charge::retrieve($object->charge);
                 $refund = $charge->refunds->retrieve($object->id);
                     
                 if($refund && $refund->succeed){
                 }
 
+                break;
+            case "red_envelope.sent":
+                header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
+
+                $redEnvelop = RedEnvelope::retrieve($object->id);
+
+                break;
+            case "red_envelope.received":
+                $redEnvelop = RedEnvelope::retrieve($object->id);
+                if($redEnvelop){
+                    $extract = Extract::findOne($redEnvelop->order_no);
+                    $extract->transactionNo = $redEnvelop->transaction_no;
+                    $extract->finish();
+                }
                 break;
             default:
                 header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request');

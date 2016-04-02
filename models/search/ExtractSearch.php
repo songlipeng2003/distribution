@@ -18,7 +18,7 @@ class ExtractSearch extends Extract
     public function rules()
     {
         return [
-            [['id', 'userId', 'amount', 'toAmount'], 'integer'],
+            [['id', 'userId', 'amount', 'toAmount', 'status'], 'integer'],
             [['createdAt', 'operatedAt'], 'safe'],
         ];
     }
@@ -60,6 +60,7 @@ class ExtractSearch extends Extract
             'userId' => $this->userId,
             'amount' => $this->amount,
             'toAmount' => $this->toAmount,
+            'status' => $this->status,
             'createdAt' => $this->createdAt,
             'operatedAt' => $this->operatedAt,
         ]);

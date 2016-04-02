@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use app\models\Extract;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\ExtractSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -26,9 +28,22 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             // 'id',
-            'userId',
+            [
+                'attribute' => 'userId',
+                'value' => function($model){
+                    return $model->user->nickname;
+                }
+            ],
             'amount',
             'toAmount',
+            [
+                'attribute' => 'status',
+                'filter' => Html::activeDropDownList($searchModel, 'status', Extract::$statuses, ['class' => 'form-control', 'prompt' => '请选择']),
+                'value' => function($model){
+                    return $model->statusText;
+                },
+                'headerOptions' => ['style' => 'width:90px'],
+            ],
             'createdAt',
             'operatedAt',
 
