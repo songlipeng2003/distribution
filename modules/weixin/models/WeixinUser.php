@@ -14,7 +14,7 @@ use app\models\BaseModel;
  *
  * @property integer $id
  * @property string $openid
- * @property string $username
+ * @property integer $sex
  * @property string $nickname
  * @property string $city
  * @property string $avatar
@@ -45,7 +45,7 @@ class WeixinUser extends BaseModel
         return [
             ['openid', 'unique'],
             [['subscribeTime'], 'safe'],
-            [['openid', 'username', 'nickname', 'city', 'avatar', 'language', 'province', 'country', 'remark'], 'string', 'max' => 255],
+            [['openid', 'nickname', 'city', 'avatar', 'language', 'province', 'country', 'remark'], 'string', 'max' => 255],
             [['sex', 'groupId'], 'integer'],
         ];
     }
@@ -58,7 +58,6 @@ class WeixinUser extends BaseModel
         return [
             'id' => '编号',
             'openid' => 'Openid',
-            'username' => '用户名',
             'nickname' => '昵称',
             'city' => '城市',
             'avatar' => '头像',

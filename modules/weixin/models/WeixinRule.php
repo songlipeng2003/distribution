@@ -112,7 +112,7 @@ class WeixinRule extends \yii\db\ActiveRecord
 
         $weixinUser->openid = $openid;
         $weixinUser->nickname = $userInfo->nickname;
-        $weixinUser->avatar = $userInfo->avatar;
+        $weixinUser->avatar = $userInfo->headimgurl;
         $weixinUser->sex = $userInfo->sex;
         $weixinUser->language = $userInfo->language;
         $weixinUser->city = $userInfo->city;
