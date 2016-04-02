@@ -45,7 +45,7 @@ class WeixinUser extends BaseModel
         return [
             ['openid', 'unique'],
             [['subscribeTime'], 'safe'],
-            [['openid', 'username', 'nickname', 'city', 'avatar', 'language', 'province', 'country', 'remark'], 'string', 'max' => 255]
+            [['openid', 'username', 'nickname', 'city', 'avatar', 'language', 'province', 'country', 'remark'], 'string', 'max' => 255],
             [['sex', 'groupId'], 'integer'],
         ];
     }

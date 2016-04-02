@@ -69,6 +69,13 @@ class Weixin
         $app = Weixin::getApplication();
         $server = $app->server;
         $server->setMessageHandler(function ($message) {
+            $openid = $message->FromUserName;
+            $weixinUser = WeixinUser::findOne(['openid' => $opendid]);
+            if($weixinUser){
+                $weixinUser->lastMessageAt = date('Y-m-d H:m:i');
+                $weixinUser->save();
+            }
+
             switch ($message->MsgType) {
                 case 'event':
                     $openid = $message->from;
@@ -98,7 +105,6 @@ class Weixin
                     }
                     break;
                 case 'text':
-                    $openid = $message->FromUserName;
                     $content = $message->Content;
 
                     $weixinMessage = new WeixinMessage;
