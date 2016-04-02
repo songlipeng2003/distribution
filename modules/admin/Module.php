@@ -19,10 +19,14 @@ class Module extends \yii\base\Module
 
     public function beforeAction($action)
     {
-        if(Yii::$app->admin->isGuest && $action->id!='login'){
-            $action->controller->redirect(array('account/login'));
+        if(parent::beforeAction($action)){
+            if(Yii::$app->admin->isGuest && $action->id!='login'){
+                $action->controller->redirect(array('/admin/account/login'));
+            }
+            
+            return true;
         }
 
-        return parent::beforeAction($action);
+        return false;
     }
 }

@@ -29,6 +29,16 @@ use app\models\User;
  */
 class WeixinUser extends BaseModel
 {
+    const SEX_NONE = 0;
+    const SEX_MALE = 1;
+    const SEX_FEMALE = 2;
+
+    public static $sexes = [
+        self::SEX_NONE => '未知',
+        self::SEX_MALE => '男性',
+        self::SEX_FEMALE => '女性'
+    ];
+
     /**
      * @inheritdoc
      */
@@ -59,6 +69,7 @@ class WeixinUser extends BaseModel
             'id' => '编号',
             'openid' => 'Openid',
             'nickname' => '昵称',
+            'sex' => '性别',
             'city' => '城市',
             'avatar' => '头像',
             'language' => '语言',
@@ -69,6 +80,7 @@ class WeixinUser extends BaseModel
             'subscribeTime' => '订阅时间',
             'createdAt' => '创建时间',
             'updatedAt' => '更新时间',
+            'lastMessageAt' => '最近活动时间',
         ];
     }
 
@@ -88,6 +100,11 @@ class WeixinUser extends BaseModel
         return User::findOne(['weixin' => $this->openid]);
     }
 
+    public function getWeixinGroup()
+    {
+        return $this->hasOne(WeixinGroup::className(), ['id' => 'groupId']);
+    }
+
     public function getSpreadUrl()
     {
         $app = Weixin::getApplication();
@@ -99,5 +116,10 @@ class WeixinUser extends BaseModel
         $url = $result->url;
 
         return $url;
+    }
+
+    public function getSexText()
+    {
+        return self::$sexes[$this->sex];
     }
 }
