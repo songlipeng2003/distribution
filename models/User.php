@@ -5,9 +5,10 @@ namespace app\models;
 use Yii;
 
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 
-class User extends ActiveRecord implements \yii\web\IdentityInterface
+use app\modules\weixin\models\WeixinUser;
+
+class User extends BaseModel implements \yii\web\IdentityInterface
 {
     /**
      * @inheritdoc
@@ -43,10 +44,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'createdAt',
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updatedAt',
-                ],
+                'createdAtAttribute' => 'createdAt',
+                'updatedAtAttribute' => 'updatedAt',
                 'value' => function() { return date('Y-m-d H:m:i'); }
             ],
         ];
@@ -93,7 +92,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return md5($this->username . $this->password);
     }
 
     /**
@@ -113,5 +112,69 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return $this->password === $password;
+    }
+
+    public function getParent()
+    {
+        return $this->hasOne(User::className(), ['id' => 'parentId']);
+    }
+
+    public function getChildren()
+    {
+        return $this->hasMany(User::className(), ['parentId' => 'id']);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        if($insert){
+            if($this->parent){
+                $this->parent->updateLevel1Number();
+
+                if($this->parent->parent){
+                    $this->parent->parent->updateLevel2Number();
+
+                    if($this->parent->parent->parent){
+                        $this->parent->parent->parent->updateLevel3Number();
+                    }
+                }
+            }
+        }
+    }
+
+    public function updateLevel1Number()
+    {
+        $number = $this->getChildren()->count();
+        return self::updateAll(['level1Number' => $number], ['id' => $this->id]);
+    }
+
+    public function updateLevel2Number()
+    {
+        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.parentId')->where(['parent.parentId' => $this->id])->count();
+        return self::updateAll(['level2Number' => $number], ['id' => $this->id]);
+    }
+
+    public function updateLevel3Number()
+    {
+        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.parentId')
+            ->leftJoin('user AS parent2', 'parent2.id=parent.parentId')
+            ->where(['parent2.parentId' => $this->id])->count();
+        return self::updateAll(['level3Number' => $number], ['id' => $this->id]);
+    }
+
+    public function getOpenid()
+    {
+        return $this->weixin;
+    }
+
+    public function getWeixinUser()
+    {
+        return $this->hasOne(WeixinUser::className(), ['openid' => 'weixin']);
+    }
+
+    public function getNickname()
+    {
+        return $this->weixinUser ?  $this->weixinUser->nickname : '';
     }
 }

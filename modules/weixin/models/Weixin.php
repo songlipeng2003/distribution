@@ -54,7 +54,7 @@ class Weixin
     {
         $app = self::getApplication();
         $notice = $app->notice;
-        $template = $notice->template($templateId)->to($opendid)->data($data);
+        $template = $notice->template($templateId)->to($openid)->data($data);
         if($url){
             $template = $template->url($url);
         }
@@ -65,33 +65,70 @@ class Weixin
         return $template->send();
     }
 
-    public function eventHandler($message){
-        if ($message->MsgType == 'event') {
-            $openid = $message->from;
-            switch ($message->Event) {
-                case 'subscribe':
-                    User::findAndCreate($openid);
-                    break;
-                case 'unsubscribe':
-                    # code...
-                    break;
-                case 'SCAN':
-                    # code...
-                    break;
-                case 'LOCATION':
-                    # code...
-                    break;
-                case 'CLICK':
-                    # code...
-                    break;
-                case 'VIEW':
-                    # code...
-                    break;
+    public static function messageHandler(){
+        $app = Weixin::getApplication();
+        $server = $app->server;
+        $server->setMessageHandler(function ($message) {
+            $openid = $message->FromUserName;
+            $weixinUser = WeixinUser::findOne(['openid' => $openid]);
+            if($weixinUser){
+                $weixinUser->lastMessageAt = date('Y-m-d H:m:i');
+                $weixinUser->save();
+            }
 
+            switch ($message->MsgType) {
+                case 'event':
+                    $openid = $message->from;
+                    switch ($message->Event) {
+                        case 'subscribe':
+                            return WeixinRule::handleSubscribe($message);
+                            break;
+                        case 'unsubscribe':
+                            # code...
+                            break;
+                        case 'SCAN':
+                            # code...
+                            break;
+                        case 'LOCATION':
+                            # code...
+                            break;
+                        case 'CLICK':
+                            # code...
+                            break;
+                        case 'VIEW':
+                            # code...
+                            break;
+
+                        default:
+                            # code...
+                            break;
+                    }
+                    break;
+                case 'text':
+                    $content = $message->Content;
+
+                    $weixinMessage = new WeixinMessage;
+                    $weixinMessage->content = $content;
+                    $weixinMessage->openid = $openid;
+                    $weixinMessage->type = WeixinMessage::TYPE_RECEIVE;
+                    $weixinMessage->isReplay = false;
+                    $weixinMessage->save();
+
+                    return WeixinRule::handleRule($content);
+                    break;
+                case 'image':
+                    # 图片消息...
+                    break;
+                case 'voice':
+                    # 语音消息...
+                    break;
+                // ... 其它消息
                 default:
-                    # code...
+                    return WeixinRule::handleDefault();
                     break;
             }
-        }
+        });
+
+        $app->server->serve()->send();
     }
 }

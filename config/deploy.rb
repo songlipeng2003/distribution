@@ -66,7 +66,14 @@ namespace :deploy do
     end
   end
 
+  task :restart do 
+    on roles(:app) do
+      execute "service php7.0-fpm restart"
+    end
+  end
+
   after :updated, "deploy:composer"
   after :updated, "deploy:migrate"
   after :updated, "deploy:clear_cache"
+  after :updated, "deploy:restart"
 end

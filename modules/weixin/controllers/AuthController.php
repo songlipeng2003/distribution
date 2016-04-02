@@ -19,7 +19,7 @@ class AuthController extends Controller
         if(Yii::$app->user->isGuest){
             return $oauth->redirect();
         }else{
-            $this->redirect("/shop/");
+            return $this->redirect("/shop/");
         }
     }
 
@@ -28,28 +28,37 @@ class AuthController extends Controller
         $app = Weixin::getApplication();
         $oauth = $app->oauth;
         $oauthUser = $oauth->user();
-        if($user){
-            $weixinUser = new WeixinUser([
-                'openid' => $oauthUser->getId(),
-                'nickname' => $oauthUser->getNickname(),
-                'avatar' => $oauthUser->getAvatar(),
-            ]);
-            $weixinUser->save();
+        if($oauthUser){
+            $openid = $oauthUser->getId();
+            $weixinUser = WeixinUser::findOne(['openid' => $openid]);
+            if(!$weixinUser){
+                $weixinUser = new WeixinUser([
+                    'openid' => $oauthUser->getId(),
+                    'nickname' => $oauthUser->getNickname(),
+                    'avatar' => $oauthUser->getAvatar(),
+                ]);
+            }else{
+                $weixinUser->nickname = $oauthUser->getNickname();
+                $weixinUser->avatar = $oauthUser->getAvatar();
+            }
 
-            // $token = $user->getToken();
-            // $user = User::findOne(['weixin' => $token]);
-            // if(!$user){
-            //     $user = new User();
-            //     $user->weixin = $token;
-            //     $user->save();
-            // }else{
-            //     $user->lastLoginedAt = date('Y-m-d H:i:s');
-            //     $user->save();
-            // }
+            if($weixinUser->save()){
+                $user = User::findOne(['weixin' => $openid]);
+                if(!$user){
+                    $user = new User();
+                    $user->weixin = $openid;
+                    $user->save();
+                }else{
+                    $user->lastLoginedAt = date('Y-m-d H:i:s');
+                    $user->save();
+                }
 
-            // Yii::$app->user->login($user, 0);
+                Yii::$app->user->login($user, 0);
 
-            $this->redirect("/shop/");
+                $this->redirect("/shop/");
+            }else{
+                throw new Exception("save user error");
+            }
         }
     }
 }

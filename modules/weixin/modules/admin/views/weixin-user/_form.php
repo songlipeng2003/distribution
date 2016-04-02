@@ -1,7 +1,10 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
+
+use app\modules\weixin\models\WeixinGroup;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\weixin\models\WeixinUser */
@@ -17,7 +20,7 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'nickname')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
-    <?= $form->field($model, 'groupId')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'groupId')->dropdownList(ArrayHelper::map(WeixinGroup::find()->all(), 'id', 'name')) ?>
 
     <div class="form-group">
         <div class="col-lg-offset-3 col-lg-11">

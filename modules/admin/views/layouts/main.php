@@ -50,7 +50,9 @@ AppAsset::register($this);
                         ['label' => '微信菜单管理', 'url' => ['/weixin/admin/menu/index']],
                         ['label' => '微信用户管理', 'url' => ['/weixin/admin/weixin-user/index']],
                         ['label' => '微信用户群组管理', 'url' => ['/weixin/admin/weixin-group/index']],
-                        ['label' => '微信文章管理', 'url' => ['/weixin/admin/weixin-article/index']]
+                        ['label' => '微信文章管理', 'url' => ['/weixin/admin/weixin-article/index']],
+                        ['label' => '微信规则管理', 'url' => ['/weixin/admin/weixin-rule/index']],
+                        ['label' => '微信消息记录管理', 'url' => ['/weixin/admin/weixin-message/index']]
                     ]
                 ]
             ],

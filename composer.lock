@@ -4,9 +4,65 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3aa4e03c32f08efcb56c32cb326aa931",
-    "content-hash": "46393e06bf1ed49682462c96a8729766",
+    "hash": "66685aa6e1d37f3763c321a46edd40e8",
+    "content-hash": "e94a47400edaf280f416a2a95ebd2cd6",
     "packages": [
+        {
+            "name": "2amigos/yii2-qrcode-helper",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2amigos/yii2-qrcode-helper.git",
+                "reference": "827a79d0e498026119c8cdcf724d81be2e0daa5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/2amigos/yii2-qrcode-helper/827a79d0e498026119c8cdcf724d81be2e0daa5f.zip",
+                "reference": "827a79d0e498026119c8cdcf724d81be2e0daa5f",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\qrcode\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "2amigOS! Consulting Group",
+                    "email": "hola@2amigos.us",
+                    "homepage": "http://2amigos.us",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Create QrCodes based on libqrencode C library.",
+            "keywords": [
+                "2amigos",
+                "extension",
+                "helper",
+                "qrcode",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2015-03-16 21:26:14"
+        },
         {
             "name": "abeautifulsite/simpleimage",
             "version": "2.6.0",
@@ -1449,6 +1505,54 @@
                 "dependency injection"
             ],
             "time": "2015-09-11 15:10:35"
+        },
+        {
+            "name": "pingplusplus/pingpp-php",
+            "version": "2.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PingPlusPlus/pingpp-php.git",
+                "reference": "e2c1b6ad7d1c70493acc845e8de9727767af5733"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/PingPlusPlus/pingpp-php/e2c1b6ad7d1c70493acc845e8de9727767af5733.zip",
+                "reference": "e2c1b6ad7d1c70493acc845e8de9727767af5733",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": []
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pingpp\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pingplusplus and contributors",
+                    "homepage": "https://github.com/PingPlusPlus/pingpp-php/contributors"
+                }
+            ],
+            "description": "Pingplusplus PHP Library",
+            "homepage": "https://pingxx.com/",
+            "keywords": [
+                "api",
+                "mobile payment processing",
+                "pingpp"
+            ],
+            "time": "2016-03-05 06:47:29"
         },
         {
             "name": "psr/http-message",

@@ -5,6 +5,7 @@ use Yii;
 use yii\base\Model;
 
 use app\models\Admin;
+use app\models\Order;
 
 class QuickCheckoutForm extends Model
 {
@@ -17,6 +18,8 @@ class QuickCheckoutForm extends Model
     public $name;
     public $phone
     public $remark;
+
+    public $order;
 
     /**
      * @inheritdoc
@@ -51,5 +54,17 @@ class QuickCheckoutForm extends Model
 
     public function checkout()
     {
+        if($this->validate()){
+            $order = new Order;
+            $order->load($this->getAttributes());
+            $order->status = Order::STATUS_UNPAYNED;
+            if($order->save()){
+                $this->order = $order;
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }

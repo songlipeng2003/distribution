@@ -18,8 +18,8 @@ class WeixinUserSearch extends WeixinUser
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['openid', 'username', 'nickname', 'city', 'avatar', 'language', 'province', 'country', 'remark', 'groupId', 'subscribeTime', 'createdAt', 'updatedAt'], 'safe'],
+            [['id', 'sex', 'groupId'], 'integer'],
+            [['openid', 'nickname', 'city', 'avatar', 'language', 'province', 'country', 'remark', 'subscribeTime', 'createdAt', 'updatedAt'], 'safe'],
         ];
     }
 
@@ -59,19 +59,19 @@ class WeixinUserSearch extends WeixinUser
             'id' => $this->id,
             'subscribeTime' => $this->subscribeTime,
             'createdAt' => $this->createdAt,
-            'updatedAt' => $this->updatedAt
+            'updatedAt' => $this->updatedAt,
+            'sex' => $this->sex,
+            'groupId' => $this->groupId
         ]);
 
         $query->andFilterWhere(['like', 'openid', $this->openid])
-            ->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'nickname', $this->nickname])
             ->andFilterWhere(['like', 'city', $this->city])
             ->andFilterWhere(['like', 'avatar', $this->avatar])
             ->andFilterWhere(['like', 'language', $this->language])
             ->andFilterWhere(['like', 'province', $this->province])
             ->andFilterWhere(['like', 'country', $this->country])
-            ->andFilterWhere(['like', 'remark', $this->remark])
-            ->andFilterWhere(['like', 'groupId', $this->groupId]);
+            ->andFilterWhere(['like', 'remark', $this->remark]);
 
         return $dataProvider;
     }

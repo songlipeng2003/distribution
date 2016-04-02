@@ -2,7 +2,7 @@
 
 namespace app\modules\weixin\modules\admin;
 
-class Module extends \yii\base\Module
+class Module extends \app\modules\admin\Module
 {
     public $controllerNamespace = 'app\modules\weixin\modules\admin\controllers';
 

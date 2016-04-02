@@ -1,5 +1,4 @@
-<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default "
-id="">
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default">
     <ul class="am-navbar-nav am-cf am-avg-sm-4">
         <li >
             <a href="" class="">

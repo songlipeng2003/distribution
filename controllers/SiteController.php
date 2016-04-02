@@ -10,6 +10,9 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\web\Response;
 
+use dosamigos\qrcode\QrCode;
+use dosamigos\qrcode\lib\Enum;
+
 use app\models\LoginForm;
 use app\models\ContactForm;
 
@@ -103,6 +106,14 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionQrcode()
+    {
+        $text = Yii::$app->request->get('text');
+        Yii::$app->response->format = Response::FORMAT_RAW;
+        header("Content-Type: image/png");
+        return QrCode::jpg($text, false, Enum::QR_ECLEVEL_Q, 10, 1);
     }
 
     public function actionUpload()

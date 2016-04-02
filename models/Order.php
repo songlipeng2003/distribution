@@ -14,15 +14,20 @@ use yii\db\ActiveRecord;
  * @property integer $productId
  * @property integer $quantity
  * @property string $price
- * @property string $total_amount
+ * @property string $totalAmount
  * @property integer $status
  * @property string $remark
  * @property string $createdAt
  * @property string $payedAt
  * @property string $updatedAt
  */
-class Order extends ActiveRecord
+class Order extends BaseModel
 {
+    const STATUS_UNPAYNED = 10;
+    const STATUS_PAYNED = 20;
+    const STATUS_SENDED = 30;
+    const STATUS_FINISHED = 40;
+
     /**
      * @inheritdoc
      */
@@ -37,8 +42,10 @@ class Order extends ActiveRecord
     public function rules()
     {
         return [
-            [['productId', 'quantity'], 'integer'],
+            [['productId', 'quantity', 'provinceId', 'cityId', 'regionId', 'address', 'name', 'phone'], 'required'],
+            [['productId', 'quantity', 'provinceId', 'cityId', 'areaId'], 'integer', 'min' => 1],
             [['price'], 'number'],
+            ['address', 'string', 'min' => 3, 'max' => 30],
             [['remark'], 'string', 'max' => 255]
         ];
     }
@@ -62,7 +69,8 @@ class Order extends ActiveRecord
         ];
     }
 
-    public function behaviors(){
+    public function behaviors()
+    {
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
@@ -73,5 +81,38 @@ class Order extends ActiveRecord
                 'value' => function() { return date('Y-m-d H:m:i'); }
             ],
         ];
+    }
+
+    public function getProduct()
+    {
+        $this->hasOne(Product::className(), ['id' => 'productId']);
+    }
+
+    public function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert)){
+            if($insert){
+                $this->price = $this->product->price;
+
+                $this->totalAmount = $this->price * $this->quantity;
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function pay()
+    {
+        return Yii::$app->db->transaction(function() use ($closeType){
+            $oldStatus = $this->status;
+            
+            $this->status = Order::STATUS_PAYNED;
+            $this->saveAndCheckResult();
+            return true;
+        });
+        
+        return false;
     }
 }

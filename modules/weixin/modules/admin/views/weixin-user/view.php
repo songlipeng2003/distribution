@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\weixin\models\WeixinUser */
 
-$this->title = $model->id;
+$this->title = $model->nickname;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Weixin Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -30,18 +30,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'openid',
-            'username',
             'nickname',
+            [
+                'attribute' => 'sex',
+                'value' => $model->sexText
+            ],
             'city',
-            'avatar',
+            'avatar:image',
             'language',
             'province',
             'country',
             'remark',
-            'groupId',
+            [
+                'attribute' => 'groupId',
+                'value' => $model->weixinGroup ? $model->weixinGroup->name : ''
+            ],
             'subscribeTime',
             'createdAt',
             'updatedAt',
+            'lastMessageAt'
         ],
     ]) ?>
 
