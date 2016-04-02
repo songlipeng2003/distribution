@@ -85,7 +85,7 @@ class WeixinUser extends BaseModel
 
     public function getUser()
     {
-        return User::findOne(['openid' => $this->openid]);
+        return User::findOne(['weixin' => $this->openid]);
     }
 
     public function getSpreadUrl()

@@ -126,7 +126,7 @@ class WeixinRule extends \yii\db\ActiveRecord
                     }
                 }
                 $user->weixin = $openid;
-                $user->save();
+                $user->saveAndCheckResult();
             }
         }
         
