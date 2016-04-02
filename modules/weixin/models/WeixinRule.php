@@ -9,6 +9,8 @@ use yii\db\ActiveRecord;
 
 use EasyWeChat\Message\Text;
 
+use app\models\User;
+
 /**
  * This is the model class for table "weixinRule".
  *
@@ -94,6 +96,46 @@ class WeixinRule extends \yii\db\ActiveRecord
             $text->content = $weixinRule->weixinArticle->content;
 
             return $text;
+        }
+
+        $openid = $message->FromUserName;
+        $eventKey = $message->EventKey;
+        $parentId = $eventKey ? str_replace('qrscene_', '', $eventKey) : null;
+        $app = Weixin::getApplication();
+        $userService = $app->user;
+        $userInfo = $userService->get($openid);
+
+        $weixinUser = WeixinUser::findOne(['openid' => $openid]);
+        if(!$weixinUser){
+            $weixinUser = new WeixinUser();
+        }
+
+        $weixinUser->openid = $openid;
+        $weixinUser->nickname = $userInfo->nickname;
+        $weixinUser->avatar = $userInfo->avatar;
+        $weixinUser->sex = $userInfo->sex;
+        $weixinUser->language = $userInfo->language;
+        $weixinUser->city = $userInfo->city;
+        $weixinUser->province = $userInfo->province;
+        $weixinUser->country = $userInfo->country;
+        $weixinUser->subscribeTime = date('Y-m-d H:m:i', $userInfo->subscribe_time);
+        $weixinUser->remark = $userInfo->remark;
+        $weixinUser->groupId = $userInfo->groupid;
+        $weixinUser->isSubscribe = $userInfo->subscribe;
+
+        if($weixinUser->saveAndCheckResult()){
+            $user = User::findOne(['weixin' => $openid]);
+            if(!$user){
+                $user = new User();
+                if($parentId){
+                    $parent = User::findOne($parentId);
+                    if($parent){
+                        $user->parentId = $parentId;
+                    }
+                }
+                $user->weixin = $openid;
+                $user->save();
+            }
         }
 
         return null;

@@ -4,6 +4,11 @@ namespace app\modules\weixin\models;
 
 use Yii;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+
+use app\models\BaseModel;
+
 /**
  * This is the model class for table "weixinUser".
  *
@@ -22,7 +27,7 @@ use Yii;
  * @property string $createdAt
  * @property string $updatedAt
  */
-class WeixinUser extends \yii\db\ActiveRecord
+class WeixinUser extends BaseModel
 {
     /**
      * @inheritdoc
@@ -39,8 +44,9 @@ class WeixinUser extends \yii\db\ActiveRecord
     {
         return [
             ['openid', 'unique'],
-            [['subscribeTime', 'createdAt', 'updatedAt'], 'safe'],
-            [['openid', 'username', 'nickname', 'city', 'avatar', 'language', 'province', 'country', 'remark', 'groupId'], 'string', 'max' => 255]
+            [['subscribeTime'], 'safe'],
+            [['openid', 'username', 'nickname', 'city', 'avatar', 'language', 'province', 'country', 'remark'], 'string', 'max' => 255]
+            [['sex', 'groupId'], 'integer'],
         ];
     }
 
@@ -64,6 +70,19 @@ class WeixinUser extends \yii\db\ActiveRecord
             'subscribeTime' => '订阅时间',
             'createdAt' => '创建时间',
             'updatedAt' => '更新时间',
+        ];
+    }
+
+    public function behaviors(){
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'createdAt',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updatedAt',
+                ],
+                'value' => function() { return date('Y-m-d H:m:i'); }
+            ],
         ];
     }
 
