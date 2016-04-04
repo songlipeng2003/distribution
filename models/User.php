@@ -177,4 +177,9 @@ class User extends BaseModel implements \yii\web\IdentityInterface
     {
         return $this->weixinUser ?  $this->weixinUser->nickname : '';
     }
+
+    public function getEmployee()
+    {
+        return $this->hasOne(Employee::className(), ['id' => 'employeeId']);
+    }
 }
