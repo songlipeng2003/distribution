@@ -3,13 +3,13 @@
         <h2>登录</h2>
         <form name="loginForm" class="loginform" novalidate="">
             <div class="list">
-                <label ng-class="{ 'has-error' : loginForm.username.$invalid  && loginForm.$submitted, 'valid' : loginForm.username.$valid  && loginForm.$submitted}">
+                <label ng-class="{ 'has-error' : loginForm.username.$invalid  && loginForm.$submitted, 'valid' : loginForm.username.$valid  && loginForm.$submitted}" class="item item-input">
                     <span class="user"></span>
                     <input type="text" name="username" placeholder="登录名" ng-model="user.username" length="11" required>
                 </label>
                 <div class="form-errors" ng-show="loginForm.phone.$invalid && loginForm.$submitted" ng-messages="loginForm.phone.$error" ng-message-include="templates/form-errors.html">
                 </div>
-                <label ng-class="{ 'has-error' : loginForm.password.$invalid  && loginForm.$submitted, 'valid' : loginForm.password.$valid  && loginForm.$submitted}">
+                <label ng-class="{ 'has-error' : loginForm.password.$invalid  && loginForm.$submitted, 'valid' : loginForm.password.$valid  && loginForm.$submitted}" class="item item-input">
                     <span class="phone"></span>
                     <input type="password" name="password" placeholder="密码" ng-model="user.password" required>
                 </label>

@@ -10,6 +10,7 @@ class EmployeeAsset extends AssetBundle
     public $baseUrl = '@web';
 
     public $css = [
+        'css/employee.css'
     ];
 
     public $js = [
