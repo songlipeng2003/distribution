@@ -14,6 +14,7 @@ class AngularAsset extends AssetBundle
 
     public $js = [
         'angular/angular.min.js',
+        'angular-resource/angular-resource.min.js',
         'angular-sanitize/angular-sanitize.min.js',
         'angular-local-storage/dist/angular-local-storage.min.js',
         'angular-messages/angular-messages.min.js',

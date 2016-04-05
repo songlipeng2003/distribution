@@ -6,10 +6,10 @@
   "apiEndpoint": "/employee/v1/"
 })
 
-angular.module('employee.controllers', []);
 angular.module('employee.services', []);
+angular.module('employee.controllers', ['employee.services']);
 angular.module('employee', ['ionic', 'config', 'employee.controllers',
-  'employee.services', 'ngMessages', 'LocalStorageModule'])
+  'employee.services', 'ngMessages', 'LocalStorageModule', 'ngResource'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -67,15 +67,13 @@ angular.module('employee', ['ionic', 'config', 'employee.controllers',
 // services
 angular.module('employee.services')
 
-.factory('Account', function($http, $rootScope, ENV) {
-  return {
-    login: function(username, password) {
-      return $http.post(ENV.apiEndpoint+'accounts/login', {
-        username: username,
-        password: password
-      });
+.factory('Account', function($resource, ENV) {
+  return $resource(ENV.apiEndpoint + 'accounts', {}, {
+    login: {
+      url: ENV.apiEndpoint + 'accounts/login',
+      method:'POST',
     }
-  }
+  });
 });
 
 
@@ -89,7 +87,7 @@ angular.module('employee.controllers')
   // }
   $scope.login = function(form){
     if(form.$valid){
-        Account.login($scope.user.username, $scope.user.password).success(function(data){
+        Account.login($scope.user, function(data){
           if(data.code===0){
             $rootScope.login(data.data);
           }else{
