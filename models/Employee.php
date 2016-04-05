@@ -9,6 +9,8 @@ use yii\db\ActiveRecord;
 use yii\helpers\Security;
 use yii\web\IdentityInterface;
 
+use app\modules\weixin\models\Weixin;
+
 /**
  * This is the model class for table "employee".
  *
@@ -88,7 +90,7 @@ class Employee extends ActiveRecord implements IdentityInterface
                 $this->token = Yii::$app->getSecurity()->generateRandomString();
             }
 
-            if(sizeof($this->password)!=32){
+            if(strlen($this->password)!=32){
                 $this->password = md5($this->password);
             }
 
@@ -160,4 +162,23 @@ class Employee extends ActiveRecord implements IdentityInterface
         return $this->password==md5($password);
     }
 
+    public function getSpreadUrl()
+    {
+        $app = Weixin::getApplication();
+        $qrcode = $app->qrcode;
+
+        $result = $qrcode->temporary($this->id, 6 * 24 * 3600);
+        $url = $result->url;
+
+        return $url;
+    }
+
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        $fields[] = 'spreadUrl';
+
+        return $fields;
+    }
 }

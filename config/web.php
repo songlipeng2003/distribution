@@ -47,6 +47,10 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'IfMjNMq9EBT5B6Y8igwLn5HJ7Z3QO_Fr',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+                'text/json' => 'yii\web\JsonParser',
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -60,6 +64,11 @@ $config = [
             'identityClass' => 'app\models\Admin',
             'enableAutoLogin' => true,
             'loginUrl' => ['/admin/account/login']
+        ],
+        'employee' => [
+            'class' => 'yii\web\User',
+            'identityClass' => 'app\models\Employee',
+            'enableAutoLogin' => true
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

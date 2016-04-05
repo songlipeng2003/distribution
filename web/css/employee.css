@@ -1,0 +1,16 @@
+label.item.has-error{
+    border-bottom: 2px solid red;
+}
+label.item.valid{
+    border-left: 2px solid green;
+    border-right: 2px solid green;
+}
+
+.form-errors{
+    margin: 5px 0; 
+}
+
+.form-error{
+    padding: 2px 0 2px 16px;
+    color: red;
+}

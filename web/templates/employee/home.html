@@ -1,0 +1,29 @@
+<ion-view title="首页" hide-back-button="true">
+    <ion-content class="has-header">
+    <ul class="list">
+        <li class="item">
+           姓名：{{currentUser.name}}
+        </li>
+        <li class="item">
+           所属院校：{{currentUser.school}}
+        </li>
+        <li class="item">
+           月度指标：{{currentUser.month_index}}
+        </li>
+        <li class="item">
+           基本薪资：{{currentUser.salary}}
+        </li>
+        <li class="item">
+           本月完成度：{{currentUser.finished_number}}
+        </li>
+        <a class="item item-icon-right" href="#/rank">
+            本月排名
+            <i class="icon ion-ios-arrow-right"></i>
+        </a>
+        <a class="item item-icon-right" href="#/spread">
+            我的推广码
+            <i class="icon ion-ios-arrow-right"></i>
+        </a>
+    </ul>
+    </ion-content>
+</ion-view>

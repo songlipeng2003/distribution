@@ -120,10 +120,18 @@ class WeixinRule extends \yii\db\ActiveRecord
             if(!$user){
                 $user = new User();
                 if($parentId){
-                    $parent = WeixinUser::findOne($parentId);
-                    if($parent){
-                        $user->parentId = $parent->user->id;
-                    }
+                    if($parentId<10000 * 10){
+                        $employee = Employee::findOne($parentId);
+                        if($employee){
+                            $user->employeeId = $parent->user->id;
+                        }
+                    }else{
+                        $parentId = $parentId - 10000*10;
+                        $parent = WeixinUser::findOne($parentId);
+                        if($parent){
+                            $user->parentId = $parent->user->id;
+                        }
+                    } 
                 }
                 $user->weixin = $openid;
                 $user->saveAndCheckResult();
