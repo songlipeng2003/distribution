@@ -102,4 +102,3 @@ angular.module('employee.controllers')
 })
 .controller('HomeCtrl', function($rootScope, $scope, $state) {
 });
-
