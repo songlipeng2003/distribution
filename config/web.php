@@ -65,6 +65,11 @@ $config = [
             'enableAutoLogin' => true,
             'loginUrl' => ['/admin/account/login']
         ],
+        'employee' => [
+            'class' => 'yii\web\User',
+            'identityClass' => 'app\models\Employee',
+            'enableAutoLogin' => true
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

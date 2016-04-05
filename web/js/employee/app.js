@@ -32,6 +32,11 @@ angular.module('employee', ['ionic', 'config', 'employee.controllers',
       templateUrl: '/templates/employee/home.html',
       controller: 'HomeCtrl'
     })
+    .state('rank', {
+      url: '/rank',
+      templateUrl: '/templates/employee/rank.html',
+      controller: 'RankCtrl'
+    })
     .state('login', {
       url: '/login',
       templateUrl: '/templates/employee/login.html',
@@ -74,6 +79,11 @@ angular.module('employee.services')
       method:'POST',
     }
   });
+})
+.factory('Employee', function($rootScope, $resource, ENV) {
+  return $resource(ENV.apiEndpoint + 'employee', {}, {
+    query: {params: {'access-token': $rootScope.currentUser.token}, isArray: true}
+  });
 });
 
 
@@ -100,5 +110,41 @@ angular.module('employee.controllers')
     }
   }
 })
-.controller('HomeCtrl', function($rootScope, $scope, $state) {
+.controller('HomeCtrl', function() {
+})
+.controller('RankCtrl', function($scope, $state, Employee) {
+  $scope.employees = [];
+  $scope.page = 0;
+  $scope.haveMore = true;
+  $scope.pageSize = 10;
+
+  $scope.listByPage = function(clear){
+    return Employee.query({page: $scope.page, pageSize: $scope.pageSize}, function(result){
+      var data = result;
+      if(data.length==$scope.pageSize){
+        $scope.haveMore = true;
+        $scope.page = $scope.page + 1;
+      }else{
+        $scope.haveMore = false;
+      }
+      if(clear){
+        $scope.employees = data;
+      }else{
+        $scope.employees = $scope.employees.concat(data);
+      }
+
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    })
+  };
+
+  $scope.loadMore = function(){
+      if($scope.haveMore){
+        $scope.listByPage(false);
+    }
+  }
+
+  $scope.refreshData = function(){
+    $scope.page = 0;
+    $scope.listByPage(true);
+  }
 });

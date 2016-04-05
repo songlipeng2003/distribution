@@ -5,6 +5,7 @@ namespace app\modules\employee\controllers\v1;
 use Yii;
 
 use yii\filters\auth\CompositeAuth;
+use app\lib\data\ActiveDataProvider;
 
 use app\controllers\ApiController;
 use app\filters\QueryParamAuth;
@@ -30,7 +31,7 @@ class EmployeeController extends ApiController
 
         $employees = Employee::find();
         return new ActiveDataProvider([
-            'query' => $employee,
+            'query' => $employees,
             'sort'=> [
                 'defaultOrder' => ['month_index'=>SORT_DESC]
             ],               

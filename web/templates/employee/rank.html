@@ -1,0 +1,29 @@
+<ion-view title="排行榜">
+  <ion-content>
+    <ion-list>
+      <ion-refresher
+        pulling-text="下拉刷新..."
+        on-refresh="refreshData()">
+      </ion-refresher>
+      <div class="row">
+        <div class="col">名次</div>
+        <div class="col">姓名</div>
+        <div class="col">业绩</div>
+        <div class="col">薪资</div>
+      </div>
+      <ion-item ng-repeat="(key, employee) in employees">
+        <div class="row">
+          <div class="col">{{key+1}}</div>
+          <div class="col">{{employee.name}}</div>
+          <div class="col">{{employee.finished_number}}</div>
+          <div class="col">{{employee.salary}}</div>
+        </div>
+      </ion-item>
+      <ion-infinite-scroll
+        ng-if="haveMore"
+        on-infinite="loadMore()"
+        distance="1%">
+      </ion-infinite-scroll>
+    </ion-list>
+  </ion-content>
+</ion-view>
