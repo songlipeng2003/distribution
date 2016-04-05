@@ -110,7 +110,7 @@ class WeixinUser extends BaseModel
         $app = Weixin::getApplication();
         $qrcode = $app->qrcode;
 
-        $result = $qrcode->temporary($this->id, 6 * 24 * 3600);
+        $result = $qrcode->temporary($this->id + 10000 * 10, 6 * 24 * 3600);
         // $ticket = $result->ticket;
         // $expireSeconds = $result->expire_seconds;
         $url = $result->url;

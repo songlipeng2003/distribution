@@ -37,6 +37,11 @@ angular.module('employee', ['ionic', 'config', 'employee.controllers',
       templateUrl: '/templates/employee/rank.html',
       controller: 'RankCtrl'
     })
+    .state('spread', {
+      url: '/spread',
+      templateUrl: '/templates/employee/spread.html',
+      controller: 'RankCtrl'
+    })
     .state('login', {
       url: '/login',
       templateUrl: '/templates/employee/login.html',
@@ -147,4 +152,6 @@ angular.module('employee.controllers')
     $scope.page = 0;
     $scope.listByPage(true);
   }
+})
+.controller('SpreadCtrl', function() {
 });
