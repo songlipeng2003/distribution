@@ -43,6 +43,7 @@ AppAsset::register($this);
                 ['label' => '公告管理', 'url' => ['/admin/notice/index']],
                 ['label' => '员工管理', 'url' => ['/admin/employee/index']],
                 ['label' => '提现管理', 'url' => ['/admin/extract/index']],
+                ['label' => '区域管理', 'url' => ['/admin/region/index']],
                 [
                     'label' => '微信管理', 
                     'url' => '#',
