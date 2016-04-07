@@ -37,6 +37,7 @@ tr th{
             'name',
             'image',
             'price',
+            'originalPrice',
             'quantity',
             'saledNumber',
             'status',

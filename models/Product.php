@@ -42,7 +42,7 @@ class Product extends ActiveRecord
     {
         return [
             [['name', 'price', 'quantity'], 'required'],
-            [['price'], 'number'],
+            [['price', 'originalPrice'], 'number', 'min' => 1],
             [['quantity', 'status'], 'integer'],
             [['content'], 'string'],
             [['name', 'image'], 'string', 'max' => 255],
@@ -59,6 +59,7 @@ class Product extends ActiveRecord
             'id' => '编号',
             'name' => '名称',
             'image' => '图片',
+            'originalPrice' => '原价',
             'price' => '价格',
             'quantity' => '数量',
             'saledNumber' => '销售数量',
