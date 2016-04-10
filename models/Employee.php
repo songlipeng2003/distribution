@@ -78,7 +78,7 @@ class Employee extends ActiveRecord implements IdentityInterface
                     ActiveRecord::EVENT_BEFORE_INSERT => 'createdAt',
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'updatedAt',
                 ],
-                'value' => function() { return date('Y-m-d H:m:i'); }
+                'value' => function() { return date('Y-m-d H:i:s'); }
             ],
         ];
     }

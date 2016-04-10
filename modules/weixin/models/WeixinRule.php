@@ -63,7 +63,7 @@ class WeixinRule extends \yii\db\ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => 'createdAt',
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'updatedAt',
                 ],
-                'value' => function() { return date('Y-m-d H:m:i'); }
+                'value' => function() { return date('Y-m-d H:i:s'); }
             ],
         ];
     }
@@ -110,7 +110,7 @@ class WeixinRule extends \yii\db\ActiveRecord
         $weixinUser->city = $userInfo->city;
         $weixinUser->province = $userInfo->province;
         $weixinUser->country = $userInfo->country;
-        $weixinUser->subscribeTime = date('Y-m-d H:m:i', $userInfo->subscribe_time);
+        $weixinUser->subscribeTime = date('Y-m-d H:i:s', $userInfo->subscribe_time);
         $weixinUser->remark = $userInfo->remark;
         $weixinUser->groupId = $userInfo->groupid;
         $weixinUser->isSubscribe = $userInfo->subscribe;

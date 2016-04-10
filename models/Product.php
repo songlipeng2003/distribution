@@ -77,7 +77,7 @@ class Product extends ActiveRecord
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'createdAt',
                 'updatedAtAttribute' => 'updatedAt',
-                'value' => function() { return date('Y-m-d H:m:i'); }
+                'value' => function() { return date('Y-m-d H:i:s'); }
             ],
             'image' => [
                 'class' => ImageBehave::className(),
