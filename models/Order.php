@@ -43,7 +43,7 @@ class Order extends BaseModel
     {
         return [
             [['productId', 'quantity', 'provinceId', 'cityId', 'regionId', 'address', 'name', 'phone'], 'required'],
-            [['productId', 'quantity', 'provinceId', 'cityId', 'areaId'], 'integer', 'min' => 1],
+            [['productId', 'quantity', 'provinceId', 'cityId', 'regionId'], 'integer', 'min' => 1],
             [['price'], 'number'],
             ['address', 'string', 'min' => 3, 'max' => 30],
             [['remark'], 'string', 'max' => 255]
@@ -74,10 +74,8 @@ class Order extends BaseModel
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'createdAt',
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updatedAt',
-                ],
+                'createdAtAttribute' => 'createdAt',
+                'updatedAtAttribute' => 'updatedAt',
                 'value' => function() { return date('Y-m-d H:i:s'); }
             ],
         ];
@@ -85,7 +83,7 @@ class Order extends BaseModel
 
     public function getProduct()
     {
-        $this->hasOne(Product::className(), ['id' => 'productId']);
+        return $this->hasOne(Product::className(), ['id' => 'productId']);
     }
 
     public function beforeSave($insert)

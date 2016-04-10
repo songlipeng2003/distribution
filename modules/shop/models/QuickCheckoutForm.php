@@ -16,7 +16,7 @@ class QuickCheckoutForm extends Model
     public $regionId;
     public $address;
     public $name;
-    public $phone
+    public $phone;
     public $remark;
 
     public $order;
@@ -31,7 +31,7 @@ class QuickCheckoutForm extends Model
             [['quantity'], 'number', 'min' => 1],
             ['phone', 'string', 'length' => 11],
             ['remark', 'string', 'max' => 255],
-            ['address', 'string', 'min' => 3, 'max' => 30]
+            ['address', 'string', 'min' => 5, 'max' => 30]
         ];
     }
 
@@ -56,7 +56,8 @@ class QuickCheckoutForm extends Model
     {
         if($this->validate()){
             $order = new Order;
-            $order->load($this->getAttributes());
+            $order->userId = Yii::$app->user->id;
+            $order->load(['Order' => $this->getAttributes()]);
             $order->status = Order::STATUS_UNPAYNED;
             if($order->save()){
                 $this->order = $order;
