@@ -143,6 +143,9 @@ class Order extends BaseModel
             
             $this->status = Order::STATUS_PAYNED;
             $this->saveAndCheckResult();
+
+            $product->updateCounters(['saledNumber' => 1]);
+
             return true;
         });
         

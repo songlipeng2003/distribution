@@ -23,7 +23,7 @@ use rico\yii2images\behaviors\ImageBehave;
  * @property string $createdAt
  * @property string $updatedAt
  */
-class Product extends ActiveRecord
+class Product extends BaseModel
 {
     public $files;
 
