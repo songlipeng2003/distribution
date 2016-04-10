@@ -148,4 +148,44 @@ class Order extends BaseModel
         
         return false;
     }
+
+    public function send()
+    {
+        return Yii::$app->db->transaction(function() use ($closeType){
+            $oldStatus = $this->status;
+            
+            $this->status = Order::STATUS_SENDED;
+            $this->saveAndCheckResult();
+            return true;
+        });
+        
+        return false;
+    }
+
+    public function finish()
+    {
+        return Yii::$app->db->transaction(function() use ($closeType){
+            $oldStatus = $this->status;
+            
+            $this->status = Order::STATUS_FINISHED;
+            $this->saveAndCheckResult();
+            return true;
+        });
+        
+        return false;
+    }
+
+    public function finance()
+    {
+        $user = $this->user;
+        $employee = $user->employee;
+
+        if($employee){
+
+        }
+
+        if($user->parent){
+            
+        }
+    }
 }
