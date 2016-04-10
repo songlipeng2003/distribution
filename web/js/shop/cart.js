@@ -99,7 +99,7 @@ $(function(){
                 dataType: 'json',
                 success: function(data){
                     if(data.result==0){
-                        location.href = "/order/pay?id=" + data.data.id;
+                        location.href = "/shop/user/order/pay?id=" + data.data.id;
                     }else{
                         alert(data.msg);
                     }

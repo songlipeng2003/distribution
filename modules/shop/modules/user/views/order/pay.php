@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\web\JqueryAsset;
 
 $this->title = '订单支付';
 ?>

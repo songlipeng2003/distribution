@@ -4,10 +4,14 @@ namespace app\modules\shop\modules\user\controllers;
 
 use Yii;
 
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+
+use Pingpp\Pingpp;
+use Pingpp\Charge;
+
 use app\models\Order;
 use app\models\search\OrderSearch;
-
-use yii\web\Controller;
 
 class OrderController extends Controller
 {
@@ -23,6 +27,34 @@ class OrderController extends Controller
         ]);
     }
 
+    public function actionPay($id)
+    {
+        $model = $this->findModel($id);
+
+        if(Yii::$app->request->isPost){
+            Pingpp::setApiKey($_ENV['PINGXX_APIKEY']);
+
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return Charge::create(array(
+                'order_no'  => $model->id,
+                'amount'    => $model->totalAmount * 100,
+                'app'       => array('id' => $_ENV['PINGXX_APPKEY']),
+                'channel'   => 'wx_pub',
+                'currency'  => 'cny',
+                'client_ip' => '127.0.0.1',
+                'subject'   => $model->product->name,
+                'body'      => $model->product->name,
+                'extra'     => [
+                    'open_id' => Yii::$app->user->identity->weixin
+                ]
+            ));
+        }
+
+        return $this->render('pay', [
+            'model' => $model,
+        ]);
+    }
+
     public function actionView($id)
     {
         $model = $this->findModel($id);
@@ -33,7 +65,7 @@ class OrderController extends Controller
 
     protected function findModel($id)
     {
-        if (($model = Order::findOne($id)) !== null && $model->user_id == Yii::$app->user->id) {
+        if (($model = Order::findOne($id)) !== null && $model->userId == Yii::$app->user->id) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
