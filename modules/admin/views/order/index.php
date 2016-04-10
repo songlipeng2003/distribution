@@ -23,12 +23,21 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'productId',
+            [
+                'attribute' => 'productId',
+                'value' => function($model){
+                    return $model->product->name;
+                }
+            ],
             'quantity',
             'price',
             'totalAmount',
-            'status',
-            // 'remark',
+            [
+                'attribute' => 'status',
+                'value' => function($model){
+                    return $model->statusText;
+                }
+            ],
             'createdAt',
             'payedAt',
             // 'updatedAt',
