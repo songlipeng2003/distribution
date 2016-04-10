@@ -64,12 +64,20 @@ class Region extends TreeModel
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['timestamp'] = [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'createdAt',
-                'updatedAtAttribute' => 'updatedAt',
-                'value' => function() { return date('Y-m-d H:i:s'); }
-            ];
+            'class' => TimestampBehavior::className(),
+            'createdAtAttribute' => 'createdAt',
+            'updatedAtAttribute' => 'updatedAt',
+            'value' => function() { return date('Y-m-d H:i:s'); }
+        ];
 
         return $behaviors;
+    }
+
+    public function fields()
+    {
+        return [
+            'id',
+            'name'
+        ];
     }
 }

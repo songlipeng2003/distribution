@@ -8,7 +8,7 @@ class RegionController extends \yii\rest\Controller
 {
     public function actionChildren($id)
     {
-        return $this->findModel($id)->children()->all();
+        return $this->findModel($id)->children(1)->all();
     }
 
     public function actionIndex()
