@@ -6,6 +6,7 @@ use Yii;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 use Pingpp\Pingpp;
 use Pingpp\Charge;
@@ -15,6 +16,8 @@ use app\models\search\OrderSearch;
 
 class OrderController extends Controller
 {
+    public $enableCsrfValidation = false;   
+
     public function actionIndex()
     {
         $searchModel = new OrderSearch();
@@ -36,7 +39,7 @@ class OrderController extends Controller
 
             Yii::$app->response->format = Response::FORMAT_JSON;
             return Charge::create(array(
-                'order_no'  => $model->id,
+                'order_no'  => $model->sn,
                 'amount'    => $model->totalAmount * 100,
                 'app'       => array('id' => $_ENV['PINGXX_APPKEY']),
                 'channel'   => 'wx_pub',

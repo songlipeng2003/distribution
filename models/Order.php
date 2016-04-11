@@ -7,6 +7,8 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
+use app\models\behaviors\SnBehavior;
+
 /**
  * This is the model class for table "order".
  *
@@ -64,6 +66,7 @@ class Order extends BaseModel
     {
         return [
             'id' => '编号',
+            'sn' => '订单号',
             'productId' => '产品',
             'quantity' => '数量',
             'price' => '价格',
@@ -93,6 +96,9 @@ class Order extends BaseModel
                 'updatedAtAttribute' => 'updatedAt',
                 'value' => function() { return date('Y-m-d H:i:s'); }
             ],
+            [
+                'class' => SnBehavior::className()
+            ]
         ];
     }
 

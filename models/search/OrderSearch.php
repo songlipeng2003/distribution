@@ -20,7 +20,7 @@ class OrderSearch extends Order
         return [
             [['id', 'productId', 'quantity', 'status', 'userId'], 'integer'],
             [['price', 'totalAmount'], 'number'],
-            [['remark', 'createdAt', 'payedAt', 'updatedAt'], 'safe'],
+            [['remark', 'createdAt', 'payedAt', 'updatedAt', 'sn'], 'safe'],
         ];
     }
 
@@ -70,6 +70,7 @@ class OrderSearch extends Order
         ]);
 
         $query->andFilterWhere(['like', 'remark', $this->remark]);
+        $query->andFilterWhere(['like', 'sn', $this->sn]);
 
         return $dataProvider;
     }
