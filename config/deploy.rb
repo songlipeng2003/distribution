@@ -26,7 +26,7 @@ set :repo_url, 'https://github.com/songlipeng2003/distribution.git'
 set :linked_files, fetch(:linked_files, []).push('.env', 'composer.phar')
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('runtime', 'web/assets')
+set :linked_dirs, fetch(:linked_dirs, []).push('runtime', 'web/assets', 'web/uploads')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
