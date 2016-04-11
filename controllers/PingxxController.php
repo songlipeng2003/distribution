@@ -13,6 +13,7 @@ use Pingpp\Charge;
 use Pingpp\RedEnvelope;
 
 use app\models\Extract;
+use app\models\Order;
 
 class PingxxController extends Controller
 {
@@ -50,7 +51,7 @@ class PingxxController extends Controller
 
                 if($charge && $charge->paid){
                     $sn = $charge->order_no;
-                    $order = Order::findOne($sn);
+                    $order = Order::findOne(['sn' => $sn]);
                     $order->pay();
                 }
 

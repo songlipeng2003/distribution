@@ -144,13 +144,13 @@ class Order extends BaseModel
 
     public function pay()
     {
-        return Yii::$app->db->transaction(function() use ($closeType){
+        return Yii::$app->db->transaction(function(){
             $oldStatus = $this->status;
             
             $this->status = Order::STATUS_PAYNED;
             $this->saveAndCheckResult();
 
-            $product->updateCounters(['saledNumber' => 1]);
+            $this->product->updateCounters(['saledNumber' => 1]);
 
             return true;
         });
@@ -160,7 +160,7 @@ class Order extends BaseModel
 
     public function send()
     {
-        return Yii::$app->db->transaction(function() use ($closeType){
+        return Yii::$app->db->transaction(function(){
             $oldStatus = $this->status;
             
             $this->status = Order::STATUS_SENDED;
@@ -173,7 +173,7 @@ class Order extends BaseModel
 
     public function finish()
     {
-        return Yii::$app->db->transaction(function() use ($closeType){
+        return Yii::$app->db->transaction(function(){
             $oldStatus = $this->status;
             
             $this->status = Order::STATUS_FINISHED;
