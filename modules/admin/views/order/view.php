@@ -29,11 +29,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+            'sn',
             'productId',
             'quantity',
             'price',
             'totalAmount',
             'status',
+            'name',
+            'phone',
+            [
+                'attribute' => 'provinceId',
+                'value' => $model->product->name
+            ],
+            [
+                'attribute' => 'cityId',
+                'value' => $model->city->name
+            ],
+            [
+                'attribute' => 'regionId',
+                'value' => $model->region->name
+            ],
+            'address',
             'remark',
             'createdAt',
             'payedAt',

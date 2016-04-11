@@ -12,7 +12,8 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.5",
@@ -29,7 +30,10 @@
         "bower-asset/amazeui": "^2.5",
         "costa-rico/yii2-images": "^1.0",
         "pingplusplus/pingpp-php": "^2.1",
-        "2amigos/yii2-qrcode-helper": "^1.0"
+        "2amigos/yii2-qrcode-helper": "^1.0",
+        "gilek/yii2-gtreetable": "dev-master",
+        "bower-asset/bootstrap-gtreetable": "2.2.1.0-alpha1",
+        "bower-asset/jquery.browser": "0.1.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

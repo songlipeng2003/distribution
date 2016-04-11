@@ -28,6 +28,14 @@ use app\modules\weixin\models\Weixin;
  */
 class Employee extends ActiveRecord implements IdentityInterface
 {
+    const STATUS_ENABLED = 1;
+    const STATUS_DISABLED = 2;
+
+    public static $statuses = [
+        self::STATUS_ENABLED => '可用',
+        self::STATUS_DISABLED => '不可用'
+    ];
+
     /**
      * @inheritdoc
      */
@@ -74,11 +82,9 @@ class Employee extends ActiveRecord implements IdentityInterface
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'createdAt',
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updatedAt',
-                ],
-                'value' => function() { return date('Y-m-d H:m:i'); }
+                'createdAtAttribute' => 'createdAt',
+                'updatedAtAttribute' => 'updatedAt',
+                'value' => function() { return date('Y-m-d H:i:s'); }
             ],
         ];
     }
@@ -100,6 +106,11 @@ class Employee extends ActiveRecord implements IdentityInterface
         return false;
     }
 
+    public function getStatusText()
+    {
+        return self::$statuses[$this->status];
+    }
+
     /**
      * @inheritdoc
      */
@@ -113,7 +124,7 @@ class Employee extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['token' => $token]);
+        return static::findOne(['token' => $token, 'status' => self::STATUS_ENABLED]);
     }
 
     /**
@@ -124,7 +135,7 @@ class Employee extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username]);
+        return static::findOne(['username' => $username, 'status' => self::STATUS_ENABLED]);
     }
 
     /**

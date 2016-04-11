@@ -76,7 +76,7 @@ class Extract extends BaseModel
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'createdAt',
                 'updatedAtAttribute' => null,
-                'value' => function() { return date('Y-m-d H:m:i'); }
+                'value' => function() { return date('Y-m-d H:i:s'); }
             ],
         ];
     }

@@ -39,6 +39,8 @@ use app\assets\UploadifyAsset;
     </div>
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'originalPrice')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'quantity')->textInput() ?>
 

@@ -41,7 +41,7 @@ class MenuController extends Controller
             }
 
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['result' => 0];     
+            return ['result' => 0];
         }
     }
 

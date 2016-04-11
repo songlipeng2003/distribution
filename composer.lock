@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "66685aa6e1d37f3763c321a46edd40e8",
-    "content-hash": "e94a47400edaf280f416a2a95ebd2cd6",
+    "hash": "014edb3f0f9766fc881802e05d57bd78",
+    "content-hash": "74195c47e760d68711235b1b6a135443",
     "packages": [
         {
             "name": "2amigos/yii2-qrcode-helper",
@@ -408,6 +408,48 @@
             ]
         },
         {
+            "name": "bower-asset/bootstrap-gtreetable",
+            "version": "v2.2.1-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gilek/bootstrap-gtreetable.git",
+                "reference": "123f23272b6b4b62381ef8c85debee4a452247fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gilek/bootstrap-gtreetable/zipball/123f23272b6b4b62381ef8c85debee4a452247fa",
+                "reference": "123f23272b6b4b62381ef8c85debee4a452247fa",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap": ">=3.0,<4.0",
+                "bower-asset/jquery": ">=1.7.1"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "dist"
+                ],
+                "bower-asset-ignore": [
+                    ".*",
+                    "Gruntfile.js",
+                    "bower.json",
+                    "package.json",
+                    "src"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "keywords": [
+                "boostrap",
+                "extension",
+                "nested",
+                "tree",
+                "twitter"
+            ]
+        },
+        {
             "name": "bower-asset/fontawesome",
             "version": "v4.5.0",
             "source": {
@@ -523,6 +565,38 @@
             }
         },
         {
+            "name": "bower-asset/jquery.browser",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gabceb/jquery-browser-plugin.git",
+                "reference": "07d59ee6e87da9f789b196d221e5f62f9db3c158"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gabceb/jquery-browser-plugin/zipball/07d59ee6e87da9f789b196d221e5f62f9db3c158",
+                "reference": "07d59ee6e87da9f789b196d221e5f62f9db3c158",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.5"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "dist/jquery.browser.js"
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A jQuery plugin for browser detection.",
+            "keywords": [
+                "browser",
+                "desktop",
+                "detect",
+                "jquery"
+            ]
+        },
+        {
             "name": "bower-asset/jquery.inputmask",
             "version": "3.2.7",
             "source": {
@@ -595,6 +669,52 @@
                     "package.json"
                 ]
             }
+        },
+        {
+            "name": "bower-asset/urijs",
+            "version": "v1.14.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/medialize/URI.js.git",
+                "reference": "dc05976ee215c3e55d970fc0c587485a1598d726"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/medialize/URI.js/zipball/dc05976ee215c3e55d970fc0c587485a1598d726",
+                "reference": "dc05976ee215c3e55d970fc0c587485a1598d726",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "src/URI.js",
+                    "src/IPv6.js",
+                    "src/SecondLevelDomains.js",
+                    "src/punycode.js",
+                    "src/URITemplate.js",
+                    "src/jquery.URI.js",
+                    "src/URI.min.js",
+                    "src/jquery.URI.min.js",
+                    "src/URI.fragmentQuery.js",
+                    "src/URI.fragmentURI.js"
+                ],
+                "bower-asset-ignore": [
+                    ".*",
+                    "*.css",
+                    "/*.js",
+                    "/*.html",
+                    "/*.json",
+                    "utils",
+                    "test",
+                    "prettify"
+                ]
+            },
+            "license": [
+                "MIT"
+            ]
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -743,6 +863,46 @@
                 "yii2-images"
             ],
             "time": "2014-10-27 15:14:55"
+        },
+        {
+            "name": "creocoder/yii2-nested-sets",
+            "version": "0.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/creocoder/yii2-nested-sets.git",
+                "reference": "cb8635a459b6246e5a144f096b992dcc30cf9954"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/creocoder/yii2-nested-sets/cb8635a459b6246e5a144f096b992dcc30cf9954.zip",
+                "reference": "cb8635a459b6246e5a144f096b992dcc30cf9954",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "creocoder\\nestedsets\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Kochetov",
+                    "email": "creocoder@gmail.com"
+                }
+            ],
+            "description": "The nested sets behavior for the Yii framework",
+            "keywords": [
+                "nested sets",
+                "yii2"
+            ],
+            "time": "2015-01-27 10:53:51"
         },
         {
             "name": "deesoft/yii2-adminlte",
@@ -957,6 +1117,56 @@
                 "html"
             ],
             "time": "2013-11-30 08:25:19"
+        },
+        {
+            "name": "gilek/yii2-gtreetable",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gilek/yii2-gtreetable.git",
+                "reference": "94f69f0d41fc1e235ac131148e48059cd33feb8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/gilek/yii2-gtreetable/94f69f0d41fc1e235ac131148e48059cd33feb8a.zip",
+                "reference": "94f69f0d41fc1e235ac131148e48059cd33feb8a",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap-gtreetable": "2.*",
+                "bower-asset/jquery.browser": "*",
+                "bower-asset/urijs": "1.14.*",
+                "creocoder/yii2-nested-sets": "0.9.0",
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-bootstrap": "*",
+                "yiisoft/yii2-jui": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "gilek\\gtreetable\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maciej Kłak",
+                    "email": "klak.maciej@gmail.com"
+                }
+            ],
+            "description": "yii2-gtreetable is an extension of Yii 2 Framework, which is wrapper for bootstrap-gtreetable plug-in, on the other hand it provides functionality which allows to save the nodes states into database.",
+            "homepage": "https://github.com/gilek/yii2-gtreetable",
+            "keywords": [
+                "extension",
+                "gtreetable",
+                "nested",
+                "tree",
+                "yii2"
+            ],
+            "time": "2015-05-06 18:09:42"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2565,9 +2775,11 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
-    "prefer-stable": false,
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "gilek/yii2-gtreetable": 20
+    },
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.4.0"

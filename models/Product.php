@@ -23,7 +23,7 @@ use rico\yii2images\behaviors\ImageBehave;
  * @property string $createdAt
  * @property string $updatedAt
  */
-class Product extends ActiveRecord
+class Product extends BaseModel
 {
     public $files;
 
@@ -42,7 +42,7 @@ class Product extends ActiveRecord
     {
         return [
             [['name', 'price', 'quantity'], 'required'],
-            [['price'], 'number'],
+            [['price', 'originalPrice'], 'number', 'min' => 1],
             [['quantity', 'status'], 'integer'],
             [['content'], 'string'],
             [['name', 'image'], 'string', 'max' => 255],
@@ -59,6 +59,7 @@ class Product extends ActiveRecord
             'id' => '编号',
             'name' => '名称',
             'image' => '图片',
+            'originalPrice' => '原价',
             'price' => '价格',
             'quantity' => '数量',
             'saledNumber' => '销售数量',
@@ -74,11 +75,9 @@ class Product extends ActiveRecord
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'createdAt',
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updatedAt',
-                ],
-                'value' => function() { return date('Y-m-d H:m:i'); }
+                'createdAtAttribute' => 'createdAt',
+                'updatedAtAttribute' => 'updatedAt',
+                'value' => function() { return date('Y-m-d H:i:s'); }
             ],
             'image' => [
                 'class' => ImageBehave::className(),

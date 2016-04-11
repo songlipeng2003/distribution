@@ -1,5 +1,12 @@
 <?php 
 return [
+    [
+        'class' => 'yii\rest\UrlRule', 
+        'controller' => 'region',
+        'extraPatterns' => [
+            'GET {id}/children' => 'children',
+        ]
+    ],
     # employee
     [
         'class' => 'yii\rest\UrlRule', 

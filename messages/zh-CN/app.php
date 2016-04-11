@@ -15,5 +15,6 @@ return [
     'Weixin Articles' => '微信文章',
     'Weixin Groups' => '微信用户群组',
     'Weixin Rules' => '微信规则',
-    'Weixin Messages' => '微信信息记录'
+    'Weixin Messages' => '微信信息记录',
+    'Trading Records' => '交易记录',
 ];

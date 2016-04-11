@@ -67,11 +67,9 @@ class Address extends ActiveRecord
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'createdAt',
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updatedAt',
-                ],
-                'value' => function() { return date('Y-m-d H:m:i'); }
+                'createdAtAttribute' => 'createdAt',
+                'updatedAtAttribute' => 'updatedAt',
+                'value' => function() { return date('Y-m-d H:i:s'); }
             ],
         ];
     }

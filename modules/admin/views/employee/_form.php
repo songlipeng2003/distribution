@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
+use app\models\Employee;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Employee */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -24,7 +26,7 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropdownList(Employee::$statuses) ?>
 
     <div class="form-group">
         <div class="col-lg-offset-3 col-lg-11">

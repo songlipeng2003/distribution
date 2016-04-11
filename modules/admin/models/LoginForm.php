@@ -90,7 +90,7 @@ class LoginForm extends Model
             $user = Admin::findByUsername($this->username);
             $this->_user = $user;
             if($user){
-                $user->lastLoginedAt = date('Y-m-d H:m:i');
+                $user->lastLoginedAt = date('Y-m-d H:i:s');
             }
         }
 

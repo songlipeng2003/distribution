@@ -72,7 +72,7 @@ class Weixin
             $openid = $message->FromUserName;
             $weixinUser = WeixinUser::findOne(['openid' => $openid]);
             if($weixinUser){
-                $weixinUser->lastMessageAt = date('Y-m-d H:m:i');
+                $weixinUser->lastMessageAt = date('Y-m-d H:i:s');
                 $weixinUser->save();
             }
 
