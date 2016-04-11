@@ -21,7 +21,7 @@ class PingxxController extends Controller
     /**
      * pingxx webhook
      */
-    public function actionWebHook()
+    public function actionWebhook()
     {
         Pingpp::setApiKey($_ENV['PINGXX_APIKEY']);
 
