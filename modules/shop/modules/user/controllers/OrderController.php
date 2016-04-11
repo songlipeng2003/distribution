@@ -40,7 +40,8 @@ class OrderController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             return Charge::create(array(
                 'order_no'  => $model->sn,
-                'amount'    => $model->totalAmount * 100,
+                // 'amount'    => $model->totalAmount * 100,
+                'amount'    => 1,
                 'app'       => array('id' => $_ENV['PINGXX_APPKEY']),
                 'channel'   => 'wx_pub',
                 'currency'  => 'cny',
