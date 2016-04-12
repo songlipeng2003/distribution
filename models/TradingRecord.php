@@ -26,9 +26,17 @@ use app\models\behaviors\SnBehavior;
  * @property string $remark
  * @property string $createdAt
  */
-class TradingRecord extends \yii\db\ActiveRecord
+class TradingRecord extends BaseModel
 {
+    const TRADING_RECORD_INCOME = 1;
+
+    const TRADING_RECORD_EXPENSE = 2;
+
+    const ITEM_TYPE_ORDER = 'order';
+
     public $tradingTypes = [
+        self::TRADING_RECORD_INCOME => '收入',
+        self::TRADING_RECORD_EXPENSE => '支出',
     ];
 
     /**
@@ -46,9 +54,8 @@ class TradingRecord extends \yii\db\ActiveRecord
     {
         return [
             [['userId', 'userType', 'tradingType', 'itemId'], 'integer'],
-            [['startAmount', 'endAmount'], 'number'],
-            [['createdAt'], 'safe'],
-            [['name', 'amount', 'itemType', 'remark'], 'string', 'max' => 255]
+            [['startAmount', 'endAmount', 'amount'], 'number'],
+            [['name', 'itemType', 'remark'], 'string', 'max' => 255]
         ];
     }
 
@@ -116,15 +123,15 @@ class TradingRecord extends \yii\db\ActiveRecord
 
     public function getFinance()
     {
-        return Finance::getByUserTypeAndUserId($this->userType,$this->userId);
+        return Finance::getByUser($this->userType, $this->userId);
     }
 
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
             if($insert){
-                $this->startAmount = $this->finance->totalBalance;
-                $this->endAmount = $this->finance->totalBalance+$this->amount;
+                $this->startAmount = $this->finance->balance;
+                $this->endAmount = $this->finance->balance + $this->amount;
             }
             return true;
         } else {
@@ -135,6 +142,10 @@ class TradingRecord extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         if($insert){
+            $finance = $this->finance;
+            $finance->balance = $this->endAmount;
+
+            $finance->saveAndCheckResult();
         }
     }
 }

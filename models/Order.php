@@ -122,6 +122,11 @@ class Order extends BaseModel
         return $this->hasOne(Region::className(), ['id' => 'regionId']);
     }
 
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'userId']);
+    }
+
     public function getStatusText()
     {
         return self::$statuses[$this->status];
@@ -144,6 +149,10 @@ class Order extends BaseModel
 
     public function pay()
     {
+        if($this->status!=ORDER::STATUS_UNPAYNED){
+            return false;
+        }
+
         return Yii::$app->db->transaction(function(){
             $oldStatus = $this->status;
             
@@ -151,6 +160,8 @@ class Order extends BaseModel
             $this->saveAndCheckResult();
 
             $this->product->updateCounters(['saledNumber' => 1]);
+
+            $this->finance();
 
             return true;
         });
@@ -190,11 +201,34 @@ class Order extends BaseModel
         $employee = $user->employee;
 
         if($employee){
-
+            $tradingRecord = new TradingRecord;
+            $tradingRecord->userId = $employee->id;
+            $tradingRecord->userType = Finance::USER_TYPE_EMPLOYEE;
+            $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
+            $tradingRecord->itemId = $this->id;
+            $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
+            $tradingRecord->amount = 5;
+            $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成";
+            $tradingRecord->saveAndCheckResult();
         }
 
-        if($user->parent){
-            
+        $parent = $user->parent;
+        $level = 0;
+        $levels = [0.05, 0.05, 0.05];
+
+        while($parent && $level<3){
+            $tradingRecord = new TradingRecord;
+            $tradingRecord->userId = $parent->id;
+            $tradingRecord->userType = Finance::USER_TYPE_USER;
+            $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
+            $tradingRecord->itemId = $this->id;
+            $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
+            $tradingRecord->amount = $this->totalAmount * $levels[$level];
+            $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
+            $tradingRecord->saveAndCheckResult();
+
+            $level++;
+            $parent = $parent->parent;
         }
     }
 }
