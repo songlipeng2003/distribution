@@ -11,7 +11,7 @@ $this->title = '个人中心';
 
 <div class="user-default-index">
     <div class="am-u-sm-4">
-        
+        <?= Html::img($weixinUser->getAvatarUrl(132)) ?>
     </div>
     <div class="am-u-sm-8">
         <?=Yii::$app->user->isGuest ? '' : Yii::$app->user->identity->username ?>
@@ -35,9 +35,10 @@ $this->title = '个人中心';
         推荐分红累计获得：175
         <i class="am-icon-angle-right am-fr am-margin-right"></i>
     </a>
-    <ul class="am-list am-collapse admin-sidebar-sub" id="user-nav">
-        <li><a href="#/userAdd"><i class="am-icon-user am-margin-left-sm"></i> 添加人员 </a></li>
-        <li><a href="#/userList/0"><i class="am-icon-user am-margin-left-sm"></i> 人员列表 </a></li>
+    <ul class="am-list am-list-static am-collapse admin-sidebar-sub" id="user-nav">
+        <li>直接推广：<?= $user->level1Number ?>人 获取分红(10%) 100元</li>
+        <li>间接推广：<?= $user->level2Number ?>人 获取分红(10%) 100元</li>
+        <li>次级推广：<?= $user->level3Number ?>人 获取分红(10%) 100元</li>
     </ul>
   </li>
 
@@ -47,9 +48,8 @@ $this->title = '个人中心';
         每日红包累计获得：175
         <i class="am-icon-angle-right am-fr am-margin-right"></i>
     </a>
-    <ul class="am-list am-collapse admin-sidebar-sub" id="company-nav">
-        <li><a href="#/companyAdd"><span class="am-icon-table am-margin-left-sm"></span> 添加单位（部门） </a></li>
-        <li><a href="#/companyList/0"><span class="am-icon-table am-margin-left-sm"></span> 单位（部门）列表 </a></li>
+    <ul class="am-list am-list-static am-collapse admin-sidebar-sub" id="company-nav">
+        <li>2016/2/6 </li>
     </ul>
   </li>
 </ul>

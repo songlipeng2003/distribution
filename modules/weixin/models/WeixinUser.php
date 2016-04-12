@@ -122,4 +122,13 @@ class WeixinUser extends BaseModel
     {
         return self::$sexes[$this->sex];
     }
+
+    public function getAvatarUrl($width)
+    {
+        if(in_array($width, [0, 60, 64, 96, 132]) && $this->avatar){
+            return substr($this->avatar, 0, strlen($this->avatar)-1) . $width;
+        }
+
+        return null;
+    }
 }
