@@ -1,5 +1,6 @@
 <?php 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = '个人中心';
 ?>
@@ -22,7 +23,7 @@ $this->title = '个人中心';
 
 <div >
     合伙人账号：<em>352</em> 
-    <a href="am-fr" href="">提现</a>
+    <a class="am-fr" href="<?= Url::to(['/shop/user/extract/create']) ?>">提现</a>
     此账户为所有可提现金额总和
 </div>
 
