@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use app\models\TradingRecord;
+use app\models\Finance;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\TradingRecordSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -20,22 +23,45 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'sn',
+            [
+                'attribute' => 'id',
+                'headerOptions' => ['style' => 'width: 50px']
+            ],
+            [
+                'attribute' => 'sn',
+                'headerOptions' => ['style' => 'width: 120px']
+            ],
             'userId',
-            'userType',
+            [
+                'attribute' => 'userType',
+                'headerOptions' => ['style' => 'width: 90px'],
+                'filter' => Html::activeDropDownList($searchModel, 'userType', Finance::$userTypes, ['class' => 'form-control', 'prompt' => '请选择']),
+                'value' => function($model){
+                    return $model->userTypeText;
+                }
+            ],
             'tradingType',
-            // 'name',
-            // 'amount',
-            // 'startAmount',
-            // 'endAmount',
+            [
+                'attribute' => 'tradingType',
+                'headerOptions' => ['style' => 'width: 90px'],
+                'filter' => Html::activeDropDownList($searchModel, 'tradingType', TradingRecord::$tradingTypes, ['class' => 'form-control', 'prompt' => '请选择']),
+                'value' => function($model){
+                    return $model->tradingTypeName;
+                }
+            ],
+            'name',
+            'amount',
+            'startAmount',
+            'endAmount',
             // 'itemType',
             // 'itemId',
             // 'remark',
-            // 'createdAt',
+            'createdAt',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}'
+            ],
         ],
     ]); ?>
 

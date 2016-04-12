@@ -27,6 +27,11 @@ class Finance extends BaseModel
 
     const USER_TYPE_EMPLOYEE = 4;
 
+    public static $userTypes = [
+        self::USER_TYPE_USER => '用户',
+        self::USER_TYPE_EMPLOYEE => '员工'
+    ];
+
     /**
      * @inheritdoc
      */

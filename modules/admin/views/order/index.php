@@ -43,6 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'totalAmount',
             [
                 'attribute' => 'status',
+                'headerOptions' => ['style' => 'width: 90px'],
+                'filter' => Html::activeDropDownList($searchModel, 'status', Order::$statuses, ['class' => 'form-control', 'prompt' => '请选择']),
                 'value' => function($model){
                     return $model->statusText;
                 }

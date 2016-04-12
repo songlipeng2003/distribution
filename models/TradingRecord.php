@@ -34,7 +34,7 @@ class TradingRecord extends BaseModel
 
     const ITEM_TYPE_ORDER = 'order';
 
-    public $tradingTypes = [
+    public static $tradingTypes = [
         self::TRADING_RECORD_INCOME => '收入',
         self::TRADING_RECORD_EXPENSE => '支出',
     ];
@@ -76,6 +76,7 @@ class TradingRecord extends BaseModel
             'itemType' => '物品类型',
             'itemId' => '物品编号',
             'remark' => '备注',
+            'sn' => '流水号',
             'createdAt' => '交易时间',
         ];
     }
@@ -124,6 +125,11 @@ class TradingRecord extends BaseModel
     public function getFinance()
     {
         return Finance::getByUser($this->userType, $this->userId);
+    }
+
+    public function getUserTypeText()
+    {
+        return Finance::$userTypes[$this->userType];    
     }
 
     public function beforeSave($insert)
