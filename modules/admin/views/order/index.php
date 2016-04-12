@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use app\models\Order;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\OrderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -22,7 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            [
+                'attribute' => 'id',
+                'headerOptions' => ['style' => 'width: 50px']
+            ],
             'sn',
             [
                 'attribute' => 'productId',
@@ -30,7 +35,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->product->name;
                 }
             ],
-            'quantity',
+            [
+                'attribute' => 'quantity',
+                'headerOptions' => ['style' => 'width: 60px']
+            ],
             'price',
             'totalAmount',
             [
@@ -45,7 +53,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view}',
+                'template' => '{view} {send}',
+                'buttons' => [
+                    'send' => function($url, $model, $key){
+                        return Html::a('发货', $url);
+                    }
+                ],
+                'visibleButtons' => [
+                    'send' => function($model){
+                        return $model->status==Order::STATUS_PAYNED;
+                    },
+                ]
             ],
         ],
     ]); ?>

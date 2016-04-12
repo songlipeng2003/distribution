@@ -30,11 +30,19 @@ class Order extends BaseModel
     const STATUS_SENDED = 30;
     const STATUS_FINISHED = 40;
 
+    const SCENARIO_SEND = 'send';
+
+    const EXPRESS_YUNDA = 1;
+
     public static $statuses = [
         self::STATUS_UNPAYNED => '未付款',
         self::STATUS_PAYNED => '已付款',
         self::STATUS_SENDED => '已发货',
         self::STATUS_FINISHED => '已完成'
+    ];
+
+    public static $expresses = [
+        self::EXPRESS_YUNDA => '韵达'
     ];
 
     /**
@@ -55,7 +63,9 @@ class Order extends BaseModel
             [['productId', 'quantity', 'provinceId', 'cityId', 'regionId'], 'integer', 'min' => 1],
             [['price'], 'number'],
             ['address', 'string', 'min' => 3, 'max' => 30],
-            [['remark'], 'string', 'max' => 255]
+            [['remark'], 'string', 'max' => 255],
+
+            [['expressId', 'expressSn'], 'required', 'on' => self::SCENARIO_SEND]
         ];
     }
 
@@ -83,7 +93,10 @@ class Order extends BaseModel
             'regionId' => '区',
             'address' => '详细地址',
             'name' => '收货人',
-            'phone' => '电话'
+            'phone' => '电话',
+            'expressId' => '快递公司',
+            'expressSn' => '快递单号',
+            'sendedAt' => '发货时间'
         ];
     }
 
@@ -132,6 +145,11 @@ class Order extends BaseModel
         return self::$statuses[$this->status];
     }
 
+    public function getExpressName()
+    {
+        return self::$expresses[$this->expressId];
+    }
+
     public function beforeSave($insert)
     {
         if(parent::beforeSave($insert)){
@@ -171,13 +189,20 @@ class Order extends BaseModel
 
     public function send()
     {
-        return Yii::$app->db->transaction(function(){
-            $oldStatus = $this->status;
-            
-            $this->status = Order::STATUS_SENDED;
-            $this->saveAndCheckResult();
-            return true;
-        });
+        if($this->status!=ORDER::STATUS_PAYNED){
+            return false;
+        }
+
+        if($this->validate()){
+            return Yii::$app->db->transaction(function(){
+                $oldStatus = $this->status;
+                
+                $this->status = Order::STATUS_SENDED;
+                $this->sendedAt = date('Y-m-d H:i:s');
+                $this->saveAndCheckResult();
+                return true;
+            });
+        }
         
         return false;
     }

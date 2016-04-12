@@ -53,17 +53,19 @@ class OrderController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Order model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
+    public function actionSend($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
 
-        return $this->redirect(['index']);
+        $model->scenario = Order::SCENARIO_SEND;
+
+        if ($model->load(Yii::$app->request->post()) && $model->send()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('send', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**

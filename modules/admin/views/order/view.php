@@ -51,9 +51,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'address',
             'remark',
+            [
+                'attribute' => 'expressId',
+                'value' => $model->expressId ? $model->expressName : null
+            ],
+            'expressSn',
             'createdAt',
-            'payedAt',
             'updatedAt',
+            'payedAt',
+            'sendedAt'
         ],
     ]) ?>
 
