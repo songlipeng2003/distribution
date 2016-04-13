@@ -22,9 +22,9 @@ use app\models\Employee;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'rate')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'status')->dropdownList(Employee::$statuses) ?>
 

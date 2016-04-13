@@ -25,6 +25,7 @@ use app\modules\weixin\models\Weixin;
  * @property string $createdAt
  * @property string $updatedAt
  * @property string $lastLoginedAt
+ * @property string $rate
  */
 class Employee extends ActiveRecord implements IdentityInterface
 {
@@ -53,7 +54,8 @@ class Employee extends ActiveRecord implements IdentityInterface
             [['username', 'password', 'phone'], 'required'],
             [['status'], 'integer'],
             ['username', 'match', 'pattern' => '/\w{5,20}/', 'message' => '用户名格式错误，只能英文或数字或_,必须5-20位'],
-            [['username', 'password', 'name', 'email', 'phone'], 'string', 'max' => 255]
+            [['username', 'password', 'name', 'email', 'phone'], 'string', 'max' => 255],
+            ['rate', 'integer', 'min' => 1, 'max' => 99]
         ];
     }
 
@@ -74,6 +76,7 @@ class Employee extends ActiveRecord implements IdentityInterface
             'createdAt' => '创建时间',
             'updatedAt' => '更新时间',
             'lastLoginedAt' => '最近登录时间',
+            'rate' => '费率'
         ];
     }
 

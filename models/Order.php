@@ -232,14 +232,14 @@ class Order extends BaseModel
             $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
             $tradingRecord->itemId = $this->id;
             $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
-            $tradingRecord->amount = 5;
+            $tradingRecord->amount = $this->totalAmount * $employee->rate / 100;
             $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成";
             $tradingRecord->saveAndCheckResult();
         }
 
         $parent = $user->parent;
         $level = 0;
-        $levels = [0.05, 0.05, 0.05];
+        $levels = [0.08, 0.07, 0.08];
 
         while($parent && $level<3){
             // TODO 增加 monthLimit 限制

@@ -18,7 +18,7 @@ class EmployeeSearch extends Employee
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
+            [['id', 'status', 'rate'], 'integer'],
             [['username', 'password', 'name', 'email', 'phone', 'token', 'createdAt', 'updatedAt', 'lastLoginedAt'], 'safe'],
         ];
     }
@@ -66,6 +66,7 @@ class EmployeeSearch extends Employee
             'createdAt' => $this->createdAt,
             'updatedAt' => $this->updatedAt,
             'lastLoginedAt' => $this->lastLoginedAt,
+            'rate' => $this->lastLoginedAt,
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
