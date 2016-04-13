@@ -35,6 +35,7 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         return [
             'id' => '编号',
             'avatar' => '头像',
+            'monthLimit' => '用户月额度',
             'createdAt' => '创建时间',
             'updatedAt' => '更新时间',
         ];
@@ -129,6 +130,8 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         parent::afterSave($insert, $changedAttributes);
 
         if($insert){
+            $this->monthLimit = rand(8000, 38888);
+
             if($this->parent){
                 $this->parent->updateLevel1Number();
 

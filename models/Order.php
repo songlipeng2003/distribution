@@ -242,6 +242,7 @@ class Order extends BaseModel
         $levels = [0.05, 0.05, 0.05];
 
         while($parent && $level<3){
+            // TODO 增加 monthLimit 限制
             $tradingRecord = new TradingRecord;
             $tradingRecord->userId = $parent->id;
             $tradingRecord->userType = Finance::USER_TYPE_USER;
