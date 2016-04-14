@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'visibleButtons' => [
                     'send' => function($model){
-                        return $model->status==Order::STATUS_PAYNED;
+                        return $model->status==Order::STATUS_PAYED;
                     },
                 ]
             ],
