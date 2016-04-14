@@ -8,6 +8,11 @@ use yii\web\JqueryAsset;
 $this->title = '快速结账';
 ?>
 <header data-am-widget="header" class="am-header am-header-default">
+    <div class="am-header-left am-header-nav">
+        <a href="<?= Url::to(['/shop/product/view', 'id' => $model->id]) ?>">
+            <i class="am-icon-chevron-left" ></i>
+        </a>
+    </div>
     <h1 class="am-header-title"><?= Html::encode($this->title) ?></h1>
 </header>
 <div class="am-slider am-slider-default" data-am-flexslider>
