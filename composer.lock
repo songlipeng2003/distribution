@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "31b02970aa8bda80eb41c78b22e199ca",
-    "content-hash": "5d6a58097910e5594ff5a62078f109de",
+    "hash": "2966683173147dec22a86ca390ba923d",
+    "content-hash": "bb428985bcba399aeb7e8780e8c11772",
     "packages": [
         {
             "name": "2amigos/yii2-qrcode-helper",
@@ -669,6 +669,41 @@
                     "package.json"
                 ]
             }
+        },
+        {
+            "name": "bower-asset/underscore",
+            "version": "1.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jashkenas/underscore.git",
+                "reference": "19db749b190a7cb5a8b7ab1aab42c0e9dc517250"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jashkenas/underscore/zipball/19db749b190a7cb5a8b7ab1aab42c0e9dc517250",
+                "reference": "19db749b190a7cb5a8b7ab1aab42c0e9dc517250",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "underscore.js",
+                "bower-asset-ignore": [
+                    "docs",
+                    "test",
+                    "*.yml",
+                    "CNAME",
+                    "index.html",
+                    "favicon.ico",
+                    "CONTRIBUTING.md"
+                ]
+            },
+            "keywords": [
+                "browser",
+                "client",
+                "functional",
+                "server",
+                "util"
+            ]
         },
         {
             "name": "bower-asset/urijs",
@@ -1500,68 +1535,6 @@
                 "psr-3"
             ],
             "time": "2016-04-02 13:12:58"
-        },
-        {
-            "name": "npm-asset/underscore",
-            "version": "1.8.2",
-            "dist": {
-                "type": "tar",
-                "url": "https://registry.npmjs.org/underscore/-/underscore-1.8.2.tgz",
-                "reference": null,
-                "shasum": "64df2eb590899de950782f3735190ba42ebf311d"
-            },
-            "require-dev": {
-                "npm-asset/docco": "*",
-                "npm-asset/eslint": "dev-0.6.x|0.6.x",
-                "npm-asset/karma": "~0.12.31",
-                "npm-asset/karma-qunit": "~0.1.4",
-                "npm-asset/qunit-cli": "~0.2.0",
-                "npm-asset/uglify-js": "dev-2.4.x|2.4.x"
-            },
-            "type": "npm-asset-library",
-            "extra": {
-                "npm-asset-bugs": {
-                    "url": "https://github.com/jashkenas/underscore/issues"
-                },
-                "npm-asset-files": [
-                    "underscore.js",
-                    "underscore-min.js",
-                    "underscore-min.map",
-                    "LICENSE"
-                ],
-                "npm-asset-main": "underscore.js",
-                "npm-asset-directories": [],
-                "npm-asset-repository": {
-                    "type": "git",
-                    "url": "git://github.com/jashkenas/underscore.git"
-                },
-                "npm-asset-scripts": {
-                    "test": "npm run test-node && npm run lint",
-                    "lint": "eslint underscore.js test/*.js",
-                    "test-node": "qunit-cli test/*.js",
-                    "test-browser": "npm i karma-phantomjs-launcher && ./node_modules/karma/bin/karma start",
-                    "build": "uglifyjs underscore.js -c \"evaluate=false\" --comments \"/    .*/\" -m --source-map underscore-min.map -o underscore-min.js",
-                    "doc": "docco underscore.js"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jeremy Ashkenas",
-                    "email": "jeremy@documentcloud.org"
-                }
-            ],
-            "description": "JavaScript's functional programming helper library.",
-            "homepage": "http://underscorejs.org",
-            "keywords": [
-                "browser",
-                "client",
-                "functional",
-                "server",
-                "util"
-            ]
         },
         {
             "name": "overtrue/socialite",
