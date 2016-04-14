@@ -22,6 +22,7 @@ class Module extends \yii\base\Module
         if(parent::beforeAction($action)){
             if(Yii::$app->admin->isGuest && $action->id!='login'){
                 $action->controller->redirect(array('/admin/account/login'));
+                return false;
             }
             
             return true;
