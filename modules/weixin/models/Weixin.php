@@ -18,7 +18,7 @@ class Weixin
                 'app_id' => $_ENV['WEIXIN_APP_ID'],
                 'secret' => $_ENV['WEIXIN_SECRET'],
                 'token'  => $_ENV['WEIXIN_TOKEN'],
-                // 'aes_key' => null, // 可选
+                'aes_key' => $_ENV['WEIXIN_AES_KEY'], // 可选
 
                 'log' => [
                     'level' => 'debug',
