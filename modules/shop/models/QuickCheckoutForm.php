@@ -58,7 +58,7 @@ class QuickCheckoutForm extends Model
             $order = new Order;
             $order->userId = Yii::$app->user->id;
             $order->load(['Order' => $this->getAttributes()]);
-            $order->status = Order::STATUS_UNPAYNED;
+            $order->status = Order::STATUS_UNPAYED;
             if($order->save()){
                 $this->order = $order;
 

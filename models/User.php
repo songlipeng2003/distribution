@@ -35,7 +35,9 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         return [
             'id' => '编号',
             'avatar' => '头像',
-            'monthLimit' => '用户月额度',
+            'totalIncome' => '总收入',
+            'thisMonthIncome' => '本月收入',
+            'monthLimit' => '本月额度',
             'createdAt' => '创建时间',
             'updatedAt' => '更新时间',
         ];
@@ -125,13 +127,24 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         return $this->hasMany(User::className(), ['parentId' => 'id']);
     }
 
+    public function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert)){
+            if($insert){
+                $this->monthLimit = rand(8000, 38888);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
 
         if($insert){
-            $this->monthLimit = rand(8000, 38888);
-
             if($this->parent){
                 $this->parent->updateLevel1Number();
 
@@ -184,5 +197,10 @@ class User extends BaseModel implements \yii\web\IdentityInterface
     public function getEmployee()
     {
         return $this->hasOne(Employee::className(), ['id' => 'employeeId']);
+    }
+
+    public function getThisMonthRate()
+    {
+        return $this->thisMonthIncome / $this->monthLimit;
     }
 }

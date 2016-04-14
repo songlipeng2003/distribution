@@ -75,5 +75,5 @@ namespace :deploy do
   after :updated, "deploy:composer"
   after :updated, "deploy:migrate"
   after :updated, "deploy:clear_cache"
-  after :updated, "deploy:restart"
+  # after :updated, "deploy:restart"
 end

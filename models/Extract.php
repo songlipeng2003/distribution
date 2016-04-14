@@ -9,6 +9,8 @@ use yii\behaviors\TimestampBehavior;
 use Pingpp\Pingpp;
 use Pingpp\RedEnvelope;
 
+use app\models\Finance;
+
 /**
  * 提现
  *
@@ -48,7 +50,13 @@ class Extract extends BaseModel
     public function rules()
     {
         return [
-            [['userId', 'amount', 'toAmount'], 'integer'],
+            [['amount'], 'integer', 'min' => 5, 'max' => 200],
+            ['amount', function($attribute, $params){
+                $finance = Finance::getByUser(Finance::USER_TYPE_USER, $this->userId);
+                if($finance->balance<$this->amount){
+                    $this->addError($attribute, "余额不足");
+                }
+            }]
         ];
     }
 
@@ -91,6 +99,23 @@ class Extract extends BaseModel
         return $this->hasOne(User::className(), ['id' => 'userId']);
     }
 
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        if($insert){
+            $tradingRecord = new TradingRecord;
+            $tradingRecord->userId = $this->userId;
+            $tradingRecord->userType = Finance::USER_TYPE_USER;
+            $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_EXTRACT;
+            $tradingRecord->itemId = $this->id;
+            $tradingRecord->itemType = TradingRecord::ITEM_TYPE_EXTRACT;
+            $tradingRecord->amount = - $this->amount;
+            $tradingRecord->name = "提现{$this->amount}元";
+            $tradingRecord->saveAndCheckResult();
+        }
+    }
+
     public function sendWeixinRedPaper()
     {
         if($this->status!=self::STATUS_APPLYED){
@@ -111,9 +136,9 @@ class Extract extends BaseModel
             'body'        => '提现',
             'extra'       => [
                 "nick_name" => "提现",
-                "send_name" => "吃货App"
+                "send_name" => "眯糊时光"
             ],//extra 需填入的参数请参阅 API 文档
-            'recipient'   => $this->user->openid,//指定用户的 open_id
+            'recipient'   => $this->user->weixin,//指定用户的 open_id
             'description' => '提现'
         ]);
 
@@ -128,6 +153,7 @@ class Extract extends BaseModel
         }
 
         $this->status = self::STATUS_FINISHED;
+        $this->operatedAt = date('Y-m-d H:i:s');
         return $this->save();
     }
 }

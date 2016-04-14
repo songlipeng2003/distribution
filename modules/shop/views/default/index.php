@@ -21,7 +21,7 @@ $this->title = '吃货榜样';
 <?php } ?>
 
 <?php foreach ($products as $product) { ?>
-    <div class="product_item">
+    <div class="product-item">
     <?=  $product->getImage() ? Html::a(Html::img($product->getImage()->getUrl('500px')), ['product/view', 'id' => $product->id]) : '' ?>
 
     <div class="price_line">

@@ -25,8 +25,8 @@ use app\models\behaviors\SnBehavior;
  */
 class Order extends BaseModel
 {
-    const STATUS_UNPAYNED = 10;
-    const STATUS_PAYNED = 20;
+    const STATUS_UNPAYED = 10;
+    const STATUS_PAYED = 20;
     const STATUS_SENDED = 30;
     const STATUS_FINISHED = 40;
 
@@ -35,8 +35,8 @@ class Order extends BaseModel
     const EXPRESS_YUNDA = 1;
 
     public static $statuses = [
-        self::STATUS_UNPAYNED => '未付款',
-        self::STATUS_PAYNED => '已付款',
+        self::STATUS_UNPAYED => '未付款',
+        self::STATUS_PAYED => '已付款',
         self::STATUS_SENDED => '已发货',
         self::STATUS_FINISHED => '已完成'
     ];
@@ -167,14 +167,14 @@ class Order extends BaseModel
 
     public function pay()
     {
-        if($this->status!=ORDER::STATUS_UNPAYNED){
+        if($this->status!=ORDER::STATUS_UNPAYED){
             return false;
         }
 
         return Yii::$app->db->transaction(function(){
             $oldStatus = $this->status;
             
-            $this->status = Order::STATUS_PAYNED;
+            $this->status = Order::STATUS_PAYED;
             $this->saveAndCheckResult();
 
             $this->product->updateCounters(['saledNumber' => 1]);
@@ -189,7 +189,7 @@ class Order extends BaseModel
 
     public function send()
     {
-        if($this->status!=ORDER::STATUS_PAYNED){
+        if($this->status!=ORDER::STATUS_PAYED){
             return false;
         }
 
@@ -226,6 +226,7 @@ class Order extends BaseModel
         $employee = $user->employee;
 
         if($employee){
+            // 员工交易流水
             $tradingRecord = new TradingRecord;
             $tradingRecord->userId = $employee->id;
             $tradingRecord->userType = Finance::USER_TYPE_EMPLOYEE;
@@ -243,6 +244,8 @@ class Order extends BaseModel
 
         while($parent && $level<3){
             // TODO 增加 monthLimit 限制
+
+            // 用户交易流水
             $tradingRecord = new TradingRecord;
             $tradingRecord->userId = $parent->id;
             $tradingRecord->userType = Finance::USER_TYPE_USER;
@@ -252,6 +255,13 @@ class Order extends BaseModel
             $tradingRecord->amount = $this->totalAmount * $levels[$level];
             $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
             $tradingRecord->saveAndCheckResult();
+
+            // 更新用户统计信息
+
+            $parent->updateCounters([
+                'thisMonthIncome' => $tradingRecord->amount,
+                'totalIncome' => $tradingRecord->amount
+            ]);
 
             $level++;
             $parent = $parent->parent;

@@ -11,6 +11,9 @@ class BatchController extends Controller
 {
     public function actionUpdateMonthLimit()
     {
-        User::updateAll(['monthLimit' => new Expression("FLOOR(8000 + (RAND() * 30888));")]);
+        User::updateAll([
+            'monthLimit' => new Expression("FLOOR(8000 + (RAND() * 30888));"),
+            'thisMonthIncome' => 0.0
+        ]);
     }
 }
