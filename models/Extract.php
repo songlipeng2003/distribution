@@ -138,7 +138,7 @@ class Extract extends BaseModel
                 "nick_name" => "提现",
                 "send_name" => "吃货App"
             ],//extra 需填入的参数请参阅 API 文档
-            'recipient'   => $this->user->openid,//指定用户的 open_id
+            'recipient'   => $this->user->weixin,//指定用户的 open_id
             'description' => '提现'
         ]);
 
