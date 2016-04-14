@@ -136,7 +136,7 @@ class Extract extends BaseModel
             'body'        => '提现',
             'extra'       => [
                 "nick_name" => "提现",
-                "send_name" => "吃货App"
+                "send_name" => "眯糊时光"
             ],//extra 需填入的参数请参阅 API 文档
             'recipient'   => $this->user->weixin,//指定用户的 open_id
             'description' => '提现'
@@ -153,6 +153,7 @@ class Extract extends BaseModel
         }
 
         $this->status = self::STATUS_FINISHED;
+        $this->operatedAt = date('Y-m-d H:i:s');
         return $this->save();
     }
 }
