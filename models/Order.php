@@ -226,6 +226,7 @@ class Order extends BaseModel
         $employee = $user->employee;
 
         if($employee){
+            // 员工交易流水
             $tradingRecord = new TradingRecord;
             $tradingRecord->userId = $employee->id;
             $tradingRecord->userType = Finance::USER_TYPE_EMPLOYEE;
@@ -243,6 +244,8 @@ class Order extends BaseModel
 
         while($parent && $level<3){
             // TODO 增加 monthLimit 限制
+
+            // 用户交易流水
             $tradingRecord = new TradingRecord;
             $tradingRecord->userId = $parent->id;
             $tradingRecord->userType = Finance::USER_TYPE_USER;
@@ -252,6 +255,13 @@ class Order extends BaseModel
             $tradingRecord->amount = $this->totalAmount * $levels[$level];
             $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
             $tradingRecord->saveAndCheckResult();
+
+            // 更新用户统计信息
+
+            $parent->updateCounters([
+                'thisMonthIncome' => $tradingRecord->amount,
+                'totalIncome' => $tradingRecord->amount
+            ]);
 
             $level++;
             $parent = $parent->parent;

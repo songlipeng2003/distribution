@@ -2,6 +2,10 @@ img {
     width: 100%;
 }
 
+.price {
+    color: red;
+}
+
 /* index */
 .notice-title {
     margin: 10px 0;
@@ -14,14 +18,13 @@ img {
     padding: 10px;
 }
 
-.product_item .price_line{
+.product-item .price_line{
     background-color: #EEE;
     padding: 10px 5px;
 }
 
-.product_item .price {
+.product-item .price {
     font-size: 24px;
-    color: red;
 }
 
 .extract-page .balance {
@@ -29,4 +32,8 @@ img {
     font-size: 30px;
     color: red;
     text-align: center;
+}
+
+.user-index {
+    padding: 10px;
 }
