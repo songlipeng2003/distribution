@@ -12,8 +12,7 @@ use app\modules\shop\models\QuickCheckoutForm;
 
 class CartController extends Controller
 {
-
-    public $enableCsrfValidation = false;   
+    public $enableCsrfValidation = false;
 
     public function actionQuickCheckout($id)
     {

@@ -9,6 +9,8 @@ use yii\behaviors\TimestampBehavior;
 use Pingpp\Pingpp;
 use Pingpp\RedEnvelope;
 
+use app\models\Finance;
+
 /**
  * 提现
  *
@@ -48,7 +50,13 @@ class Extract extends BaseModel
     public function rules()
     {
         return [
-            [['userId', 'amount', 'toAmount'], 'integer'],
+            [['amount'], 'integer', 'min' => 5, 'max' => 200],
+            ['amount', function($attribute, $params){
+                $finance = Finance::getByUser(Finance::USER_TYPE_USER, $this->userId);
+                if($finance->balance<$this->amount){
+                    $this->addError($attribute, "余额不足");
+                }
+            }]
         ];
     }
 
@@ -89,6 +97,23 @@ class Extract extends BaseModel
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'userId']);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        if($insert){
+            $tradingRecord = new TradingRecord;
+            $tradingRecord->userId = $this->userId;
+            $tradingRecord->userType = Finance::USER_TYPE_USER;
+            $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_EXTRACT;
+            $tradingRecord->itemId = $this->id;
+            $tradingRecord->itemType = TradingRecord::ITEM_TYPE_EXTRACT;
+            $tradingRecord->amount = - $this->amount;
+            $tradingRecord->name = "提现{$this->amount}元";
+            $tradingRecord->saveAndCheckResult();
+        }
     }
 
     public function sendWeixinRedPaper()
