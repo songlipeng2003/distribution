@@ -10,6 +10,7 @@ use yii\db\ActiveRecord;
 use EasyWeChat\Message\Text;
 
 use app\models\User;
+use app\models\Employee;
 
 /**
  * This is the model class for table "weixinRule".
