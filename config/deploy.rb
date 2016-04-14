@@ -48,7 +48,7 @@ namespace :deploy do
   task :composer do
     on roles(:app) do
       within release_path do
-        execute "cd #{release_path} && php composer.phar global require \"fxp/composer-asset-plugin:~1.1.1\""
+        execute "cd #{release_path} && php composer.phar global require \"fxp/composer-asset-plugin:~1.1.3\""
         execute "cd #{release_path} && php composer.phar install"
       end
     end
