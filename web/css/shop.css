@@ -18,12 +18,12 @@ img {
     padding: 10px;
 }
 
-.product-item .price_line{
+.product-item .price-line{
     background-color: #EEE;
     padding: 10px 5px;
 }
 
-.product-item .price {
+.price-line .price {
     font-size: 24px;
 }
 
