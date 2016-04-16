@@ -21,7 +21,7 @@ $this->title = '自定义菜单';
                                     <a href="javascript:;" ng-click="addSubMenu(menu);" title="添加子菜单" class="fa fa-plus-circle"></a>
                                 </div>
                                 <div class="designer">
-                                    <div ng-repeat="sub in menu.subMenus" style="margin-top:20px;padding-left:80px;background:url('/images/bg_repno.gif') no-repeat -245px -545px;">
+                                    <div ng-repeat="sub in menu.subMenus" style="margin-top:20px;padding-left:80px;background:url('/img/bg_repno.gif') no-repeat -245px -545px;">
                                         <input type="hidden" data-role="sub" data-hash="{{sub.$$hashKey}}" />
                                         <input type="text" class="form-control" style="display:inline-block;width:220px;" ng-model="sub.title"> &nbsp; &nbsp;
                                         <a href="javascript:;" class="fa fa-arrows" title="拖动调整此菜单位置"></a> &nbsp;
@@ -54,7 +54,7 @@ $this->title = '自定义菜单';
                                     <input type="text" class="form-control ng-pristine ng-valid" readonly="" style="display:inline-block;width:300px;" ng-model="hmenu.title"> &nbsp; &nbsp;
                                 </div>
                                 <div class="designer">
-                                    <div ng-repeat="sub in hmenu.subMenus" style="margin-top:20px;padding-left:80px;background:url('/images/bg_repno.gif') no-repeat -245px -545px;">
+                                    <div ng-repeat="sub in hmenu.subMenus" style="margin-top:20px;padding-left:80px;background:url('/img/bg_repno.gif') no-repeat -245px -545px;">
                                         <input type="hidden" data-role="sub" data-hash="{{sub.$$hashKey}}" />
                                         <input type="text" class="form-control" style="display:inline-block;width:220px;" ng-model="sub.title" readonly> &nbsp; &nbsp;
                                     </div>
