@@ -175,6 +175,7 @@ class Order extends BaseModel
             $oldStatus = $this->status;
             
             $this->status = Order::STATUS_PAYED;
+            $this->payedAt = date('Y-m-d H:i:s');
             $this->saveAndCheckResult();
 
             $this->product->updateCounters(['saledNumber' => 1]);
@@ -242,26 +243,46 @@ class Order extends BaseModel
         $level = 0;
         $levels = [0.08, 0.07, 0.08];
 
-        while($parent && $level<3){
-            // TODO 增加 monthLimit 限制
+        while($parent && $level<10){
+            if($parent->userType==User::USER_TYPE_NOMARL){
+                // 层级限制
+                if($level<3){
+                    // 每月限额限制
+                    if($parent->monthLimit > $parent->thisMonthIncome + $this->totalAmount * $levels[$level]){
+                        // 用户交易流水
+                        $tradingRecord = new TradingRecord;
+                        $tradingRecord->userId = $parent->id;
+                        $tradingRecord->userType = Finance::USER_TYPE_USER;
+                        $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
+                        $tradingRecord->itemId = $this->id;
+                        $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
+                        $tradingRecord->amount = $this->totalAmount * $levels[$level];
+                        $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
+                        $tradingRecord->saveAndCheckResult();
 
-            // 用户交易流水
-            $tradingRecord = new TradingRecord;
-            $tradingRecord->userId = $parent->id;
-            $tradingRecord->userType = Finance::USER_TYPE_USER;
-            $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
-            $tradingRecord->itemId = $this->id;
-            $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
-            $tradingRecord->amount = $this->totalAmount * $levels[$level];
-            $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
-            $tradingRecord->saveAndCheckResult();
+                        $parent->updateCounters([
+                            'thisMonthIncome' => $tradingRecord->amount,
+                            'totalIncome' => $tradingRecord->amount
+                        ]);
+                    }
+                }
+            }elseif($parent->userType==User::USER_TYPE_LIMITED){
+                // 无限级用户 ，其实是最多10级
+                $tradingRecord = new TradingRecord;
+                $tradingRecord->userId = $parent->id;
+                $tradingRecord->userType = Finance::USER_TYPE_USER;
+                $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
+                $tradingRecord->itemId = $this->id;
+                $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
+                $tradingRecord->amount = $this->totalAmount * 0.05;
+                $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
+                $tradingRecord->saveAndCheckResult();
 
-            // 更新用户统计信息
-
-            $parent->updateCounters([
-                'thisMonthIncome' => $tradingRecord->amount,
-                'totalIncome' => $tradingRecord->amount
-            ]);
+                $parent->updateCounters([
+                    'thisMonthIncome' => $tradingRecord->amount,
+                    'totalIncome' => $tradingRecord->amount
+                ]);
+            }
 
             $level++;
             $parent = $parent->parent;

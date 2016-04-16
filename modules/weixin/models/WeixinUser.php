@@ -125,7 +125,7 @@ class WeixinUser extends BaseModel
 
     public function getAvatarUrl($width)
     {
-        if(in_array($width, [0, 60, 64, 96, 132]) && $this->avatar){
+        if(in_array($width, [0, 64, 96, 132]) && $this->avatar){
             return substr($this->avatar, 0, strlen($this->avatar)-1) . $width;
         }
 

@@ -17,4 +17,5 @@ return [
     'Weixin Rules' => '微信规则',
     'Weixin Messages' => '微信信息记录',
     'Trading Records' => '交易记录',
+    'Users' => '用户'
 ];

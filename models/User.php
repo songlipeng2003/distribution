@@ -10,6 +10,15 @@ use app\modules\weixin\models\WeixinUser;
 
 class User extends BaseModel implements \yii\web\IdentityInterface
 {
+    const USER_TYPE_NOMARL = 1;
+
+    const USER_TYPE_LIMITED = 2;
+
+    public static $userTypes = [
+        self::USER_TYPE_NOMARL => '普通',
+        self::USER_TYPE_LIMITED => '无限级',
+    ];
+
     /**
      * @inheritdoc
      */
@@ -24,6 +33,7 @@ class User extends BaseModel implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
+            ['userType', 'integer']
         ];
     }
 
@@ -34,12 +44,24 @@ class User extends BaseModel implements \yii\web\IdentityInterface
     {
         return [
             'id' => '编号',
+            'userType' => '用户类型',
             'avatar' => '头像',
             'totalIncome' => '总收入',
             'thisMonthIncome' => '本月收入',
             'monthLimit' => '本月额度',
             'createdAt' => '创建时间',
             'updatedAt' => '更新时间',
+            'parentId' => '父',
+            'lastLoginedAt' => '最后登录时间',
+            'monthLimit' => '本月限额',
+            'thisMonthIncome' => '本月收入',
+            'totalIncome' => '总收入',
+            'userType' => '用户类型',
+            'level1Number' => '1级下线数',
+            'level2Number' => '2级下线数',
+            'level3Number' => '3级下线数',
+            'nickname' => '昵称',
+            'employeeId' => '员工'
         ];
     }
 
@@ -202,5 +224,10 @@ class User extends BaseModel implements \yii\web\IdentityInterface
     public function getThisMonthRate()
     {
         return $this->thisMonthIncome / $this->monthLimit;
+    }
+
+    public function getUserTypeText()
+    {
+        return self::$userTypes[$this->userType];
     }
 }
