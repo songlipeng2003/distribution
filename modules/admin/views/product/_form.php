@@ -6,6 +6,7 @@ use yii\bootstrap\ActiveForm;
 use kucha\ueditor\UEditor;
 
 use app\assets\UploadifyAsset;
+use app\models\Product;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
@@ -44,7 +45,7 @@ use app\assets\UploadifyAsset;
 
     <?= $form->field($model, 'quantity')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropdownList(Product::$statuses) ?>
 
     <?= $form->field($model, 'content')->widget(UEditor::className(), []) ?>
 

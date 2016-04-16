@@ -2,9 +2,10 @@
 
 namespace app\modules\shop\controllers;
 
-use app\models\Product;
-
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+
+use app\models\Product;
 
 class ProductController extends Controller
 {
@@ -19,7 +20,7 @@ class ProductController extends Controller
 
     protected function findModel($id)
     {
-        if (($model = Product::findOne($id)) !== null) {
+        if (($model = Product::findOne($id)) !== null && $model->status==Product::STATUS_ON) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

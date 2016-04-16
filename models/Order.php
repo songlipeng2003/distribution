@@ -165,6 +165,18 @@ class Order extends BaseModel
         return false;
     }
 
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        if($insert){
+            $this->product->updateCounters([
+                'saledNumber' => $this->quantity,
+                'quantity' => - $this->quantity
+            ]);
+        }
+    }
+
     public function pay()
     {
         if($this->status!=ORDER::STATUS_UNPAYED){

@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use app\models\Product;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -30,7 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             'quantity',
             'saledNumber',
-            'status',
+            [
+                'attribute' =>'status',
+                'filter' => Html::activeDropDownList($searchModel, 'status', Product::$statuses, ['class' => 'form-control', 'prompt' => '请选择']),
+                'headerOptions' => ['style' => 'width:80px'],
+                'value' => function($model){
+                    return $model->statusText;
+                }
+            ],
             'createdAt',
             // 'updatedAt',
 

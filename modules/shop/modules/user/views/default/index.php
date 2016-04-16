@@ -37,9 +37,9 @@ $this->title = '个人中心';
         <i class="am-icon-angle-right am-fr am-margin-right"></i>
     </a>
     <ul class="am-list am-list-static am-collapse admin-sidebar-sub" id="user-nav">
-        <li>直接推广：<?= $user->level1Number ?>人 获取分红(10%) 100元</li>
-        <li>间接推广：<?= $user->level2Number ?>人 获取分红(10%) 100元</li>
-        <li>次级推广：<?= $user->level3Number ?>人 获取分红(10%) 100元</li>
+        <li>直接推广：<?= $user->level1Number ?>人 获取分红(8%) 100元</li>
+        <li>间接推广：<?= $user->level2Number ?>人 获取分红(7%) 100元</li>
+        <li>次级推广：<?= $user->level3Number ?>人 获取分红(8%) 100元</li>
     </ul>
   </li>
 </ul>

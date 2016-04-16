@@ -25,6 +25,15 @@ use rico\yii2images\behaviors\ImageBehave;
  */
 class Product extends BaseModel
 {
+    const STATUS_ON = 1;
+
+    const STATUS_OFF = 2;
+
+    public static $statuses = [
+        self::STATUS_ON => '上架',
+        self::STATUS_OFF => '下架',
+    ];
+
     public $files;
 
     /**
@@ -41,7 +50,7 @@ class Product extends BaseModel
     public function rules()
     {
         return [
-            [['name', 'price', 'quantity'], 'required'],
+            [['name', 'price', 'quantity', 'status'], 'required'],
             [['price', 'originalPrice'], 'number', 'min' => 1],
             [['quantity', 'status'], 'integer'],
             [['content'], 'string'],
@@ -92,5 +101,10 @@ class Product extends BaseModel
                 $this->attachImage(Yii::getAlias("@webroot") . $file);
             }
         }
+    }
+
+    public function getStatusText()
+    {
+        return self::$statuses[$this->status];
     }
 }

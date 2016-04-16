@@ -40,7 +40,10 @@ tr th{
             'originalPrice',
             'quantity',
             'saledNumber',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => $model->statusText
+            ],
             'content:html',
             'createdAt',
             'updatedAt',
