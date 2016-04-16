@@ -249,6 +249,10 @@ class Order extends BaseModel
             $tradingRecord->amount = $this->totalAmount * $employee->rate / 100;
             $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成";
             $tradingRecord->saveAndCheckResult();
+
+            $employee->updateCounters([
+                'finishedNumber' => $tradingRecord->amount,
+            ]);
         }
 
         $parent = $user->parent;

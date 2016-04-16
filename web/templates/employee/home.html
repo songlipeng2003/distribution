@@ -8,13 +8,16 @@
            所属院校：{{currentUser.school}}
         </li>
         <li class="item">
-           月度指标：{{currentUser.month_index}}
+           月度指标：{{currentUser.monthIndex}}
         </li>
         <li class="item">
            基本薪资：{{currentUser.salary}}
         </li>
         <li class="item">
-           本月完成度：{{currentUser.finished_number}}
+           本月完成度：{{currentUser.finishedNumber/currentUser.monthIndex*100|number:2}}%
+        </li>
+        <li class="item">
+           应发薪资：{{currentUser.finishedNumber}}
         </li>
         <a class="item item-icon-right" href="#/rank">
             本月排名
