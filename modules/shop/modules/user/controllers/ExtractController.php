@@ -8,11 +8,24 @@ use yii\web\Controller;
 use yii\web\Response;
 
 use app\models\Extract;
+use app\models\search\ExtractSearch;
 use app\models\Finance;
 
 class ExtractController extends Controller
 {
     public $enableCsrfValidation = false;
+
+    public function actionIndex()
+    {
+        $searchModel = new ExtractSearch();
+        $searchModel->userId = Yii::$app->user->id;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
     
     public function actionCreate()
     {

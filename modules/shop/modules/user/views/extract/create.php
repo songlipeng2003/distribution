@@ -12,6 +12,11 @@ $this->title = '合伙人账户';
             <i class="am-icon-chevron-left" ></i>
         </a>
     </div>
+    <div class="am-header-right am-header-nav">
+        <a href="<?= Url::to(['/shop/user/extract']) ?>">
+            提现记录
+        </a>
+    </div>
   <h1 class="am-header-title"><?= Html::encode($this->title) ?></h1>
 </header>
 
