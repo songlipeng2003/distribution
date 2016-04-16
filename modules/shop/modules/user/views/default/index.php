@@ -44,10 +44,10 @@ $this->title = '个人中心';
   </li>
 </ul>
 
-分红完成度 <?= $user->getThisMonthRate() ?>% 总计<?= $user->monthLimit ?>元分红
+分红完成度 <?= number_format($user->getThisMonthRate() * 100, 2) ?>% 总计<span class="price"><?= $user->monthLimit ?></span>元分红
 <div class="am-progress am-progress-xs">
-    <div class="am-progress-bar" style="width: <?= $user->getThisMonthRate() ?>%"></div>
+    <div class="am-progress-bar" style="width: <?= number_format($user->getThisMonthRate() * 100, 2) ?>%"></div>
 </div>
-累计获得：<?= $user->totalIncome ?>元 剩余可获得 <?= $user->monthLimit - $user->getThisMonthRate() ?>元
+累计获得：<?= $user->totalIncome ?>元 剩余可获得 <?= $user->monthLimit - $user->thisMonthIncome ?>元
 
 <?= $this->render('../elements/bottom') ?>
