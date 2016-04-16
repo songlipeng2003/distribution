@@ -17,9 +17,11 @@ class MenuController extends Controller
     public function actionIndex()
     {
         $menu = Yii::$app->settings->get('weixin', 'menu');
+        $menuLastModify = Yii::$app->settings->get('weixin', 'menuLastModify');
 
         return $this->render('index', [
-            'menu'=>$menu
+            'menu' => $menu,
+            'menuLastModify' => $menuLastModify
         ]);
     }
 
@@ -31,10 +33,11 @@ class MenuController extends Controller
 
             $menu = $post['menus'];
 
-            Yii::$app->settings->set('menu', json_encode($menu), 'weixin', 'string');
-            Yii::$app->settings->set('menuLastModify', time(), 'weixin', 'string');
+            Yii::$app->settings->set('weixin', 'menu', json_encode($menu), 'string');
+            Yii::$app->settings->set('weixin', 'menuLastModify', time(), 'integer');
 
             $menus = $this->menuBuildMenuSet($menu);
+
             $app = Weixin::getApplication();
             foreach ($menus as $button) {
                 $app->menu->add($button);
