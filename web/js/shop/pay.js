@@ -6,6 +6,7 @@ $(function(){
                 location.href = "/shop/user/orders";
             } else {
                 console.log(result+" "+err.msg+" "+err.extra);
+                location.href = "/shop/user/orders";
             }
         });
     });
