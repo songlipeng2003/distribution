@@ -98,7 +98,13 @@ class EmployeeController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        if($model->getUsers()->count()==0){
+            $model->delete();
+        }else{
+            Yii::$app->session->setFlash('error', '删除失败，该员工下面已经发展用户');
+        }
 
         return $this->redirect(['index']);
     }

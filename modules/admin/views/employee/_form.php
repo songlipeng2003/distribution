@@ -26,6 +26,10 @@ use app\models\Employee;
 
     <?= $form->field($model, 'rate')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'monthIndex')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'salary')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'status')->dropdownList(Employee::$statuses) ?>
 
     <div class="form-group">
