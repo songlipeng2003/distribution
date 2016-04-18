@@ -1,53 +1,56 @@
-<?php
-
-/* @var $this yii\web\View */
-
-$this->title = 'My Yii Application';
-?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+<!-- Custom Theme files -->
+<div class="main">
+    <div class="nav-circle">
+        <div class="logo">
+            <a href="/"><h1>M</h1></a>
+        </div>
+        <div class="right-nav" style="height: 260px;"></div>
+        <div class="clear"></div>
     </div>
 
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+    <!--block-->
+    <ul id="demo-block">
+        <li>
+            <h2>Your Design.</h2></li>
+        <li></li>
+        <li>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s Lorem Ipsum has been the industry's standard dummy text ever since the 1500s Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+        </li>
+        <div class="copy">
+            <p>&copy; 2016 安徽咻一咻电子商务有限公司 . All Rights Reserved</p>
         </div>
+    </ul>
+    <!--End of styles-->
+</div>
 
+<!--End of styles-->
+<!--Thumbnail Navigation-->
+<div id="prevthumb"></div>
+<div id="nextthumb"></div>
+<!--Arrow Navigation-->
+<a id="prevslide" class="load-item"></a>
+<a id="nextslide" class="load-item"></a>
+<div id="thumb-tray" class="load-item">
+    <div id="thumb-back"></div>
+    <div id="thumb-forward"></div>
+</div>
+<!--Time Bar-->
+<div id="progress-back" class="load-item">
+    <div id="progress-bar"></div>
+</div>
+<!--Control Bar-->
+<div id="controls-wrapper" class="load-item">
+    <div id="controls">
+        <a id="play-button"><img id="pauseplay" src="img/pause.png" /></a>
+        <!--Slide counter-->
+        <div id="slidecounter">
+            <span class="slidenumber"></span> / <span class="totalslides"></span>
+        </div>
+        <!--Slide captions displayed here-->
+        <div id="slidecaption"></div>
+        <!--Thumb Tray button-->
+        <a id="tray-button"><img id="tray-arrow" src="img/button-tray-up.png" /></a>
+        <!--Navigation-->
+        <ul id="slide-list"></ul>
     </div>
 </div>
