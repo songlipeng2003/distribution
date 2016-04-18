@@ -13,7 +13,7 @@ $this->title = '订单';
 </header>
 
 <div class="am-panel-group">
-<?php foreach ($dataProvider->getModels() as $key => $order): ?>
+<?php foreach ($dataProvider->getModels() as $key => $order){ ?>
     <div class="am-panel am-panel-default">
         <div class="am-panel-hd">
             订单号：<?= $order->sn ?>
@@ -38,7 +38,7 @@ $this->title = '订单';
             <? } ?>
         </div>
     </div>
-<?php endforeach ?>
+<?php } ?>
 </div>
 
 <?= $this->render('../elements/bottom') ?>
