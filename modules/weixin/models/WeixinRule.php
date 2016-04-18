@@ -128,9 +128,9 @@ class WeixinRule extends \yii\db\ActiveRecord
                         }
                     }else{
                         $parentId = $parentId - 10000*10;
-                        $parent = WeixinUser::findOne($parentId);
+                        $parent = User::findOne($parentId);
                         if($parent){
-                            $user->parentId = $parent->user->id;
+                            $user->parentId = $parent->id;
                         }
                     } 
                 }

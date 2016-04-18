@@ -7,6 +7,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 
 use app\modules\weixin\models\WeixinUser;
+use app\modules\weixin\models\Weixin;
 
 class User extends BaseModel implements \yii\web\IdentityInterface
 {
@@ -229,5 +230,18 @@ class User extends BaseModel implements \yii\web\IdentityInterface
     public function getUserTypeText()
     {
         return self::$userTypes[$this->userType];
+    }
+
+    public function getSpreadUrl()
+    {
+        $app = Weixin::getApplication();
+        $qrcode = $app->qrcode;
+
+        $result = $qrcode->temporary($this->id + 10000 * 10, 6 * 24 * 3600);
+        // $ticket = $result->ticket;
+        // $expireSeconds = $result->expire_seconds;
+        $url = $result->url;
+
+        return $url;
     }
 }
