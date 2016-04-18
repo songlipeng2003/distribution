@@ -39,14 +39,15 @@ AdminAsset::register($this);
             'options' => ['class' => 'navbar-nav navbar-pull nav-pills'],
             #修改使用yii2-admin的菜单控制项
             'items' => [
-                ['label' => '用户管理', 'url' => ['/admin/user/index']],
-                ['label' => '产品管理', 'url' => ['/admin/product/index']],
-                ['label' => '订单管理', 'url' => ['/admin/order/index']],
-                ['label' => '公告管理', 'url' => ['/admin/notice/index']],
-                ['label' => '员工管理', 'url' => ['/admin/employee/index']],
-                ['label' => '提现管理', 'url' => ['/admin/extract/index']],
+                ['label' => '用户', 'url' => ['/admin/user/index']],
+                ['label' => '产品', 'url' => ['/admin/product/index']],
+                ['label' => '订单', 'url' => ['/admin/order/index']],
+                ['label' => '公告', 'url' => ['/admin/notice/index']],
+                ['label' => '员工', 'url' => ['/admin/employee/index']],
+                ['label' => '提现', 'url' => ['/admin/extract/index']],
+                ['label' => '区域', 'url' => ['/admin/region/index']],
+                ['label' => '配置', 'url' => ['/admin/setting/index']],
                 ['label' => '交易记录', 'url' => ['/admin/trading-record/index']],
-                ['label' => '区域管理', 'url' => ['/admin/region/index']],
                 [
                     'label' => '微信管理', 
                     'url' => '#',
