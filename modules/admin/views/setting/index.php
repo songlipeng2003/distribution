@@ -25,6 +25,9 @@ $this->title = '系统配置';
                 <li role="presentation">
                     <a href="#ship" aria-controls="ship" role="tab" data-toggle="tab">快递</a>
                 </li>
+                <li role="presentation">
+                    <a href="#level" aria-controls="level" role="tab" data-toggle="tab">分销设置</a>
+                </li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
@@ -56,6 +59,15 @@ $this->title = '系统配置';
                     <?= $form->field($model, 'shipCompany')->textInput() ?>
 
                     <?= $form->field($model, 'shipAddress')->textInput() ?>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="level">
+                    <?= $form->field($model, 'level1Number')->textInput()->hint("如果提成是5%，请输入0.05") ?>
+
+                    <?= $form->field($model, 'level2Number')->textInput() ?>
+
+                    <?= $form->field($model, 'level3Number')->textInput() ?>
+
+                    <?= $form->field($model, 'levelUnlimitedNumber')->textInput() ?>
                 </div>
             </div>
 

@@ -26,6 +26,12 @@ class SettingForm extends Model
     public $shipCompany;
     public $shipAddress;
 
+    // 分销
+    public $level1Number;
+    public $level2Number;
+    public $level3Number;
+    public $levelUnlimitedNumber;
+
     private $_user = false;
 
 
@@ -42,6 +48,12 @@ class SettingForm extends Model
             [['weixinName', 'weixinCode', 'weixinAppId', 'weixinSecret', 'weixinToken', 'weixinAesKey'], 'required'],
 
             [['shipName', 'shipPhone', 'shipCity', 'shipCompany', 'shipAddress'], 'safe'],
+
+            [['level1Number', 'level2Number', 'level3Number', 'levelUnlimitedNumber'], 'number', 'min' => 0, 'max' =>1],
+            ['level1Number', 'default', 'value' => 0.08],
+            ['level2Number', 'default', 'value' => 0.07],
+            ['level3Number', 'default', 'value' => 0.08],
+            ['levelUnlimitedNumber', 'default', 'value' => 0.05],
         ];
     }
 
@@ -65,7 +77,12 @@ class SettingForm extends Model
             'shipPhone' => '寄件人联系电话',
             'shipCity' => '寄件人始发地',
             'shipCompany' => '寄件人单位名称',
-            'shipAddress' => '寄件人地址'
+            'shipAddress' => '寄件人地址',
+
+            'level1Number' => '一级分销提成',
+            'level2Number' => '二级分销提成',
+            'level3Number' => '三级分销提成',
+            'levelUnlimitedNumber' => '无限级分销提成',
         ];
     }
 

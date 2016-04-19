@@ -257,7 +257,11 @@ class Order extends BaseModel
 
         $parent = $user->parent;
         $level = 0;
-        $levels = [0.08, 0.07, 0.08];
+        $levels = [
+            Yii::$app->settings->get('system', 'level1Number', 0.08), 
+            Yii::$app->settings->get('system', 'level2Number', 0.07),
+            Yii::$app->settings->get('system', 'level3Number', 0.08)
+        ];
 
         while($parent && $level<10){
             if($parent->userType==User::USER_TYPE_NOMARL){
@@ -290,7 +294,7 @@ class Order extends BaseModel
                 $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
                 $tradingRecord->itemId = $this->id;
                 $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
-                $tradingRecord->amount = $this->totalAmount * 0.05;
+                $tradingRecord->amount = $this->totalAmount * Yii::$app->settings->get('system', 'levelUnlimitedNumber', 0.05);
                 $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
                 $tradingRecord->saveAndCheckResult();
 
