@@ -15,10 +15,10 @@ class Weixin
         if(!self::$application){
             $options = [
                 'debug'  => $_ENV['WEIXIN_DEBUG'],
-                'app_id' => $_ENV['WEIXIN_APP_ID'],
-                'secret' => $_ENV['WEIXIN_SECRET'],
-                'token'  => $_ENV['WEIXIN_TOKEN'],
-                'aes_key' => $_ENV['WEIXIN_AES_KEY'], // 可选
+                'app_id' => Yii::$app->settings->get('system', 'weixinAppId'),
+                'secret' => Yii::$app->settings->get('system', 'weixinSecret'),
+                'token'  => Yii::$app->settings->get('system', 'weixinToken'),
+                'aes_key' => Yii::$app->settings->get('system', 'weixinAesKey'), // 可选
 
                 'log' => [
                     'level' => 'debug',

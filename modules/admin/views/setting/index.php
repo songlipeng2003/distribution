@@ -15,15 +15,49 @@ $this->title = '系统配置';
             'layout' => 'horizontal',
         ]); ?>
 
-            <?= $form->field($model, 'shipName')->textInput() ?>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#site" aria-controls="site" role="tab" data-toggle="tab">网站设置</a>
+                </li>
+                <li role="presentation">
+                    <a href="#weixin" aria-controls="weixin" role="tab" data-toggle="tab">公众号</a>
+                </li>
+                <li role="presentation">
+                    <a href="#ship" aria-controls="ship" role="tab" data-toggle="tab">快递</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="site">
+                    <?= $form->field($model, 'siteName')->textInput() ?>
 
-            <?= $form->field($model, 'shipPhone')->textInput() ?>
+                    <?= $form->field($model, 'siteDescription')->textInput() ?>
+                </div>
+                <div role="tabpanel" class="tab-pane active" id="weixin">
+                    <?= $form->field($model, 'weixinName')->textInput() ?>
 
-            <?= $form->field($model, 'shipCity')->textInput() ?>
+                    <?= $form->field($model, 'weixinCode')->textInput() ?>
 
-            <?= $form->field($model, 'shipCompany')->textInput() ?>
+                    <?= $form->field($model, 'weixinAppId')->textInput() ?>
 
-            <?= $form->field($model, 'shipAddress')->textInput() ?>
+                    <?= $form->field($model, 'weixinSecret')->textInput() ?>
+
+                    <?= $form->field($model, 'weixinToken')->textInput() ?>
+
+                    <?= $form->field($model, 'weixinAesKey')->textInput() ?>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="ship">
+                    <?= $form->field($model, 'shipName')->textInput() ?>
+
+                    <?= $form->field($model, 'shipPhone')->textInput() ?>
+
+                    <?= $form->field($model, 'shipCity')->textInput() ?>
+
+                    <?= $form->field($model, 'shipCompany')->textInput() ?>
+
+                    <?= $form->field($model, 'shipAddress')->textInput() ?>
+                </div>
+            </div>
 
             <div class="form-group">
                 <div class="col-lg-offset-3 col-lg-11">
