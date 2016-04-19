@@ -1,6 +1,25 @@
+body {
+    /*background-color: #e5e5e5;*/
+}
+
 img {
     width: 100%;
 }
+
+.am-navbar-default .am-navbar-nav {
+    background-color: #369cf6;
+}
+
+.am-header-default {
+    background-color: #369cf6;
+}
+
+.am-btn-primary {
+    background-color: #369cf6;
+    border-color: #369cf6;
+}
+
+/* common end */
 
 .price {
     color: red;
@@ -36,4 +55,14 @@ img {
 
 .user-index {
     padding: 10px;
+}
+
+.page {
+    margin: 5px;
+    padding: 10px;
+    background-color: #FFF;
+}
+
+.pay-success-page {
+    text-align: center;
 }

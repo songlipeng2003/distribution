@@ -59,6 +59,11 @@ class OrderController extends Controller
         ]);
     }
 
+    public function actionPaySuccess()
+    {
+        return $this->render('pay-success');
+    }
+
     public function actionView($id)
     {
         $model = $this->findModel($id);
