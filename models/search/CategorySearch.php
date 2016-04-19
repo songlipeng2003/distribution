@@ -5,12 +5,12 @@ namespace app\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Product;
+use app\models\Category;
 
 /**
- * ProductSearch represents the model behind the search form about `app\models\Product`.
+ * CategorySearch represents the model behind the search form about `app\models\Category`.
  */
-class ProductSearch extends Product
+class CategorySearch extends Category
 {
     /**
      * @inheritdoc
@@ -18,9 +18,8 @@ class ProductSearch extends Product
     public function rules()
     {
         return [
-            [['id', 'quantity', 'saledNumber', 'status'], 'integer'],
-            [['name', 'image', 'content', 'createdAt', 'updatedAt'], 'safe'],
-            [['price', 'categoryId'], 'number'],
+            [['id'], 'integer'],
+            [['name', 'createdAt', 'updatedAt'], 'safe'],
         ];
     }
 
@@ -42,7 +41,7 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
-        $query = Product::find();
+        $query = Category::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -58,18 +57,11 @@ class ProductSearch extends Product
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'price' => $this->price,
-            'quantity' => $this->quantity,
-            'saledNumber' => $this->saledNumber,
-            'status' => $this->status,
             'createdAt' => $this->createdAt,
             'updatedAt' => $this->updatedAt,
-            'categoryId' => $this->categoryId,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'image', $this->image])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

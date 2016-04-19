@@ -2,11 +2,13 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 use kucha\ueditor\UEditor;
 
 use app\assets\UploadifyAsset;
 use app\models\Product;
+use app\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
@@ -38,6 +40,8 @@ use app\models\Product;
             <button type="button" id="file-upload" class="btn btn-default">上传</button>
         </div>
     </div>
+
+    <?= $form->field($model, 'categoryId')->dropdownList(ArrayHelper::map(Category::find()->all(), 'id', 'name')) ?>
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
     

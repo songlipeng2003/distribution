@@ -1,9 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
 
 use app\models\Product;
+use app\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\ProductSearch */
@@ -29,6 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
+            [
+                'attribute' =>'categoryId',
+                'filter' => Html::activeDropDownList($searchModel, 'categoryId', ArrayHelper::map(Category::find()->all(), 'id', 'name'), ['class' => 'form-control', 'prompt' => '请选择']),
+                'headerOptions' => ['style' => 'width:100px'],
+                'value' => function($model){
+                    return $model->category ? $model->category->name : null;
+                }
+            ],
             'price',
             'quantity',
             'saledNumber',

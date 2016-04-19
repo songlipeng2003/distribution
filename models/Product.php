@@ -50,10 +50,11 @@ class Product extends BaseModel
     public function rules()
     {
         return [
-            [['name', 'price', 'quantity', 'status'], 'required'],
+            [['name', 'price', 'quantity', 'status', 'categoryId'], 'required'],
             [['price', 'originalPrice'], 'number', 'min' => 1],
             [['quantity', 'status'], 'integer'],
             [['content'], 'string'],
+            ['categoryId', 'number'],
             [['name', 'image'], 'string', 'max' => 255],
             ['files', 'safe']
         ];
@@ -76,6 +77,7 @@ class Product extends BaseModel
             'content' => '内容',
             'createdAt' => '创建时间',
             'updatedAt' => '更新时间',
+            'categoryId' => '分类',
         ];
     }
 
@@ -106,5 +108,10 @@ class Product extends BaseModel
     public function getStatusText()
     {
         return self::$statuses[$this->status];
+    }
+
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'categoryId']);
     }
 }
