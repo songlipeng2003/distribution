@@ -22,12 +22,14 @@ $this->title = $model->name;
         <?php } ?>
     </ul>
 </div>
-<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-<div>
-    <h2>世界这么大，我想要吃掉它！</h2>
-    <p>
-        本零食大礼包专为吃货精心准备，囊获全球22款零食，一次吃够
-    </p>
+<div class="page">
+    <h1><?= $model->name ?></h1>
+    <?= $model->slogan ?>
+    <br/><br/>
+
+    <span class="orange">累计销量：</span><?= $model->saledNumber ?>
+    <span class="orange am-fr">购买一份成为代言人</span>
+
     <div class="price-line">
         <span class="price">￥<?= $model->price ?></span>
         <?php if($model->originalPrice){ ?>
@@ -35,13 +37,12 @@ $this->title = $model->name;
             <?= $model->originalPrice ?>
         </del>
         <?php } ?>
+        <br/>
     </div>
 </div>
-<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-<div class="">
-    <h3>商品详情</h3>
-    <?= $model->content ?>
-</div>
+
+<?= $model->content ?>
+
 <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default " id="">
     <ul class="am-navbar-nav am-cf am-avg-sm-1">
         <li>

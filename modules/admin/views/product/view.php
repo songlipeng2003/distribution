@@ -35,6 +35,7 @@ tr th{
         'attributes' => [
             'id',
             'name',
+            'slogan',
             'image',
             'price',
             'originalPrice',

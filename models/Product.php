@@ -55,7 +55,8 @@ class Product extends BaseModel
             [['quantity', 'status'], 'integer'],
             [['content'], 'string'],
             ['categoryId', 'number'],
-            [['name', 'image'], 'string', 'max' => 255],
+            ['name', 'string', 'max' => 30],
+            [['slogan', 'image'], 'string', 'max' => 255],
             ['files', 'safe']
         ];
     }
@@ -68,6 +69,7 @@ class Product extends BaseModel
         return [
             'id' => '编号',
             'name' => '名称',
+            'slogan' => '副标题',
             'image' => '图片',
             'originalPrice' => '原价',
             'price' => '价格',

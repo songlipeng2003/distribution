@@ -23,6 +23,8 @@ use app\models\Category;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'slogan')->textInput(['maxlength' => true]) ?>
+
     <div class="form-group field-product-price required">
         <label class="control-label col-sm-3" for="product-price">图片</label>
         <div class="col-sm-6">

@@ -7,6 +7,11 @@ img {
     width: 100%;
 }
 
+h1 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
 h3 {
     font-size: 14px;
     font-weight: normal;
@@ -31,6 +36,20 @@ h3 {
     margin-top: 10px;
 }
 
+.am-slider-default .am-control-nav {
+    bottom: 15px;
+}
+
+.am-slider-default {
+    margin-bottom: 10px;
+}
+
+.am-form-group {
+    padding-bottom: 8px;
+    border-bottom: 1px solid #EEE;
+    margin-bottom: 8px;
+}
+
 /* common end */
 
 .price {
@@ -38,7 +57,7 @@ h3 {
 }
 
 .page {
-    margin: 2px;
+    margin: 2px 2px 10px 2px;
     padding: 10px;
     background-color: #FFF;
 }
@@ -63,6 +82,10 @@ h3 {
 
 .panel .content {
     padding: 10px;
+}
+
+.orange {
+    color: #f19d7b;
 }
 
 /* index */
