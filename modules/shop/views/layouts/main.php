@@ -17,6 +17,11 @@ ShopAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <style type="text/css" media="screen">
+    header{
+        display: none;
+    }
+    </style>
 </head>
 <body>
 <?php $this->beginBody() ?>

@@ -9,7 +9,7 @@ $this->title = '支付成功';
     <h1 class="am-header-title"><?= Html::encode($this->title) ?></h1>
 </header>
 
-<div class="pay-success-page page">
+<div class="success-page page">
     <img src="/img/shop/pay-success.jpg" alt="" style="width: 50%">
 
     <p>

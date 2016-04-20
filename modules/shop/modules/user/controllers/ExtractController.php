@@ -50,4 +50,9 @@ class ExtractController extends Controller
             ]);
         }
     }
+
+    public function actionSuccess()
+    {
+        return $this->render('success');
+    }
 }

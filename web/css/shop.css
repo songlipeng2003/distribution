@@ -39,7 +39,7 @@ img {
 }
 
 .page {
-    margin: 5px;
+    margin: 2px;
     padding: 10px;
     background-color: #FFF;
 }
@@ -76,6 +76,12 @@ img {
     padding: 10px;
 }
 
-.pay-success-page {
+.success-page {
     text-align: center;
+    padding-top: 50px;
+}
+
+.success-page img {
+    margin-bottom: 30px;
+
 }

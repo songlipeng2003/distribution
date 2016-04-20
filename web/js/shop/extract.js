@@ -20,8 +20,7 @@ $(function(){
                 dataType: 'json',
                 success: function(data){
                     if(data.result==0){
-
-                        location.href = "/shop/user/extract/create";
+                        location.href = "/shop/user/extract/success";
                     }else{
                         alert(data.msg);
                     }
