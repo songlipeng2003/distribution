@@ -19,10 +19,22 @@ img {
     border-color: #369cf6;
 }
 
+.am-navbar-nav a img {
+    height: 30px;
+    width: auto;
+    margin-top: 10px;
+}
+
 /* common end */
 
 .price {
     color: red;
+}
+
+.panel {
+    background-color: #FFF;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 /* index */
