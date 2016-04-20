@@ -116,6 +116,15 @@ h3 {
 
 .extract-page input.am-form-field{
     border: none;
+    font-size: 40px;
+    padding: 0.1em 0.3em 0em;
+    border-bottom: 1px solid #EEE;
+    display: inline-block;
+    width: 90%;
+}
+
+.extract-page input.am-form-field:focus {
+    border-width: 0 0 1px 0;
     border-bottom: 1px solid #EEE;
 }
 
