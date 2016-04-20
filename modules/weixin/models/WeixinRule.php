@@ -143,7 +143,7 @@ class WeixinRule extends \yii\db\ActiveRecord
 
         $msg = "欢迎关注“吃货榜样”！我们为你准备了吃货们无法拒绝的进口零食大礼包——“世界这么大，带你吃掉它”，同时也恭喜你成为我们第{$user->id}合伙候选人，你仅需购买一盒大礼包即可获得18888元合伙人现金奖励，想到现在领取请点击<a href=\"{$url}\">了解更多</a>";
         
-        $text = new Text($msg);
+        $text = new Text();
         $text->content = $msg;
 
         return $text;
