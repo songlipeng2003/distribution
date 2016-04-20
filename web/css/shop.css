@@ -1,5 +1,6 @@
 body {
-    /*background-color: #e5e5e5;*/
+    background-color: #e5e5e5;
+    font-size: 12px;
 }
 
 img {
@@ -37,6 +38,12 @@ img {
     margin-bottom: 20px;
 }
 
+.page {
+    margin: 5px;
+    padding: 10px;
+    background-color: #FFF;
+}
+
 /* index */
 .notice-title {
     margin: 10px 0;
@@ -67,12 +74,6 @@ img {
 
 .user-index {
     padding: 10px;
-}
-
-.page {
-    margin: 5px;
-    padding: 10px;
-    background-color: #FFF;
 }
 
 .pay-success-page {

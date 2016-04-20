@@ -222,6 +222,11 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         return $this->hasOne(Employee::className(), ['id' => 'employeeId']);
     }
 
+    public function getOrders()
+    {
+        return $this->hasMany(Order::className(), ['userId' => 'id']);
+    }
+
     public function getThisMonthRate()
     {
         return $this->thisMonthIncome / $this->monthLimit;

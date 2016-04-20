@@ -110,7 +110,16 @@ class Order extends BaseModel
                 'value' => function() { return date('Y-m-d H:i:s'); }
             ],
             [
-                'class' => SnBehavior::className()
+                'class' => SnBehavior::className(),
+                'value' => function(){
+                    $sn = date('ymdh').rand(10, 99);
+                    $count = self::find()->where(['sn'=>$sn])->count();
+                    if($count>0){
+                        $sn = $this->getValue($event);
+                    }
+
+                    return $sn;
+                }
             ]
         ];
     }
