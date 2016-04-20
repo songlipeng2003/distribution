@@ -273,7 +273,7 @@ class Order extends BaseModel
         ];
 
         while($parent && $level<10){
-            if($parent->userType==User::USER_TYPE_NOMARL){
+            if($parent->userType==User::USER_TYPE_MEMBER){
                 // 层级限制
                 if($level<3){
                     // 每月限额限制

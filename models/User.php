@@ -11,13 +11,16 @@ use app\modules\weixin\models\Weixin;
 
 class User extends BaseModel implements \yii\web\IdentityInterface
 {
-    const USER_TYPE_NOMARL = 1;
+    const USER_TYPE_NORMAL = 1;
 
-    const USER_TYPE_LIMITED = 2;
+    const USER_TYPE_MEMBER = 2;
+
+    const USER_TYPE_LIMITED = 3;
 
     public static $userTypes = [
-        self::USER_TYPE_NOMARL => '普通',
-        self::USER_TYPE_LIMITED => '无限级',
+        self::USER_TYPE_NORMAL => '代言人候选人',
+        self::USER_TYPE_MEMBER => '代言人',
+        self::USER_TYPE_LIMITED => '超级代言人',
     ];
 
     /**
@@ -248,5 +251,10 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         $url = $result->url;
 
         return $url;
+    }
+
+    public function getTotalLevelNumber()
+    {
+        return $this->level1Number+$this->level2Number+$this->level3Number;
     }
 }
