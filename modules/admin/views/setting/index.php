@@ -36,7 +36,7 @@ $this->title = '系统配置';
 
                     <?= $form->field($model, 'siteDescription')->textInput() ?>
                 </div>
-                <div role="tabpanel" class="tab-pane active" id="weixin">
+                <div role="tabpanel" class="tab-pane" id="weixin">
                     <?= $form->field($model, 'weixinName')->textInput() ?>
 
                     <?= $form->field($model, 'weixinCode')->textInput() ?>
