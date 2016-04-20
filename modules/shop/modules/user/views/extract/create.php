@@ -20,25 +20,26 @@ $this->title = '合伙人账户';
   <h1 class="am-header-title"><?= Html::encode($this->title) ?></h1>
 </header>
 
-<div class="extract-page">
-    <h2 class="balance"> ￥<?= $finance->balance ?></h2>
-
-    <p>
-        因银行接口限制，单词提现1-200元将由微信红包形式即时发送，另每次扣除1元手续费。
-    </p>
+<form id="extract_form" class="am-form am-form-horizontal" method="POST">
+<div class="panel extract-page">
+    <div class="title">
+        提现方式 &nbsp;&nbsp;&nbsp;&nbsp;<span>微信红包</span>
+    </div>
+    <div class="content">
+        <h3>提现金额</h3>
+        <span style="font-size: 20px;">￥</span>
+        <input name="Extract[amount]" type="number" class="am-form-field" required="" min="5" max="200">
+        <h3>代言人余额 ￥<?= $finance->balance ?></h3>
+        <p>
+            * 因微信提现限制，所有提现均以微信红包形式即时发放，每   次提现金额为5-200元，可多次提现，单次提现扣除1元手续费。
+        </p>
+    </div>
 </div>
 
-<form id="extract_form" class="am-form am-form-horizontal" method="POST">
-    <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-    <div class="am-form-group">
-        <label class="am-u-sm-4 am-form-label">提现金额：</label>
-        <div class="am-u-sm-8">
-            <input name="Extract[amount]" type="number" class="am-form-field" placeholder="请输入提现金额(大于5的整数)" required="" min="5" max="200">
-        </div>
-    </div>
-    <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
+<h3 style="text-align: center;">即时到账</h3>
 
-    <button type="submit" class="am-btn am-btn-primary am-btn-block">立即提现</button>
+<button type="submit" class="am-btn am-btn-primary am-btn-block">提现</button>
+
 </form>
 
 <?= $this->render('../elements/bottom') ?>

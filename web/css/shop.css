@@ -7,6 +7,11 @@ img {
     width: 100%;
 }
 
+h3 {
+    font-size: 14px;
+    font-weight: normal;
+}
+
 .am-navbar-default .am-navbar-nav {
     background-color: #369cf6;
 }
@@ -32,16 +37,32 @@ img {
     color: red;
 }
 
-.panel {
-    background-color: #FFF;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
 .page {
     margin: 2px;
     padding: 10px;
     background-color: #FFF;
+}
+
+.panel {
+    background-color: #FFF;
+    width: 98%;
+    margin: 1%;
+}
+
+
+.panel .title{
+    background-color: #fafafa;
+    line-height: 40px;
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+.panel .title span {
+    color: #2f619f;
+}
+
+.panel .content {
+    padding: 10px;
 }
 
 /* index */
@@ -65,11 +86,22 @@ img {
     font-size: 24px;
 }
 
-.extract-page .balance {
-    padding: 50px 10px 20px;
-    font-size: 30px;
-    color: red;
-    text-align: center;
+.extract-page {
+    width: 96%;
+    margin: 2%;
+}
+
+.extract-page input.am-form-field{
+    border: none;
+    border-bottom: 1px solid #EEE;
+}
+
+#extract_form .am-btn-primary {
+    background-color: #2f9f28;
+    color: #FFF;
+    width: 96%;
+    margin: 2%;
+    border-radius: 5px;
 }
 
 .user-index {
