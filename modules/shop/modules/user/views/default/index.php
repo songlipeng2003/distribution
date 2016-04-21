@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+use app\models\User;
+
 $this->title = '个人中心';
 ?>
 
@@ -17,8 +19,11 @@ $this->title = '个人中心';
 </header>
 
 <div class="page am-cf">
-    <div class="c100 p25 big">
-        <span>50%</span>
+    <div class="c100 p<?= (int)($user->getThisMonthRate() * 100) ?> big orange proccess-cicle">
+        <span class="title">本月代言费用（元）</span>
+        <span class="number"><?= $user->monthLimit ?></span>
+        <span class="arrow-up"></span>
+        <span class="rect">本月剩余 <?= $user->monthLimit - $user->thisMonthIncome ?></span>
         <div class="slice">
             <div class="bar"></div>
             <div class="fill"></div>
@@ -26,7 +31,7 @@ $this->title = '个人中心';
     </div>
 </div>
 
-<div class="page">
+<div class="page userinfo-line">
     <div class="am-cf">
         <div class="am-u-sm-4">
             <?= Html::img($weixinUser->getAvatarUrl(132), ['class' => 'am-img-thumbnail am-circle', 'style' => "width:80px;"]) ?>
@@ -35,10 +40,17 @@ $this->title = '个人中心';
             <h2 style="padding-top: 15px;"><?= $user->username ?><br/><?= $user->userTypeText ?></h2>
         </div>
         <div class="am-u-sm-4">
+            <?php if($user->userType==User::USER_TYPE_NORMAL){ ?>
+            <a class="am-fr orange order-link" href="<?= Url::to(['/shop/']) ?>">
+                成为代言人
+                <i class="am-icon-angle-right am-margin-right"></i>
+            </a>
+            <?php }else{ ?>
             <a class="am-fr orange order-link" href="<?= Url::to(['/shop/user/order']) ?>">
                 我的订单
                 <i class="am-icon-angle-right am-margin-right"></i>
             </a>
+            <?php } ?>
         </div>
     </div>
 </div>
