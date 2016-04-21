@@ -9,6 +9,9 @@ use yii\behaviors\TimestampBehavior;
 use app\modules\weixin\models\WeixinUser;
 use app\modules\weixin\models\Weixin;
 
+use dosamigos\qrcode\QrCode;
+use dosamigos\qrcode\lib\Enum;
+
 class User extends BaseModel implements \yii\web\IdentityInterface
 {
     const USER_TYPE_NORMAL = 1;
@@ -251,6 +254,73 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         $url = $result->url;
 
         return $url;
+    }
+
+    public function getPoster()
+    {
+        $img = Yii::$app->basePath . '/web/img/shop/qrcode-bg.jpg';
+
+        $im = imagecreatefromjpeg($img);
+
+        $fontColor = imagecolorallocate($im, 255, 255, 255);
+
+        $font = Yii::$app->basePath . "/web/font/Yahei.ttf";
+        $boldFont = Yii::$app->basePath . "/web/font/Yahei Bold.ttf";
+
+        imagettftext($im, 36, 0, 90, 645, $fontColor, $boldFont, "¥ " . $this->totalIncome);
+
+        imagettftext($im, 36, 0, 410, 645, $fontColor, $boldFont,  rand(70, 90) . "%");
+
+        imagettftext($im, 18, 0, 195, 696, $fontColor, $font, $this->id);
+
+        imagettftext($im, 18, 0, 410, 696, $fontColor, $font, $this->nickname);
+
+        $avatar = imagecreatefrompng($this->weixinUser->getAvatarUrl(132));
+
+        // $color = 'FFFFFF';
+        // $radius = 66;
+        // $cornerImage = imagecreatetruecolor($radius, $radius);
+        // $clearColor = imagecolorallocate($cornerImage, 0, 0, 0);
+        // $solidColor = imagecolorallocatealpha($cornerImage, hexdec(substr($color, 0, 2)), hexdec(substr($color, 2, 2)), hexdec(substr($color, 4, 2)), 127);
+        // imagecolortransparent($cornerImage, $clearColor);
+        // imagefill($cornerImage, 0, 0, $solidColor);
+        // imagefilledellipse($cornerImage, $radius, $radius, $radius*2, $radius*2, $clearColor);
+        // imagecopymerge($avatar, $cornerImage, 0, 0, 0, 0, $radius, $radius, 100);
+        // $cornerImage = imagerotate($cornerImage, 90, 0);
+
+        // imagecopymerge($avatar, $cornerImage, 0, 132-$radius, 0, 0, $radius, $radius, 100);
+        // $cornerImage = imagerotate($cornerImage, 90, 0);
+
+        // imagecopymerge($avatar, $cornerImage, 132-$radius, 132-$radius, 0, 0, $radius, $radius, 100);
+        // $cornerImage = imagerotate($cornerImage, 90, 0);
+
+        // imagecopymerge($avatar, $cornerImage, 132-$radius, 0, 0, 0, $radius, $radius, 100);
+
+        imagecopyresized($im, $avatar, 258, 384, 0, 0, 150, 150, 132, 132);
+
+        $tmpPath = Yii::$app->basePath . '/web/uploads/tmp/';
+        if(!file_exists($tmpPath)){
+            mkdir($tmpPath, 0777, true);
+        }
+
+        $tmp = $tmpPath  .  uniqid() . '.jpg';
+
+        QrCode::jpg($this->getSpreadUrl(), $tmp, Enum::QR_ECLEVEL_Q, 10, 1);
+
+        $qrcode = imagecreatefrompng($tmp);
+
+        imagecopyresized($im, $qrcode, 97, 833, 0, 0, 214, 214, 350, 350);
+
+        $filename = uniqid() . '.jpg';
+        $path = Yii::$app->basePath . '/web/images/qrcode/';
+        if(!file_exists($path)){
+            mkdir($path, 0777, true);
+        }
+        $file = $path . $filename;
+
+        imagejpeg($im, $file);
+
+        return '/images/qrcode/' . $filename; 
     }
 
     public function getTotalLevelNumber()

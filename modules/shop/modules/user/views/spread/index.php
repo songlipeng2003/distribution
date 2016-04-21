@@ -14,6 +14,7 @@ $this->title = '我的推广码';
 
 <p>请使用微信扫描下面二维码</p>
 
-<img src="<?= Url::to(['/site/qrcode', 'text' => $url]) ?>" alt="">
+<!-- <img src="<?= Url::to(['/site/qrcode', 'text' => $url]) ?>" alt=""> -->
+<img src="<?= $url ?>" alt="">
 
 <?= $this->render('../elements/bottom') ?>
