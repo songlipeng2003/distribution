@@ -256,7 +256,7 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         return $url;
     }
 
-    public function getPoster()
+    public function genPoster()
     {
         $img = Yii::$app->basePath . '/web/img/shop/qrcode-bg.jpg';
 
@@ -320,7 +320,13 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
         imagejpeg($im, $file);
 
-        return '/images/qrcode/' . $filename; 
+        $url = '/images/qrcode/' . $filename;
+
+        $this->poster = $url;
+        $this->posterAt = date('Y-m-d H:i:s');
+        $this->save();
+
+        return $url; 
     }
 
     public function getTotalLevelNumber()
