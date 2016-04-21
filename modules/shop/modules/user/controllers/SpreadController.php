@@ -26,6 +26,7 @@ class SpreadController extends Controller
         }
 
         Yii::$app->response->format = Response::FORMAT_JSON;
+        $url = Url::to($url, true);
 
         $app = Weixin::getApplication();
         $notice = $app->notice;
@@ -37,13 +38,13 @@ class SpreadController extends Controller
                 'first' => '您申请办理的业务已经成功',
                 'keyword1' => '获取专属二维码海报',
                 'keyword2' => date('Y年m月d日'),
-                'remark' > '点击获取二维码'
+                'remark' > '回复“二维码”即可获得当日二维码海报'
             ]
         ]);
 
         return  [
             'result' => 0,
-            'url' => Url::to($url, true)
+            'url' => $url
         ];
     }
 }

@@ -76,6 +76,10 @@ class WeixinRule extends \yii\db\ActiveRecord
 
     public static function handleRule($msg)
     {
+        if($msg=='二维码'){
+            
+        }
+
         $weixinRule = WeixinRule::findOne(['keyword' => $msg]);
         if($weixinRule){
             $text = new Text();
