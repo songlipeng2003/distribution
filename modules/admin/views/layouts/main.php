@@ -7,9 +7,10 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
 
-AppAsset::register($this);
+use app\assets\AdminAsset;
+
+AdminAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -38,23 +39,33 @@ AppAsset::register($this);
             'options' => ['class' => 'navbar-nav navbar-pull nav-pills'],
             #修改使用yii2-admin的菜单控制项
             'items' => [
-                ['label' => '产品管理', 'url' => ['/admin/product/index']],
-                ['label' => '订单管理', 'url' => ['/admin/order/index']],
-                ['label' => '公告管理', 'url' => ['/admin/notice/index']],
-                ['label' => '员工管理', 'url' => ['/admin/employee/index']],
-                ['label' => '提现管理', 'url' => ['/admin/extract/index']],
+                ['label' => '用户', 'url' => ['/admin/user/index']],
+                ['label' => '分类', 'url' => ['/admin/category/index']],
+                ['label' => '产品', 'url' => ['/admin/product/index']],
+                ['label' => '订单', 'url' => ['/admin/order/index']],
+                ['label' => '公告', 'url' => ['/admin/notice/index']],
+                ['label' => '员工', 'url' => ['/admin/employee/index']],
+                ['label' => '提现', 'url' => ['/admin/extract/index']],
+                ['label' => '区域', 'url' => ['/admin/region/index']],
                 ['label' => '交易记录', 'url' => ['/admin/trading-record/index']],
-                ['label' => '区域管理', 'url' => ['/admin/region/index']],
+                [
+                    'label' => '系统',
+                    'url' => '#',
+                    'items' => [
+                        ['label' => '系统', 'url' => ['/admin/system/index']],
+                        ['label' => '配置', 'url' => ['/admin/setting/index']],
+                    ]
+                ],
                 [
                     'label' => '微信管理', 
                     'url' => '#',
                     'items' => [
                         ['label' => '微信菜单管理', 'url' => ['/weixin/admin/menu/index']],
-                        ['label' => '微信用户管理', 'url' => ['/weixin/admin/weixin-user/index']],
-                        ['label' => '微信用户群组管理', 'url' => ['/weixin/admin/weixin-group/index']],
-                        ['label' => '微信文章管理', 'url' => ['/weixin/admin/weixin-article/index']],
+                        // ['label' => '微信用户管理', 'url' => ['/weixin/admin/weixin-user/index']],
+                        // ['label' => '微信用户群组管理', 'url' => ['/weixin/admin/weixin-group/index']],
+                        // ['label' => '微信文章管理', 'url' => ['/weixin/admin/weixin-article/index']],
                         ['label' => '微信规则管理', 'url' => ['/weixin/admin/weixin-rule/index']],
-                        ['label' => '微信消息记录管理', 'url' => ['/weixin/admin/weixin-message/index']]
+                        // ['label' => '微信消息记录管理', 'url' => ['/weixin/admin/weixin-message/index']]
                     ]
                 ]
             ],

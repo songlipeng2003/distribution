@@ -6,6 +6,7 @@ use yii\base\Model;
 
 use app\models\Admin;
 use app\models\Order;
+use app\models\Product;
 
 class QuickCheckoutForm extends Model
 {
@@ -29,6 +30,14 @@ class QuickCheckoutForm extends Model
         return [
             [['productId', 'quantity', 'provinceId', 'cityId', 'regionId', 'address', 'name', 'phone'], 'required'],
             [['quantity'], 'number', 'min' => 1],
+            ['quantity', function($attribute, $params){
+                if($this->productId){
+                    $product = Product::findOne($this->productId);
+                    if($product && $product->quantity < $this->quantity){
+                        $this->addError('quantity', '库存数量不足');
+                    }
+                }
+            }],
             ['phone', 'string', 'length' => 11],
             ['remark', 'string', 'max' => 255],
             ['address', 'string', 'min' => 5, 'max' => 30]

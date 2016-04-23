@@ -61,7 +61,8 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->redirect(['/shop/']);
+        $this->layout = 'web';
+        return $this->render('index');
     }
 
     public function actionLogin()
@@ -112,7 +113,7 @@ class SiteController extends Controller
     {
         $text = Yii::$app->request->get('text');
         Yii::$app->response->format = Response::FORMAT_RAW;
-        header("Content-Type: image/png");
+        header("Content-Type: image/jpeg");
         return QrCode::jpg($text, false, Enum::QR_ECLEVEL_Q, 10, 1);
     }
 

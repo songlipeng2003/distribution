@@ -24,24 +24,30 @@ $this->title = '快速结账';
         <?php } ?>
     </ul>
 </div>
-<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-<div>
-    <h2>世界这么大，我想要吃掉它！</h2>
+
+<div class="page">
+    <h1>
+        <?= $model->name ?>
+        <div class="am-fr">
+            <img src="/img/shop/minus.jpg" alt="" id="op_minus" style="width: 35px;">
+            <span data-number style="font-size: 26px; padding: 4px 5px;">1</span>
+            <img src="/img/shop/plus.jpg" alt="" id="op_plus" style="width: 35px;">
+        </div>
+    </h1>
+
+    购物总计：已选<span class="orange" data-number>1</span>份
+    共计 <span class="orange" data-price="<?= $model->price ?>" data-total-price><?= $model->price ?></span>元
+
+    <hr>
+    <h3>购买须知</h3>
     <p>
-        本零食大礼包专为吃货精心准备，囊获全球22款零食，一次吃够
+    感谢您对眯糊时光的支持，同时也恭喜您购买成功后就成为我们的代言人
+    ，可以在帮助我们推广品牌的同时获得不菲的代言费回报。请您在购买时
+    填写详细的收货地址信息和电话，以确保能快速的收到货物
     </p>
-    <div class="am-fr">
-        <span class="am-icon-md am-icon-minus" id="op_minus"></span>
-        <span data-number style="font-size: 26px; padding: 4px 5px;">1</span>
-        <span class="am-icon-md am-icon-plus" id="op_plus"></span>
-    </div>
 </div>
-<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-<div>
-    购物车总价:已选<em data-number>1</em>份 共计 <em data-price="<?= $model->price ?>" id="total_price"><?= $model->price ?></em>元
-</div>
-<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-<h2>收货人信息</h2>
+
+<div class="page">
 <form id="checkout_form" class="am-form am-form-horizontal" novalidate="" method="post">
     <input type="hidden" id="quantity" name="QuickCheckoutForm[quantity]" value="1">
     <div class="am-form-group">
@@ -57,7 +63,7 @@ $this->title = '快速结账';
         </div>
     </div>
     <div class="am-form-group">
-        <label class="am-u-sm-4 am-form-label">省：</label>
+        <label class="am-u-sm-4 am-form-label">省份：</label>
         <div class="am-u-sm-8">
             <select id="province_id" name="QuickCheckoutForm[provinceId]" required>
                 <option value="">请选择</option>
@@ -73,7 +79,7 @@ $this->title = '快速结账';
         </div>
     </div>
     <div class="am-form-group">
-        <label class="am-u-sm-4 am-form-label">区：</label>
+        <label class="am-u-sm-4 am-form-label">县/区：</label>
         <div class="am-u-sm-8">
             <select id="region_id" name="QuickCheckoutForm[regionId]" required>
                 <option value="">请选择</option>
@@ -93,11 +99,13 @@ $this->title = '快速结账';
         </div>
     </div>
 </form>
+</div>
+
 <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default " id="">
     <ul class="am-navbar-nav am-cf am-avg-sm-1">
         <li>
             <a id="checkout" href="<?= Url::to(['cart/quick-checkout', 'id' => $model->id]) ?>" class="">
-                <span class="am-navbar-label">立即购买并成为合伙人</span>
+                <span class="am-navbar-label">立即支付<span data-total-price></span>成为代言人</span>
             </a>
         </li>
     </ul>

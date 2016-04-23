@@ -58,12 +58,21 @@ angular.module('employee', ['ionic', 'config', 'employee.controllers',
     $rootScope.isLogin = false;
     $rootScope.currentUser = {};
   }
+
   $rootScope.login = function(user){
     localStorageService.set('isLogin', true);
     localStorageService.set('currentUser', user);
     $rootScope.isLogin = true;
     $rootScope.currentUser = user;
     $state.go('home');
+  }
+
+  $rootScope.logout = function(user){
+    localStorageService.set('isLogin', false);
+    localStorageService.set('currentUser', null);
+    $rootScope.isLogin = false;
+    $rootScope.currentUser = null;
+    $state.go('login');
   }
 
   $rootScope.checkLogin = function(){

@@ -2,10 +2,13 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 use kucha\ueditor\UEditor;
 
 use app\assets\UploadifyAsset;
+use app\models\Product;
+use app\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
@@ -19,6 +22,8 @@ use app\assets\UploadifyAsset;
     ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'slogan')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group field-product-price required">
         <label class="control-label col-sm-3" for="product-price">图片</label>
@@ -38,13 +43,15 @@ use app\assets\UploadifyAsset;
         </div>
     </div>
 
+    <?= $form->field($model, 'categoryId')->dropdownList(ArrayHelper::map(Category::find()->all(), 'id', 'name')) ?>
+
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'originalPrice')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'quantity')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropdownList(Product::$statuses) ?>
 
     <?= $form->field($model, 'content')->widget(UEditor::className(), []) ?>
 

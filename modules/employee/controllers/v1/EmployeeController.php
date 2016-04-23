@@ -33,7 +33,7 @@ class EmployeeController extends ApiController
         return new ActiveDataProvider([
             'query' => $employees,
             'sort'=> [
-                'defaultOrder' => ['month_index'=>SORT_DESC]
+                'defaultOrder' => ['monthIndex'=>SORT_DESC]
             ],               
         ]);
     }

@@ -2,6 +2,8 @@
 
 namespace app\models\behaviors;
 
+use Closure;
+
 use yii\db\BaseActiveRecord;
 use yii\behaviors\AttributeBehavior;
 
@@ -23,6 +25,10 @@ class SnBehavior extends AttributeBehavior
 
     public function getValue($event)
     {
+        if ($this->value instanceof Closure || is_array($this->value) && is_callable($this->value)) {
+            return call_user_func($this->value, $event);
+        }
+
         $sn = date('ymdh').rand(1000, 9999);
 
         $count = $this->owner->find()->where(['sn'=>$sn])->count();

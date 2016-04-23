@@ -51,11 +51,12 @@ class Employee extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'password', 'phone'], 'required'],
+            [['username', 'password', 'phone', 'salary', 'monthIndex'], 'required'],
             [['status'], 'integer'],
             ['username', 'match', 'pattern' => '/\w{5,20}/', 'message' => '用户名格式错误，只能英文或数字或_,必须5-20位'],
             [['username', 'password', 'name', 'email', 'phone'], 'string', 'max' => 255],
-            ['rate', 'integer', 'min' => 1, 'max' => 99]
+            ['rate', 'integer', 'min' => 1, 'max' => 99],
+            [['salary', 'monthIndex'], 'integer', 'min' => 1]
         ];
     }
 
@@ -76,7 +77,11 @@ class Employee extends ActiveRecord implements IdentityInterface
             'createdAt' => '创建时间',
             'updatedAt' => '更新时间',
             'lastLoginedAt' => '最近登录时间',
-            'rate' => '费率'
+            'rate' => '费率',
+            'monthIndex' => '月度指标',
+            'salary' => '基本工资',
+            'lastMonthNumber' => '上月工资',
+            'finishedNumber' => '本月完成',
         ];
     }
 
@@ -194,5 +199,10 @@ class Employee extends ActiveRecord implements IdentityInterface
         $fields[] = 'spreadUrl';
 
         return $fields;
+    }
+
+    public function getUsers()
+    {
+        return $this->hasMany(User::className(), ['employeeId' => 'id']);
     }
 }

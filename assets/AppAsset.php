@@ -18,12 +18,16 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+        'css/style.css',
+        'css/supersized.css',
+        'css/supersized.shutter.css',
     ];
     public $js = [
+        'js/supersized.3.2.7.min.js',
+        'js/supersized.shutter.min.js',
+        'js/innards.js'
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'yii\web\JqueryAsset',
     ];
 }

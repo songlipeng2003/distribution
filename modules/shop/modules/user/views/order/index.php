@@ -7,38 +7,27 @@ use app\models\Order;
 $this->title = '订单';
 ?>
 
-<header data-am-widget="header"
-      class="am-header am-header-default">
-  <h1 class="am-header-title"><?= Html::encode($this->title) ?></h1>
-</header>
+<!-- <header data-am-widget="header" class="am-header am-header-default">
+    <h1 class="am-header-title"><?= Html::encode($this->title) ?></h1>
+</header> -->
 
-<div class="am-panel-group">
-<?php foreach ($dataProvider->getModels() as $key => $order): ?>
-    <div class="am-panel am-panel-default">
-        <div class="am-panel-hd">
-            订单号：<?= $order->sn ?>
-            <div class="am-fr">
-                <?= $order->statusText ?>
-            </div>
-        </div>
-        <div class="am-panel-bd">
-            <p>
-                <?= Html::img($order->product->getImage()->getUrl(200)) ?> 
-                商品：<?= $order->product->name ?> 
-                数量：<?= $order->product->quantity ?>
-                <span class="am-fr">
-                    <?= substr($order->createdAt, 0, 10) ?>
-                </span>
-            </p>
-        </div>
-        <div class="am-panel-footer am-cf">
-            <a class="am-btn am-btn-primary am-fr " href="<?= Url::to(['view', 'id' => $order->id]) ?>">订单详情</a>
-            <?php if($order->status==Order::STATUS_UNPAYED){ ?>
-            <a class="am-btn am-btn-primary am-fr am-margin-right" href="<?= Url::to(['pay', 'id' => $order->id]) ?>" target="_blank">支付</a>
-            <? } ?>
-        </div>
-    </div>
-<?php endforeach ?>
+<div class="page">
+    <table class="am-table">
+        <tr>
+            <td>订单号</td>
+            <td>下单时间</td>
+            <td>金额</td>
+            <td>订单状态</td>
+        </tr>
+        <?php foreach ($dataProvider->getModels() as $key => $order){ ?>
+        <tr>
+            <td><?= $order->sn ?></td>
+            <td><?= substr($order->createdAt, 2, 8) ?></td>
+            <td><?= $order->totalAmount ?></td>
+            <td><?= $order->statusText ?></td>
+        </tr>
+        <?php } ?>
+    </table>
 </div>
 
 <?= $this->render('../elements/bottom') ?>

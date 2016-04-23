@@ -49,11 +49,11 @@ $(function(){
         $('[data-number]').text(number);
         $('#quantity').val(number);
 
-        var price = $('#total_price').data('price');
+        var price = $('[data-price]').data('price');
         price = Number.parseInt(price);
 
         var totalPrice = price*number;
-        $('#total_price').text(totalPrice);
+        $('[data-total-price]').text(totalPrice);
     }
 
     $('#checkout_form').validate({

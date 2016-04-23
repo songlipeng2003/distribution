@@ -135,7 +135,7 @@ angular.module('myApp', []).controller('menuDesigner', function($scope, $http){
             return;
         }
         $http.post('/weixin/admin/menu/save', params).success(function(data, status){
-            if(data != 0) {
+            if(data.result != 0) {
                 util.message(dat.message, '', 'error');
             } else {
                 util.message('菜单保存成功. ', location.href);
@@ -153,7 +153,6 @@ angular.module('myApp', []).controller('menuDesigner', function($scope, $http){
             } else {
                 util.message('清除自定义菜单成功. ', location.href);
             }
-
         });
     };
     

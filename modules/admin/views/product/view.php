@@ -35,12 +35,16 @@ tr th{
         'attributes' => [
             'id',
             'name',
+            'slogan',
             'image',
             'price',
             'originalPrice',
             'quantity',
             'saledNumber',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => $model->statusText
+            ],
             'content:html',
             'createdAt',
             'updatedAt',

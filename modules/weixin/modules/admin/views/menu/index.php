@@ -21,7 +21,7 @@ $this->title = '自定义菜单';
                                     <a href="javascript:;" ng-click="addSubMenu(menu);" title="添加子菜单" class="fa fa-plus-circle"></a>
                                 </div>
                                 <div class="designer">
-                                    <div ng-repeat="sub in menu.subMenus" style="margin-top:20px;padding-left:80px;background:url('/images/bg_repno.gif') no-repeat -245px -545px;">
+                                    <div ng-repeat="sub in menu.subMenus" style="margin-top:20px;padding-left:80px;background:url('/img/bg_repno.gif') no-repeat -245px -545px;">
                                         <input type="hidden" data-role="sub" data-hash="{{sub.$$hashKey}}" />
                                         <input type="text" class="form-control" style="display:inline-block;width:220px;" ng-model="sub.title"> &nbsp; &nbsp;
                                         <a href="javascript:;" class="fa fa-arrows" title="拖动调整此菜单位置"></a> &nbsp;
@@ -39,12 +39,12 @@ $this->title = '自定义菜单';
             </div>
         </div>
 
-        <?php if(!empty($weixinMenuLastModify)){ ?>
+        <?php if(!empty($menuLastModify)){ ?>
         <div class="panel panel-success">
             <div class="panel-heading">
-                历史记录菜单 <span class="text-muted">最后一次编辑时间：<?php echo strftime('%Y-%m-%d %H-%M-%S', $weixinMenuLastModify) ?> <b><a href="javascript:;" onclick="$('.history-body').fadeToggle();$('.history-foot').fadeToggle();">点击展示</a></b></span>
+                历史记录菜单 <span class="text-muted">最后一次编辑时间：<?php echo strftime('%Y-%m-%d %H:%M:%S', $menuLastModify) ?> <b><a href="javascript:;" onclick="$('.history-body').fadeToggle();$('.history-foot').fadeToggle();">点击展示</a></b></span>
             </div>
-            <div class="table-responsive history-body" style="display: none;">
+            <div class="table-responsive history-body">
                 <table class="table table-hover">
                     <tbody class="designer ui-sortable">
                         <tr class="hover ng-scope" ng-repeat="hmenu in hmenus">
@@ -54,7 +54,7 @@ $this->title = '自定义菜单';
                                     <input type="text" class="form-control ng-pristine ng-valid" readonly="" style="display:inline-block;width:300px;" ng-model="hmenu.title"> &nbsp; &nbsp;
                                 </div>
                                 <div class="designer">
-                                    <div ng-repeat="sub in hmenu.subMenus" style="margin-top:20px;padding-left:80px;background:url('/images/bg_repno.gif') no-repeat -245px -545px;">
+                                    <div ng-repeat="sub in hmenu.subMenus" style="margin-top:20px;padding-left:80px;background:url('/img/bg_repno.gif') no-repeat -245px -545px;">
                                         <input type="hidden" data-role="sub" data-hash="{{sub.$$hashKey}}" />
                                         <input type="text" class="form-control" style="display:inline-block;width:220px;" ng-model="sub.title" readonly> &nbsp; &nbsp;
                                     </div>
@@ -64,7 +64,7 @@ $this->title = '自定义菜单';
                     </tbody>
                 </table>
             </div>
-            <div class="panel-footer history-foot" style="display: none;">
+            <div class="panel-footer history-foot">
                 <a href="javascript:;" ng-click="useHistory();" class="btn btn-success">使用历史菜单</a>
             </div>
         </div>
@@ -106,7 +106,9 @@ $this->title = '自定义菜单';
                                 <hr>
                                 <div ng-show="activeMenu.type == 'url';" class="ng-hide">
                                     <input class="form-control ng-pristine ng-valid" id="ipt-url" type="text" ng-model="activeMenu.url">
-                                    <span class="help-block">指定点击此菜单时要跳转的链接（注：链接需加http://）<a href="javascript:;" ng-click="select_link()"><i class="fa fa-external-link"></i> 选择系统链接</a></span>
+                                    <span class="help-block">指定点击此菜单时要跳转的链接（注：链接需加http://）
+                                    <a href="javascript:;" ng-click="select_link()" class="hide"><i class="fa fa-external-link"></i> 选择系统链接</a>
+                                    </span>
                                     <span class="help-block"><strong>注意: 由于接口限制. 如果你没有网页oAuth接口权限, 这里输入链接直接进入微站个人中心时将会有缺陷(有可能获得不到当前访问用户的身份信息. 如果没有oAuth接口权限, 建议你使用图文回复的形式来访问个人中心)</strong></span>
                                 </div>
                                 <div ng-show="activeMenu.type == 'forward';" style="position:relative" class="ng-hide">
@@ -121,7 +123,7 @@ $this->title = '自定义菜单';
                                     <div id="key-result" style="width:100%;position:absolute;top:32px;left:0px;display:none;z-index:10000">
                                       <ul class="dropdown-menu" style="display:block;width:91%;"></ul>
                                     </div>
-                                    <span class="help-block">指定点击此菜单时要执行的操作, 你可以在这里输入关键字, 那么点击这个菜单时就就相当于发送这个内容至微擎系统</span>
+                                    <span class="help-block">指定点击此菜单时要执行的操作, 你可以在这里输入关键字, 那么点击这个菜单时就就相当于发送这个内容至系统</span>
                                     <span class="help-block"><strong>这个过程是程序模拟的, 比如这里添加关键字: 优惠券, 那么点击这个菜单是, 微擎系统相当于接受了粉丝用户的消息, 内容为"优惠券"</strong></span>
                                 </div>
                             </div>

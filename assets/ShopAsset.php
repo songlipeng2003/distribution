@@ -12,9 +12,11 @@ class ShopAsset extends AssetBundle
 
     public $css = [
         'css/shop.css',
+        'css/circle.css',
     ];
 
     public $js = [
+        'js/shop/shop.js',
     ];
 
     public $depends = [

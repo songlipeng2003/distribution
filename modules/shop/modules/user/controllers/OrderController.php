@@ -7,6 +7,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\data\ActiveDataProvider;
 
 use Pingpp\Pingpp;
 use Pingpp\Charge;
@@ -20,12 +21,20 @@ class OrderController extends Controller
 
     public function actionIndex()
     {
-        $searchModel = new OrderSearch();
-        $searchModel->userId = Yii::$app->user->id;
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $user = Yii::$app->user->identity;
+
+        $query = $user->getOrders()->where("status>=:status", ['status' => Order::STATUS_PAYED]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -57,6 +66,11 @@ class OrderController extends Controller
         return $this->render('pay', [
             'model' => $model,
         ]);
+    }
+
+    public function actionPaySuccess()
+    {
+        return $this->render('pay-success');
     }
 
     public function actionView($id)

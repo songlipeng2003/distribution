@@ -25,13 +25,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'keyword',
-            'weixinArticleId',
-            'createdAt',
-            'updatedAt',
+            // 'id',
+            [
+                'attribute' => 'keyword',
+                'headerOptions' => ['style' => 'width: 120px;']
+            ],
+            'reply:html',
+            //'weixinArticleId',
+            [
+                'attribute' => 'createdAt',
+                'headerOptions' => ['style' => 'width: 100px;']
+            ],
+            [
+                'attribute' => 'updatedAt',
+                'headerOptions' => ['style' => 'width: 100px;']
+            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'headerOptions' => ['style' => 'width: 100px;']
+            ],
         ],
     ]); ?>
 

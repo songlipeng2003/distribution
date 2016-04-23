@@ -30,6 +30,9 @@ class ProductController extends Controller
         return [
             'upload' => [
                 'class' => 'kucha\ueditor\UEditorAction',
+                'config' => [
+                    "imagePathFormat" => "/uploads/editor/image/{yyyy}{mm}{dd}/{time}{rand:6}"
+                ]
             ]
         ];
     }

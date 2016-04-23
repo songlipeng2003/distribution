@@ -34,6 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'email:email',
             'phone',
             'rate',
+            'salary',
+            'monthIndex',
+            'lastMonthNumber',
+            'finishedNumber',
             // 'token',
             [
                 'attribute' => 'status',
@@ -47,7 +51,9 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updatedAt',
             'lastLoginedAt',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+            ],
         ],
     ]); ?>
 

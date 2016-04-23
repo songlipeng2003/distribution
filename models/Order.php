@@ -110,7 +110,16 @@ class Order extends BaseModel
                 'value' => function() { return date('Y-m-d H:i:s'); }
             ],
             [
-                'class' => SnBehavior::className()
+                'class' => SnBehavior::className(),
+                'value' => function(){
+                    $sn = date('ymdh').rand(10, 99);
+                    $count = self::find()->where(['sn'=>$sn])->count();
+                    if($count>0){
+                        $sn = $this->getValue($event);
+                    }
+
+                    return $sn;
+                }
             ]
         ];
     }
@@ -165,6 +174,18 @@ class Order extends BaseModel
         return false;
     }
 
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        if($insert){
+            $this->product->updateCounters([
+                'saledNumber' => $this->quantity,
+                'quantity' => - $this->quantity
+            ]);
+        }
+    }
+
     public function pay()
     {
         if($this->status!=ORDER::STATUS_UNPAYED){
@@ -175,6 +196,7 @@ class Order extends BaseModel
             $oldStatus = $this->status;
             
             $this->status = Order::STATUS_PAYED;
+            $this->payedAt = date('Y-m-d H:i:s');
             $this->saveAndCheckResult();
 
             $this->product->updateCounters(['saledNumber' => 1]);
@@ -236,32 +258,64 @@ class Order extends BaseModel
             $tradingRecord->amount = $this->totalAmount * $employee->rate / 100;
             $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成";
             $tradingRecord->saveAndCheckResult();
+
+            $employee->updateCounters([
+                'finishedNumber' => $tradingRecord->amount,
+            ]);
         }
 
         $parent = $user->parent;
         $level = 0;
-        $levels = [0.08, 0.07, 0.08];
+        $levels = [
+            Yii::$app->settings->get('system', 'level1Number', 0.08), 
+            Yii::$app->settings->get('system', 'level2Number', 0.07),
+            Yii::$app->settings->get('system', 'level3Number', 0.08)
+        ];
 
-        while($parent && $level<3){
-            // TODO 增加 monthLimit 限制
+        while($parent && $level<10){
+            if($parent->userType==User::USER_TYPE_MEMBER){
+                // 层级限制
+                if($level<3){
+                    // 每月限额限制
+                    if($parent->monthLimit > $parent->thisMonthIncome + $this->totalAmount * $levels[$level]){
+                        // 用户交易流水
+                        $tradingRecord = new TradingRecord;
+                        $tradingRecord->userId = $parent->id;
+                        $tradingRecord->userType = Finance::USER_TYPE_USER;
+                        $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
+                        $tradingRecord->itemId = $this->id;
+                        $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
+                        $tradingRecord->amount = $this->totalAmount * $levels[$level];
+                        $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
+                        $tradingRecord->saveAndCheckResult();
 
-            // 用户交易流水
-            $tradingRecord = new TradingRecord;
-            $tradingRecord->userId = $parent->id;
-            $tradingRecord->userType = Finance::USER_TYPE_USER;
-            $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
-            $tradingRecord->itemId = $this->id;
-            $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
-            $tradingRecord->amount = $this->totalAmount * $levels[$level];
-            $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
-            $tradingRecord->saveAndCheckResult();
+                        $data = [
+                            'thisMonthIncome' => $tradingRecord->amount,
+                            'totalIncome' => $tradingRecord->amount
+                        ];
 
-            // 更新用户统计信息
+                        $data['level' . ($level + 1) . 'Count'] = $tradingRecord->amount;
 
-            $parent->updateCounters([
-                'thisMonthIncome' => $tradingRecord->amount,
-                'totalIncome' => $tradingRecord->amount
-            ]);
+                        $parent->updateCounters();
+                    }
+                }
+            }elseif($parent->userType==User::USER_TYPE_UNLIMITED){
+                // 无限级用户 ，其实是最多10级
+                $tradingRecord = new TradingRecord;
+                $tradingRecord->userId = $parent->id;
+                $tradingRecord->userType = Finance::USER_TYPE_USER;
+                $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
+                $tradingRecord->itemId = $this->id;
+                $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
+                $tradingRecord->amount = $this->totalAmount * Yii::$app->settings->get('system', 'levelUnlimitedNumber', 0.05);
+                $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
+                $tradingRecord->saveAndCheckResult();
+
+                $parent->updateCounters([
+                    'thisMonthIncome' => $tradingRecord->amount,
+                    'totalIncome' => $tradingRecord->amount
+                ]);
+            }
 
             $level++;
             $parent = $parent->parent;

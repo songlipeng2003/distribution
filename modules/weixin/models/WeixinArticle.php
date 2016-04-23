@@ -22,12 +22,21 @@ use yii\db\ActiveRecord;
  */
 class WeixinArticle extends ActiveRecord
 {
+    const SCENARIO_TEXT = 'text';
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'weixinArticle';
+    }
+
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_TEXT => ['name', 'content'],
+        ];
     }
 
     /**
@@ -65,10 +74,8 @@ class WeixinArticle extends ActiveRecord
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'createdAt',
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updatedAt',
-                ],
+                'createdAtAttribute' => 'createdAt',
+                'updatedAtAttribute' => 'updatedAt',
                 'value' => function() { return date('Y-m-d H:i:s'); }
             ],
         ];

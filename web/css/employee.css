@@ -1,16 +1,31 @@
-label.item.has-error{
+label.item.has-error {
     border-bottom: 2px solid red;
 }
-label.item.valid{
+label.item.valid {
     border-left: 2px solid green;
     border-right: 2px solid green;
 }
 
-.form-errors{
+.form-errors {
     margin: 5px 0; 
 }
 
-.form-error{
+.form-error {
     padding: 2px 0 2px 16px;
     color: red;
+}
+
+.login-title {
+    padding: 50px;
+    text-align: center;
+}
+
+.qrcode {
+    padding: 30px;
+    width: 100%;
+}
+
+.spread-page h2{
+    padding-top: 30px;
+    text-align: center;
 }

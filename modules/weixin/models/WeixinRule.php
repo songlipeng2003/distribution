@@ -37,6 +37,11 @@ class WeixinRule extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            ['keyword', 'required'],
+            ['keyword', 'unique'],
+            ['reply', 'required', 'when' => function($model){
+                return !$this->weixinArticleId;
+            }],
             [['weixinArticleId'], 'integer'],
             [['keyword'], 'string', 'max' => 255]
         ];
@@ -50,6 +55,7 @@ class WeixinRule extends \yii\db\ActiveRecord
         return [
             'id' => '编号',
             'keyword' => '关键词',
+            'reply' => '回复内容',
             'weixinArticleId' => '微信文章',
             'createdAt' => '创建时间',
             'updatedAt' => '更新时间',
@@ -76,6 +82,10 @@ class WeixinRule extends \yii\db\ActiveRecord
 
     public static function handleRule($msg)
     {
+        if($msg=='二维码'){
+            
+        }
+
         $weixinRule = WeixinRule::findOne(['keyword' => $msg]);
         if($weixinRule){
             $text = new Text();
@@ -128,21 +138,25 @@ class WeixinRule extends \yii\db\ActiveRecord
                         }
                     }else{
                         $parentId = $parentId - 10000*10;
-                        $parent = WeixinUser::findOne($parentId);
+                        $parent = User::findOne($parentId);
                         if($parent){
-                            $user->parentId = $parent->user->id;
+                            $user->parentId = $parent->id;
                         }
                     } 
                 }
                 $user->weixin = $openid;
+                $user->nickname = $userInfo->nickname;
+                $user->avatar = $userInfo->headimgurl;
                 $user->saveAndCheckResult();
             }
         }
 
-        $msg = "欢迎关注“吃货榜样”！我们为你准备了吃货们无法拒绝的进口零食大礼包——“世界这么大，带你吃掉它”，同时也恭喜你成为我们第{$user->id}合伙候选人，你仅需购买一盒大礼包即可获得18888元合伙人现金奖励，想到现在领取请点击<a href=\"http://www.baidu.com\">了解更多</a>";
+        $url = Yii::$app->settings->get('system', 'siteUrl', 'http://mihutime.com/shop/');
+
+        $msg = "欢迎关注“吃货榜样”！我们为你准备了吃货们无法拒绝的进口零食大礼包——“世界这么大，带你吃掉它”，同时也恭喜你成为我们第{$user->id}合伙候选人，你仅需购买一盒大礼包即可获得" . $user->monthLimit . "元合伙人现金奖励，想到现在领取请点击<a href=\"{$url}\">了解更多</a>";
         
-        $text = new Text($msg);
-        $text->content = $weixinRule->weixinArticle->content;
+        $text = new Text();
+        $text->content = $msg;
 
         return $text;
     }
