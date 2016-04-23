@@ -37,7 +37,7 @@ $this->title = '个人中心';
             <?= Html::img($weixinUser->getAvatarUrl(132), ['class' => 'am-img-thumbnail am-circle', 'style' => "width:80px;"]) ?>
         </div>
         <div class="am-u-sm-4">
-            <h2 style="padding-top: 15px;"><?= $user->username ?><br/><?= $user->userTypeText ?></h2>
+            <h2 style="padding-top: 15px;"><?= $user->nickname ?><br/><?= $user->userTypeText ?></h2>
         </div>
         <div class="am-u-sm-4">
             <?php if($user->userType==User::USER_TYPE_NORMAL){ ?>
