@@ -8,7 +8,7 @@ use app\assets\ShopAsset;
 use app\modules\weixin\models\Weixin;
 
 ShopAsset::register($this);
-$js = $app->js;
+$js = Weixin::getApplication()->js;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
