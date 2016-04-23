@@ -30,7 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'keyword',
-            'weixinArticleId',
+            'reply',
+            //'weixinArticleId',
             'createdAt',
             'updatedAt',
         ],

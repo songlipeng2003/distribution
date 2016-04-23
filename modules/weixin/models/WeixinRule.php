@@ -37,6 +37,11 @@ class WeixinRule extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            ['keyword', 'required'],
+            ['keyword', 'unique'],
+            ['reply', 'required', 'when' => function($model){
+                return !$this->weixinArticleId;
+            }],
             [['weixinArticleId'], 'integer'],
             [['keyword'], 'string', 'max' => 255]
         ];
@@ -50,6 +55,7 @@ class WeixinRule extends \yii\db\ActiveRecord
         return [
             'id' => '编号',
             'keyword' => '关键词',
+            'reply' => '回复内容',
             'weixinArticleId' => '微信文章',
             'createdAt' => '创建时间',
             'updatedAt' => '更新时间',

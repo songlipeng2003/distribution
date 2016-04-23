@@ -17,9 +17,11 @@ use app\modules\weixin\models\WeixinArticle;
         'layout' => 'horizontal',
     ]); ?>
 
-    <?= $form->field($model, 'keyword')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'keyword')->textInput(['maxlength' => true])->hint("*表示不匹配其他时，匹配这条记录") ?>
 
-    <?= $form->field($model, 'weixinArticleId')->dropdownList(ArrayHelper::map(WeixinArticle::find()->all(), 'id', 'name')) ?>
+    <?= $form->field($model, 'reply')->textArea(['rows' => 8]) ?>
+
+    <?php //$form->field($model, 'weixinArticleId')->dropdownList(ArrayHelper::map(WeixinArticle::find()->all(), 'id', 'name')) ?>
 
     <div class="form-group">
         <div class="col-lg-offset-3 col-lg-11">
