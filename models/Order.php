@@ -289,10 +289,14 @@ class Order extends BaseModel
                         $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
                         $tradingRecord->saveAndCheckResult();
 
-                        $parent->updateCounters([
+                        $data = [
                             'thisMonthIncome' => $tradingRecord->amount,
                             'totalIncome' => $tradingRecord->amount
-                        ]);
+                        ];
+
+                        $data['level' . ($level + 1) . 'Count'] = $tradingRecord->amount;
+
+                        $parent->updateCounters();
                     }
                 }
             }elseif($parent->userType==User::USER_TYPE_LIMITED){
