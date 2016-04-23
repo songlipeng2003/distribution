@@ -47,8 +47,15 @@ AdminAsset::register($this);
                 ['label' => '员工', 'url' => ['/admin/employee/index']],
                 ['label' => '提现', 'url' => ['/admin/extract/index']],
                 ['label' => '区域', 'url' => ['/admin/region/index']],
-                ['label' => '配置', 'url' => ['/admin/setting/index']],
                 ['label' => '交易记录', 'url' => ['/admin/trading-record/index']],
+                [
+                    'label' => '系统',
+                    'url' => '#',
+                    'items' => [
+                        ['label' => '系统', 'url' => ['/admin/system/index']],
+                        ['label' => '配置', 'url' => ['/admin/setting/index']],
+                    ]
+                ],
                 [
                     'label' => '微信管理', 
                     'url' => '#',
@@ -57,7 +64,7 @@ AdminAsset::register($this);
                         // ['label' => '微信用户管理', 'url' => ['/weixin/admin/weixin-user/index']],
                         // ['label' => '微信用户群组管理', 'url' => ['/weixin/admin/weixin-group/index']],
                         // ['label' => '微信文章管理', 'url' => ['/weixin/admin/weixin-article/index']],
-                        // ['label' => '微信规则管理', 'url' => ['/weixin/admin/weixin-rule/index']],
+                        ['label' => '微信规则管理', 'url' => ['/weixin/admin/weixin-rule/index']],
                         // ['label' => '微信消息记录管理', 'url' => ['/weixin/admin/weixin-message/index']]
                     ]
                 ]
