@@ -79,7 +79,7 @@ class Employee extends ActiveRecord implements IdentityInterface
             'lastLoginedAt' => '最近登录时间',
             'rate' => '费率',
             'monthIndex' => '月度指标',
-            'salary' => '基本公司',
+            'salary' => '基本工资',
             'lastMonthNumber' => '上月工资',
             'finishedNumber' => '本月完成',
         ];
