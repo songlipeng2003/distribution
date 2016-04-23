@@ -18,12 +18,12 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
     const USER_TYPE_MEMBER = 2;
 
-    const USER_TYPE_LIMITED = 3;
+    const USER_TYPE_UNLIMITED = 3;
 
     public static $userTypes = [
         self::USER_TYPE_NORMAL => '代言人候选人',
         self::USER_TYPE_MEMBER => '代言人',
-        self::USER_TYPE_LIMITED => '超级代言人',
+        self::USER_TYPE_UNLIMITED => '超级代言人',
     ];
 
     /**
@@ -161,6 +161,11 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         if(parent::beforeSave($insert)){
             if($insert){
                 $this->monthLimit = rand(8000, 38888);
+            }
+
+
+            if($this->userType==self::USER_TYPE_UNLIMITED){
+                $this->monthLimit = 999999;
             }
 
             return true;

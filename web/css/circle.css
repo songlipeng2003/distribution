@@ -229,7 +229,7 @@
   height: 1em;
   border-radius: 50%;
   margin: 0.1em auto;
-  background-color: #cccccc;
+  background-color: #ee6e30;
 }
 .c100 *,
 .c100 *:before,
@@ -994,5 +994,5 @@
 
 .c100.orange .bar,
 .c100.orange .fill {
-  border-color: #ee6e30 !important;
+  border-color: #CCC !important;
 }

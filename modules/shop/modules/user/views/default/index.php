@@ -29,6 +29,10 @@ $this->title = '个人中心';
             <div class="fill"></div>
         </div>
     </div>
+
+    <div class="am-text-center">
+        本月累计获得<span class="orange"><?= $user->thisMonthIncome ?></span>元 <span class="orange">继续推广好友</span>
+    </div>
 </div>
 
 <div class="page userinfo-line">

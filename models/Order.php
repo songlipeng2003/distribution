@@ -299,7 +299,7 @@ class Order extends BaseModel
                         $parent->updateCounters();
                     }
                 }
-            }elseif($parent->userType==User::USER_TYPE_LIMITED){
+            }elseif($parent->userType==User::USER_TYPE_UNLIMITED){
                 // 无限级用户 ，其实是最多10级
                 $tradingRecord = new TradingRecord;
                 $tradingRecord->userId = $parent->id;

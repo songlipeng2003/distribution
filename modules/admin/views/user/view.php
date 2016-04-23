@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nickname',
             [
                 'attribute' => 'avatar',
+                'format' => 'raw',
                 'value' => $model->weixinUser ? Html::img($model->weixinUser->getAvatarUrl(64)) : null
             ],
             'parentId',

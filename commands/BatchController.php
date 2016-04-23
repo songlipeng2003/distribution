@@ -14,7 +14,13 @@ class BatchController extends Controller
         User::updateAll([
             'monthLimit' => new Expression("FLOOR(8000 + (RAND() * 30888));"),
             'thisMonthIncome' => 0.0
-        ]);
+        ], ['userType' => User::USER_TYPE_MEMBER]);
+
+        User::updateAll([
+            'monthLimit' => 999999),
+            'thisMonthIncome' => 0.0
+        ], ['userType' => User::USER_TYPE_UNLIMITED]);
+
 
         Employee::updateAll([
             'lastMonthNumber' => new Expression("finishedNumber"),
