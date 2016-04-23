@@ -5,8 +5,10 @@
 
 use yii\helpers\Html;
 use app\assets\ShopAsset;
+use app\modules\weixin\models\Weixin;
 
 ShopAsset::register($this);
+$js = $app->js;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -17,6 +19,10 @@ ShopAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode(Yii::$app->settings->get('system', 'siteName')) ?></title>
     <?php $this->head() ?>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+        wx.config(<?php echo $js->config(array('closeWindow'), true) ?>);
+    </script>
     <style type="text/css" media="screen">
     header{
         display: none;
