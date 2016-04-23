@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use app\modules\weixin\models\WeixinArticle;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\weixin\models\search\WeixinArticleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -16,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('创建文字回复', ['create', 'type' => WeixinArticle::SCENARIO_TEXT], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
