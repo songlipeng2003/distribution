@@ -21,7 +21,7 @@ $js = Weixin::getApplication()->js;
     <?php $this->head() ?>
     <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript">
-        wx.config(<?php echo $js->config(array('closeWindow'), true) ?>);
+        wx.config(<?php echo $js->config(array('closeWindow'), false) ?>);
     </script>
     <style type="text/css" media="screen">
     header{

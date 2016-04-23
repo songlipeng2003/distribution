@@ -31,7 +31,7 @@ id="">
     <div class="am-modal-dialog">
         <div class="am-modal-bd">
             你的专属推广海报已发送！请前往眯糊时光查看<br/>
-            <button class="am-btn am-btn-primary" style="padding: 0.5em 3em" data-am-modal-close click="wx.closeWindow();">去看看</button>
+            <button class="am-btn am-btn-primary" style="padding: 0.5em 3em" click="wx.closeWindow();">去看看</button>
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn">关闭</span>
