@@ -309,7 +309,7 @@ class Order extends BaseModel
 
                         $data['level' . ($level + 1) . 'Count'] = $tradingRecord->amount;
 
-                        $parent->updateCounters();
+                        $parent->updateCounters($data);
                     }
                 }
             }elseif($parent->userType==User::USER_TYPE_UNLIMITED){
