@@ -8,6 +8,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 use app\models\behaviors\SnBehavior;
+use app\modules\weixin\models\WeixinTemplateMessage;
 
 /**
  * This is the model class for table "order".
@@ -222,6 +223,18 @@ class Order extends BaseModel
                 $this->status = Order::STATUS_SENDED;
                 $this->sendedAt = date('Y-m-d H:i:s');
                 $this->saveAndCheckResult();
+
+                $data = [
+                    'first' => '您好，您有一个订单已经发货，请及时查看并收货',
+                    'keyword1' => $this->sn,
+                    'keyword2' => $this->statusText,
+                    'keyword3' => date('Y年m月d日 H:i:s'),
+                    'keyword4' => $this->address,
+                    'remark' => '如有疑问，请联系我们。'
+                ];
+
+                WeixinTemplateMessage::send($this->user->weixin, '0FTHOKyLq-YeopYDptUstLD9s-_JUfEa3lHMn-5WWKk', $data);
+
                 return true;
             });
         }

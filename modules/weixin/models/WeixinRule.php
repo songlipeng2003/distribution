@@ -141,6 +141,15 @@ class WeixinRule extends \yii\db\ActiveRecord
                         $parent = User::findOne($parentId);
                         if($parent){
                             $user->parentId = $parent->id;
+
+                            $data = [
+                                'first' => '您好，您有下级会员注册成功。',
+                                'keyword1' => $parent->nickname,
+                                'keyword2' => date('Y年m月d日'),
+                                'remark' => '如有疑问，请联系我们。'
+                            ];
+
+                            WeixinTemplateMessage::send($parent->weixin, 'LPvczo4tfNWkgFEUpKSRHzS1wpX7-ReKEmLTdEkkRh0', $data);
                         }
                     } 
                 }
