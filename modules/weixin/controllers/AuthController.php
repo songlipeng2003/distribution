@@ -47,6 +47,8 @@ class AuthController extends Controller
                 if(!$user){
                     $user = new User();
                     $user->weixin = $openid;
+                    $user->nickname = $oauthUser->getNickname();
+                    $user->avatar = $oauthUser->getAvatar();
                     $user->save();
                 }else{
                     $user->lastLoginedAt = date('Y-m-d H:i:s');
