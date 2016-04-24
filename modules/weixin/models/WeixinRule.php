@@ -145,7 +145,7 @@ class WeixinRule extends \yii\db\ActiveRecord
                             $data = [
                                 'first' => '您好，您有下级会员注册成功。',
                                 'keyword1' => $parent->nickname,
-                                'keyword2' => date('Y年m月d日'),
+                                'keyword2' => date('Y年m月d日H:i:s'),
                                 'remark' => '如有疑问，请联系我们。'
                             ];
 
