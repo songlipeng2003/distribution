@@ -267,13 +267,20 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         $font = Yii::$app->basePath . "/web/font/Yahei.ttf";
         $boldFont = Yii::$app->basePath . "/web/font/Yahei Bold.ttf";
 
+        // 总收入
         imagettftext($im, 36, 0, 90, 645, $fontColor, $boldFont, "¥ " . $this->totalIncome);
 
+        // 名次
         imagettftext($im, 36, 0, 410, 645, $fontColor, $boldFont,  rand(70, 90) . "%");
 
+        // 编号
         imagettftext($im, 18, 0, 195, 696, $fontColor, $font, $this->id);
 
+        // Nickname
         imagettftext($im, 18, 0, 410, 696, $fontColor, $font, $this->nickname);
+
+        // 头像
+        imagefilledrectangle($im, 256, 382, 256+150+4, 382+150+4, $fontColor);
 
         $avatar = imagecreatefrompng($this->weixinUser->getAvatarUrl(132));
 
@@ -298,6 +305,7 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
         imagecopyresized($im, $avatar, 258, 384, 0, 0, 150, 150, 132, 132);
 
+        // 二维码
         $tmpPath = Yii::$app->basePath . '/web/uploads/tmp/';
         if(!file_exists($tmpPath)){
             mkdir($tmpPath, 0777, true);
