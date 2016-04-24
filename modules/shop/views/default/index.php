@@ -12,7 +12,7 @@ $this->title = '吃货榜样';
 <?php if($lastNotice){ ?>
 <div class="page am-cf">
     <div class="am-u-sm-3 notice-title">
-        <h2 style="font-size: 18px;">吃货<br/>公告</h2>
+    &nbsp;
     </div>
     <div class="am-u-sm-9 notice-content">
         <img src="/img/shop/notice.png" alt="" style="width:80px;"><br/>
