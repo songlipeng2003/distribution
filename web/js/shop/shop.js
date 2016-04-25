@@ -2,7 +2,16 @@ $(function(){
     $('.yii-debug-toolbar_position_bottom').hide();
 
     $('#nav-qrcode').click(function(){
-        $.getJSON('/shop/user/spread', function(){
+        $.getJSON('/shop/user/spread', function(data){
+            var msg;
+            if(data.result==0){
+                msg = '你的专属推广海报已发送！请前往眯糊时光查看';
+            }else{
+                msg = data.msg;
+            }
+
+            $('#alert-msg').text(msg);
+
             $('#qrcode-alert').modal();
         });
     });

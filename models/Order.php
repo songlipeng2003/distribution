@@ -201,6 +201,11 @@ class Order extends BaseModel
             $this->saveAndCheckResult();
 
             $this->product->updateCounters(['saledNumber' => 1]);
+            $user = $this->user;
+            if($user->userType==User::USER_TYPE_NORMAL){
+                $user->userType = User::USER_TYPE_MEMBER;
+                $user->saveAndCheckResult();
+            }
 
             $this->finance();
 
