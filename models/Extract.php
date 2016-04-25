@@ -113,6 +113,21 @@ class Extract extends BaseModel
             $tradingRecord->amount = - $this->amount;
             $tradingRecord->name = "提现{$this->amount}元";
             $tradingRecord->saveAndCheckResult();
+
+
+            $finance = Finance::getByUser(Finance::USER_TYPE_USER, $this->userId);
+
+            $data = [
+                'first' => '您好，您刚刚申请提现已经成功',
+                'keyword1' => $this->user->nickname,
+                'keyword2' => date('Y年m月d日 H:i:s'),
+                'keyword3' => $this->amount,
+                'keyword4' => $finance->balance,
+                'keyword5' => '提现',
+                'remark' => '感谢你的使用。'
+            ];
+
+            WeixinTemplateMessage::send($parent->weixin, 'AcpmPoQ99iu82lK-8UvsXQ1v9dhLp43Qq4N71aHjxHE', $data);
         }
     }
 

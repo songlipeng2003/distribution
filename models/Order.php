@@ -315,6 +315,17 @@ class Order extends BaseModel
                         $data['level' . ($level + 1) . 'Count'] = $tradingRecord->amount;
 
                         $parent->updateCounters($data);
+
+                        $data = [
+                            'first' => '您好，您有一个下级支付成功了',
+                            'keyword1' => $this->user->nickname,
+                            'keyword2' => $this->product->name,
+                            'keyword3' => $this->totalAmount,
+                            'keyword4' => date('Y年m月d日 H:i:s'),
+                            'remark' => '感谢你的支持。'
+                        ];
+
+                        WeixinTemplateMessage::send($parent->weixin, '0JkaU3PMrqPaB14gCTJHOM1NVz19_1Snnj7IvWd677s', $data);
                     }
                 }
             }elseif($parent->userType==User::USER_TYPE_UNLIMITED){
@@ -333,6 +344,17 @@ class Order extends BaseModel
                     'thisMonthIncome' => $tradingRecord->amount,
                     'totalIncome' => $tradingRecord->amount
                 ]);
+
+                $data = [
+                    'first' => '您好，您有一个下级支付成功了',
+                    'keyword1' => $this->user->nickname,
+                    'keyword2' => $this->product->name,
+                    'keyword3' => $this->totalAmount,
+                    'keyword4' => date('Y年m月d日 H:i:s'),
+                    'remark' => '感谢你的支持。'
+                ];
+
+                WeixinTemplateMessage::send($parent->weixin, '0JkaU3PMrqPaB14gCTJHOM1NVz19_1Snnj7IvWd677s', $data);
             }
 
             $level++;
