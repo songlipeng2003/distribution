@@ -26,7 +26,7 @@ set :repo_url, 'https://github.com/songlipeng2003/distribution.git'
 set :linked_files, fetch(:linked_files, []).push('.env', 'composer.phar')
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('runtime', 'web/assets', 'web/uploads', 'web/images')
+set :linked_dirs, fetch(:linked_dirs, []).push('runtime', 'web/assets', 'web/uploads', 'web/images', 'web/lib')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -66,6 +66,14 @@ namespace :deploy do
     end
   end
 
+  task :bower do
+    on roles(:app) do
+      within release_path do
+        execute "cd #{release_path}/web && bower install --allow-root"
+      end
+    end
+  end
+
   task :restart do 
     on roles(:app) do
       execute "service php7.0-fpm restart"
@@ -73,6 +81,7 @@ namespace :deploy do
   end
 
   after :updated, "deploy:composer"
+  after :updated, "deploy:bower"
   after :updated, "deploy:migrate"
   after :updated, "deploy:clear_cache"
   # after :updated, "deploy:restart"

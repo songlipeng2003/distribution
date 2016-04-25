@@ -192,14 +192,6 @@ h3 {
     display: none;
 }
 
-#user-collapase .am-collapsed .am-icon-angle-down {
-    display: inline-block;
-}
-
-#user-collapase .am-collapsed .am-icon-angle-up {
-    display: none;
-}
-
 .order-link {
     font-size: 14px;
     line-height: 90px;
