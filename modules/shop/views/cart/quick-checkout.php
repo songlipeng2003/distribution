@@ -29,9 +29,9 @@ $this->title = '快速结账';
     <h1>
         <?= $model->name ?>
         <div class="am-fr">
-            <img src="/img/shop/minus.jpg" alt="" id="op_minus" style="width: 35px;">
+            <img src="/img/shop/minus.jpg" alt="" id="op_minus" style="width: 30px;">
             <span data-number style="font-size: 26px; padding: 5px;">1</span>
-            <img src="/img/shop/plus.jpg" alt="" id="op_plus" style="width: 35px;">
+            <img src="/img/shop/plus.jpg" alt="" id="op_plus" style="width: 30px;">
         </div>
     </h1>
 
@@ -94,7 +94,7 @@ $this->title = '快速结账';
     <div class="am-form-group">
         <label class="am-u-sm-4 am-form-label">备注</label>
         <div class="am-u-sm-8">
-            <input type="text" name="QuickCheckoutForm[remark]" placeholder="">
+            <input type="text" name="QuickCheckoutForm[remark]" placeholder="非必填">
         </div>
     </div>
 </form>

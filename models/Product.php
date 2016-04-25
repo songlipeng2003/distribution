@@ -57,7 +57,8 @@ class Product extends BaseModel
             ['categoryId', 'number'],
             ['name', 'string', 'max' => 30],
             [['slogan', 'image'], 'string', 'max' => 255],
-            ['files', 'safe']
+            ['files', 'safe'],
+            ['saledNumber', 'default', 'value' => 1026]
         ];
     }
 

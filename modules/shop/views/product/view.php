@@ -28,17 +28,8 @@ $this->title = $model->name;
     <br/><br/>
 
     <span class="orange">累计销量：</span><?= $model->saledNumber ?>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">快递:</span>0.00
     <span class="orange am-fr">购买<span style="color:black;">1</span>份成为代言人</span>
-
-    <div class="price-line">
-        <span class="price">￥<?= $model->price ?></span>
-        <?php if($model->originalPrice){ ?>
-        <del>￥
-            <?= $model->originalPrice ?>
-        </del>
-        <?php } ?>
-        <br/>
-    </div>
 </div>
 
 <div class="page">

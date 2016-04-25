@@ -20,7 +20,7 @@ $this->title = '个人中心';
 
 <div class="page am-cf">
     <div class="c100 p<?= (int)($user->getThisMonthRate() * 100) ?> big orange proccess-cicle">
-        <span class="title">本月代言费用（元）</span>
+        <span class="title">本月代言费（元）</span>
         <span class="number"><?= $user->monthLimit ?></span>
         <span class="arrow-up"></span>
         <span class="rect">本月剩余 <?= $user->monthLimit - $user->thisMonthIncome ?></span>
@@ -38,7 +38,7 @@ $this->title = '个人中心';
 <div class="page userinfo-line">
     <div class="am-cf">
         <div class="am-u-sm-4">
-            <?= Html::img($weixinUser->getAvatarUrl(132), ['class' => 'am-img-thumbnail am-circle', 'style' => "width:80px;"]) ?>
+            <?= Html::img($weixinUser->getAvatarUrl(132), ['class' => 'am-img-thumbnail am-circle', 'style' => "width:80px;float:right;margin-right:15px;"]) ?>
         </div>
         <div class="am-u-sm-4">
             <h2 style="padding-top: 15px;"><?= $user->nickname ?><br/><?= $user->userTypeText ?></h2>
@@ -72,8 +72,9 @@ $this->title = '个人中心';
 <div class="page">
     <ul class="am-list" id="user-collapase">
       <li class="am-panel">
-        <a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}">
+        <a data-am-collapse="{target: '#user-nav'}">
             <i class="am-icon-angle-up am-margin-left-sm"></i>
+            <i class="am-icon-angle-down am-margin-left-sm"></i>
             累计获得代言费<span class="orange">￥<?= $user->totalIncome ?></span>
 
             <span class="am-fr fans-number">共<span class="orange"><?= $user->totalLevelNumber ?></span>位粉丝</span>

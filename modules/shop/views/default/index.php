@@ -10,7 +10,7 @@ $this->title = '吃货榜样';
 </header>
 
 <?php if($lastNotice){ ?>
-<div class="page am-cf">
+<!-- <div class="page am-cf">
     <div class="am-u-sm-3 notice-title">
     &nbsp;
     </div>
@@ -18,20 +18,19 @@ $this->title = '吃货榜样';
         <img src="/img/shop/notice.png" alt="" style="width:80px;"><br/>
         <?= nl2br($lastNotice->content)?>
     </div>
-</div>
+</div> -->
 <?php } ?>
+
+<img src="/img/shop/notice-1.jpg" alt="" style="margin-bottom: 10px;">
 
 <?php foreach ($products as $product) { ?>
     <div class="product-item">
     <?=  $product->getImage() ? Html::a(Html::img($product->getImage()->getUrl('500px')), ['product/view', 'id' => $product->id]) : '' ?>
 
         <div class="info">
-            <h2><?= $product->name ?></h2>
+            <h2><?= $product->name ?><span class="am-fr price">￥<?= $product->price ?></span></h2>
             <span class="orange"><?= $product->slogan ?></span> 
             <span class="am-fr"><?php if($product->originalPrice){ ?> <del>￥<?= $product->originalPrice ?></del><?php } ?></span>
-
-            <!-- <span class="price">￥<?= $product->price ?></span> -->
-            
         </div>
     </div>
 <?php } ?>

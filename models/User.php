@@ -268,7 +268,7 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         $boldFont = Yii::$app->basePath . "/web/font/Yahei Bold.ttf";
 
         // 总收入
-        imagettftext($im, 36, 0, 90, 645, $fontColor, $boldFont, "¥ " . $this->totalIncome);
+        imagettftext($im, 36, 0, 90, 645, $fontColor, $boldFont, "¥ " . $this->monthLimit);
 
         // 名次
         imagettftext($im, 36, 0, 410, 645, $fontColor, $boldFont,  rand(70, 90) . "%");
@@ -282,7 +282,13 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         // 头像
         imagefilledrectangle($im, 256, 382, 256+150+4, 382+150+4, $fontColor);
 
-        $avatar = imagecreatefrompng($this->weixinUser->getAvatarUrl(132));
+        $avatar = $this->weixinUser->getAvatarUrl(132);
+
+        if($avatar){
+            $avatar = imagecreatefromjpeg($avatar);
+
+            imagecopyresized($im, $avatar, 258, 384, 0, 0, 150, 150, 132, 132);
+        }
 
         // $color = 'FFFFFF';
         // $radius = 66;
@@ -302,8 +308,6 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         // $cornerImage = imagerotate($cornerImage, 90, 0);
 
         // imagecopymerge($avatar, $cornerImage, 132-$radius, 0, 0, 0, $radius, $radius, 100);
-
-        imagecopyresized($im, $avatar, 258, 384, 0, 0, 150, 150, 132, 132);
 
         // 二维码
         $tmpPath = Yii::$app->basePath . '/web/uploads/tmp/';
