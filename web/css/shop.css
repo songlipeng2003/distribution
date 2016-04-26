@@ -121,7 +121,7 @@ h3 {
 }
 
 .product-item .price {
-    font-size: 26px;
+    font-size: 20px;
     color: #f19d7b;
 }
 
@@ -244,4 +244,23 @@ div.proccess-cicle > span {
 
 #checkout span{
     font-size: 18px;
+}
+
+#product-buy-bar{
+    font-size: 16px;
+    text-align: center;
+    color: #FFF;
+    font-weight: bold;
+}
+
+#product-buy-bar [class*=am-u-]{
+    padding: 0;
+}
+
+#product-buy-bar .am-u-sm-5{
+    background-color: #369cf6;
+}
+
+#product-buy-bar .am-u-sm-7{
+    background-color: #276fd9;
 }

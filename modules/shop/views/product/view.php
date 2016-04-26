@@ -36,12 +36,15 @@ $this->title = $model->name;
     <?= $model->content ?>
 </div>
 
-<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default " id="">
-    <ul class="am-navbar-nav am-cf am-avg-sm-1">
-        <li>
-            <a href="<?= Url::to(['cart/quick-checkout', 'id' => $model->id]) ?>" class="">
-                <span class="am-navbar-label">立即购买并成为合伙人</span>
-            </a>
-        </li>
-    </ul>
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default" id="product-buy-bar">
+    <div class="am-u-sm-5">
+        <a href="<?= Url::to(['cart/quick-checkout', 'id' => $model->id]) ?>" class="">
+            <span class="am-navbar-label">活动价仅<?= $model->price ?>元</span>
+        </a>
+    </div>
+    <div class="am-u-sm-7">
+        <a href="<?= Url::to(['cart/quick-checkout', 'id' => $model->id]) ?>" class="">
+            <span class="am-navbar-label">立即购买并成为代言人</span>
+        </a>
+    </div>
 </div>
