@@ -10,6 +10,7 @@ use Pingpp\Pingpp;
 use Pingpp\RedEnvelope;
 
 use app\models\Finance;
+use app\models\behaviors\SnBehavior;
 
 /**
  * 提现
