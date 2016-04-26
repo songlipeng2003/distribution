@@ -29,8 +29,10 @@ $this->title = '吃货榜样';
 
         <div class="info">
             <h2><?= $product->name ?><span class="am-fr price">￥<?= $product->price ?></span></h2>
-            <span class="orange"><?= $product->slogan ?></span> 
-            <span class="am-fr"><?php if($product->originalPrice){ ?> <del>￥<?= $product->originalPrice ?></del><?php } ?></span>
+            <div>
+                <span class="orange"><?= $product->slogan ?>
+                <span class="am-fr"><?php if($product->originalPrice){ ?> <del>￥<?= $product->originalPrice ?></del><?php } ?></span></span> 
+            </div>
         </div>
     </div>
 <?php } ?>

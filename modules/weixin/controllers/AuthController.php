@@ -17,7 +17,7 @@ class AuthController extends Controller
         $app = Weixin::getApplication();
         $oauth = $app->oauth;
         if(Yii::$app->user->isGuest){
-            return $oauth->redirect();
+            return $this->redirect($oauth->redirect());
         }else{
             return $this->redirect("/shop/");
         }
