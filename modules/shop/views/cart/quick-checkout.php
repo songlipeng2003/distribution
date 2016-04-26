@@ -19,7 +19,7 @@ $this->title = '快速结账';
     <ul class="am-slides">
         <?php foreach ($images as $key => $image) { ?>
         <li>
-            <?= Html::img($image->getUrl('300*300')) ?>
+            <?= Html::img($image->getUrl()) ?>
         </li>
         <?php } ?>
     </ul>

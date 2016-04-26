@@ -125,6 +125,10 @@ h3 {
     color: #f19d7b;
 }
 
+.product-content p{
+    margin-bottom: 0;
+}
+
 .extract-page {
     width: 96%;
     margin: 2%;

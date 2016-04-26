@@ -32,7 +32,7 @@ $this->title = $model->name;
     <span class="orange am-fr">购买 <span style="color:black;">1</span> 份成为代言人</span>
 </div>
 
-<div class="page">
+<div class="page product-content">
     <?= $model->content ?>
 </div>
 
