@@ -31,12 +31,12 @@ $this->title = '合伙人账户';
         <input name="Extract[amount]" type="number" class="am-form-field" required="" min="5" max="200">
         <h3>代言人余额 ￥<?= $finance->balance ?></h3>
         <p>
-            * 因微信提现限制，所有提现均以微信红包形式即时发放，每   次提现金额为5-200元，可多次提现，单次提现扣除1元手续费。
+            * 因微信提现限制，所有提现均以微信红包形式即时发放，每次提现金额为5-200元，可多次提现，单次提现扣除1元手续费。
         </p>
     </div>
 </div>
 
-<h3 style="text-align: center;">即时到账</h3>
+<h3 style="text-align: center;">五分钟内红包到账</h3>
 
 <button type="submit" class="am-btn am-btn-primary am-btn-block">提现</button>
 

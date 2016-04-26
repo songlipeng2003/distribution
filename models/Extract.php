@@ -80,12 +80,15 @@ class Extract extends BaseModel
 
     public function behaviors(){
         return [
-            'timestamp' => [
+            [
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'createdAt',
                 'updatedAtAttribute' => null,
                 'value' => function() { return date('Y-m-d H:i:s'); }
             ],
+            [
+                'class' => SnBehavior::className()
+            ]
         ];
     }
 
@@ -142,7 +145,7 @@ class Extract extends BaseModel
 
         Pingpp::setApiKey($_ENV['PINGXX_APIKEY']);
         $redEnvelope = RedEnvelope::create([
-            'order_no'    => $this->id,
+            'order_no'    => $this->sn,
             'app'         => ['id' => $_ENV['PINGXX_APPKEY']],
             'channel'     => 'wx_pub',//红包基于微信公众帐号，所以渠道是 wx_pub
             'amount'      => $this->toAmount * 100,//金额在 100-20000 之间
