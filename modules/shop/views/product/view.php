@@ -17,7 +17,7 @@ $this->title = $model->name;
     <ul class="am-slides">
         <?php foreach ($images as $key => $image) { ?>
         <li>
-            <?= Html::img($image->getUrl('300*300')) ?>
+            <?= Html::img($image->getUrl()) ?>
         </li>
         <?php } ?>
     </ul>
@@ -27,9 +27,9 @@ $this->title = $model->name;
     <span style="color:#6a6968"><?= $model->slogan ?></span>
     <br/><br/>
 
-    <span class="orange">累计销量：</span><?= $model->saledNumber ?>
-    &nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">快递:</span>0.00
-    <span class="orange am-fr">购买<span style="color:black;">1</span>份成为代言人</span>
+    <span class="orange">累计销量:</span> <?= $model->saledNumber ?>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">快递:</span> 0.00
+    <span class="orange am-fr">购买 <span style="color:black;">1</span> 份成为代言人</span>
 </div>
 
 <div class="page">
