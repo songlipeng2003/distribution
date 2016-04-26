@@ -285,7 +285,15 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         $avatar = $this->weixinUser->getAvatarUrl(132);
 
         if($avatar){
-            $avatar = imagecreatefromjpeg($avatar);
+            $imageType = exif_imagetype($avatar);
+
+            if($imageType==IMAGETYPE_JPEG){
+                $avatar = imagecreatefromjpeg($avatar);
+            }elseif($imageType==IMAGETYPE_PNG){
+                $avatar = imagecreatefrompng($avatar);
+            }elseif($imageType==IMAGETYPE_GIF){
+                $avatar = imagecreatefromgif($avatar);
+            }
 
             imagecopyresized($im, $avatar, 258, 384, 0, 0, 150, 150, 132, 132);
         }
