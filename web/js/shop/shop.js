@@ -1,7 +1,7 @@
 $(function(){
     $('.yii-debug-toolbar_position_bottom').hide();
 
-    $('#nav-qrcode').click(function(){
+    $('.op-qrcode').click(function(){
         $.getJSON('/shop/user/spread', function(data){
             var msg;
             if(data.result==0){

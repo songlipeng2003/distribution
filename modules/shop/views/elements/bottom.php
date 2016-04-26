@@ -20,7 +20,7 @@ id="">
             </a>
         </li>
         <li >
-            <a href="javascript:void(0)" id="nav-qrcode">
+            <a href="javascript:void(0)" class="op-qrcode">
                 <img src="/img/shop/nav/qrcode.png" alt="">
             </a>
         </li>
