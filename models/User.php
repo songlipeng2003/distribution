@@ -163,7 +163,6 @@ class User extends BaseModel implements \yii\web\IdentityInterface
                 $this->monthLimit = rand(8000, 38888);
             }
 
-
             if($this->userType==self::USER_TYPE_UNLIMITED){
                 $this->monthLimit = 999999;
             }
@@ -190,6 +189,16 @@ class User extends BaseModel implements \yii\web\IdentityInterface
                     }
                 }
             }
+
+            $tradingRecord = new TradingRecord;
+            $tradingRecord->userId = $this->id;
+            $tradingRecord->userType = Finance::USER_TYPE_USER;
+            $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_RED_PAPER;
+            $tradingRecord->itemId = $this->id;
+            $tradingRecord->itemType = TradingRecord::ITEM_TYPE_USER;
+            $tradingRecord->amount = rand(10, 100) / 100;
+            $tradingRecord->name = "红包收入{$tradingRecord->amount}元";
+            $tradingRecord->saveAndCheckResult();
         }
     }
 
