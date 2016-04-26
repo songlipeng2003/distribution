@@ -11,6 +11,7 @@ use Pingpp\RedEnvelope;
 
 use app\models\Finance;
 use app\models\behaviors\SnBehavior;
+use app\modules\weixin\models\WeixinTemplateMessage;
 
 /**
  * 提现
@@ -131,7 +132,7 @@ class Extract extends BaseModel
                 'remark' => '感谢你的使用。'
             ];
 
-            WeixinTemplateMessage::send($parent->weixin, 'AcpmPoQ99iu82lK-8UvsXQ1v9dhLp43Qq4N71aHjxHE', $data);
+            WeixinTemplateMessage::send($this->user->weixin, 'AcpmPoQ99iu82lK-8UvsXQ1v9dhLp43Qq4N71aHjxHE', $data);
         }
     }
 
