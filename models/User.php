@@ -151,9 +151,19 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         return $this->hasOne(User::className(), ['id' => 'parentId']);
     }
 
+    public function getGrandparent()
+    {
+        return $this->hasOne(User::className(), ['id' => 'grandparentId']);
+    }
+
     public function getChildren()
     {
         return $this->hasMany(User::className(), ['parentId' => 'id']);
+    }
+
+    public function getGrandchildren()
+    {
+        return $this->hasMany(User::className(), ['grandparentId' => 'id']);
     }
 
     public function beforeSave($insert)
@@ -178,16 +188,15 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         parent::afterSave($insert, $changedAttributes);
 
         if($insert){
-            if($this->parent){
-                $this->parent->updateLevel1Number();
+            $parent = $this->parent;
+            $i = 1;
 
-                if($this->parent->parent){
-                    $this->parent->parent->updateLevel2Number();
+            while($parent && $i<=5){
+                $method = "updateLevel{$i}Number";
+                $parent->$method();
 
-                    if($this->parent->parent->parent){
-                        $this->parent->parent->parent->updateLevel3Number();
-                    }
-                }
+                $i++;
+                $parent = $parent->parent;
             }
 
             $tradingRecord = new TradingRecord;
@@ -200,6 +209,8 @@ class User extends BaseModel implements \yii\web\IdentityInterface
             $tradingRecord->name = "红包收入{$tradingRecord->amount}元";
             $tradingRecord->saveAndCheckResult();
         }
+
+        //if(isset($changedAttributes['userType'])
     }
 
     public function updateLevel1Number()
@@ -210,16 +221,28 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
     public function updateLevel2Number()
     {
-        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.parentId')->where(['parent.parentId' => $this->id])->count();
+        $number = $this->getGrandchildren()->count();
         return self::updateAll(['level2Number' => $number], ['id' => $this->id]);
     }
 
     public function updateLevel3Number()
     {
-        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.parentId')
-            ->leftJoin('user AS parent2', 'parent2.id=parent.parentId')
-            ->where(['parent2.parentId' => $this->id])->count();
+        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.grandparentId')->where(['parent.parentId' => $this->id])->count();
         return self::updateAll(['level3Number' => $number], ['id' => $this->id]);
+    }
+
+    public function updateLevel4Number()
+    {
+        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.grandparentId')->where(['parent.grandparentId' => $this->id])->count();
+        return self::updateAll(['level4Number' => $number], ['id' => $this->id]);
+    }
+
+    public function updateLevel5Number()
+    {
+        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.grandparentId')
+            ->leftJoin('user AS parent2', 'parent2.id=parent.grandparentId')
+            ->where(['parent2.parentId' => $this->id])->count();
+        return self::updateAll(['level5Number' => $number], ['id' => $this->id]);
     }
 
     public function getOpenid()
@@ -360,6 +383,45 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
     public function getTotalLevelNumber()
     {
-        return $this->level1Number+$this->level2Number+$this->level3Number;
+        if($this->userType==self::USER_TYPE_UNLIMITED){
+            return $this->level1Number+$this->level2Number+$this->level3Number+$this->level4Number+$this->level5Number;
+        }else{
+            return $this->level1Number+$this->level2Number+$this->level3Number;
+        }
+    }
+
+    public function getLevel1Rate()
+    {
+        return $this->userType==self::USER_TYPE_UNLIMITED ? 
+            Yii::$app->settings->get('system', 'unlimitedNumber', 0.05) :
+            Yii::$app->settings->get('system', 'level1Number', 0.08);
+    }
+
+    public function getLevel2Rate()
+    {
+        return $this->userType==self::USER_TYPE_UNLIMITED ? 
+            Yii::$app->settings->get('system', 'unlimitedNumber', 0.05) :
+            Yii::$app->settings->get('system', 'level2Number', 0.07);
+    }
+
+    public function getLevel3Rate()
+    {
+        return $this->userType==self::USER_TYPE_UNLIMITED ? 
+            Yii::$app->settings->get('system', 'unlimitedNumber', 0.05) :
+            Yii::$app->settings->get('system', 'level3Number', 0.08);
+    }
+
+    public function getLevel4Rate()
+    {
+        return $this->userType==self::USER_TYPE_UNLIMITED ? 
+            Yii::$app->settings->get('system', 'unlimitedNumber', 0.05) :
+            Yii::$app->settings->get('system', 'level4Number');
+    }
+
+    public function getLevel5Rate()
+    {
+        return $this->userType==self::USER_TYPE_UNLIMITED ? 
+            Yii::$app->settings->get('system', 'unlimitedNumber', 0.05) :
+            Yii::$app->settings->get('system', 'level5Number');
     }
 }

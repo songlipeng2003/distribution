@@ -290,7 +290,7 @@ class Order extends BaseModel
             Yii::$app->settings->get('system', 'level3Number', 0.08)
         ];
 
-        while($parent && $level<10){
+        while($parent && $level<5){
             if($parent->userType==User::USER_TYPE_MEMBER){
                 // 层级限制
                 if($level<3){
@@ -340,10 +340,14 @@ class Order extends BaseModel
                 $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
                 $tradingRecord->saveAndCheckResult();
 
-                $parent->updateCounters([
+                $data = [
                     'thisMonthIncome' => $tradingRecord->amount,
                     'totalIncome' => $tradingRecord->amount
-                ]);
+                ];
+
+                $data['level' . ($level + 1) . 'Count'] = $tradingRecord->amount;
+
+                $parent->updateCounters($data);
 
                 $data = [
                     'first' => '您好，您有一个下级支付成功了',
