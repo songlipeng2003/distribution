@@ -141,6 +141,7 @@ class WeixinRule extends \yii\db\ActiveRecord
                         $parent = User::findOne($parentId);
                         if($parent){
                             $user->parentId = $parent->id;
+                            $user->grandparentId = $parent->parentId;
 
                             $data = [
                                 'first' => '您好，您有下级会员注册成功。',
