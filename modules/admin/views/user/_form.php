@@ -18,6 +18,8 @@ use app\models\User;
 
     <?= $form->field($model, 'userType')->dropdownList(User::$userTypes) ?>
 
+    <?= $form->field($model, 'monthLimit')->textInput() ?>
+
     <div class="form-group">
         <div class="col-lg-offset-3 col-lg-11">
             <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

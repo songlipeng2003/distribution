@@ -40,7 +40,8 @@ class User extends BaseModel implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            ['userType', 'integer']
+            ['userType', 'integer'],
+            ['monthLimit', 'integer', 'min' => 1, 'max' => 999999]
         ];
     }
 
