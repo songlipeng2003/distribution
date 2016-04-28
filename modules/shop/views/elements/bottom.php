@@ -27,6 +27,12 @@ id="">
     </ul>
 </div>
 
+<div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="loading">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">正在生成中，可能大概需要5-10秒，请稍等...</div>
+    </div>
+</div>
+
 <div class="am-modal am-modal-alert" tabindex="-1" id="qrcode-alert">
     <div class="am-modal-dialog">
         <div class="am-modal-bd">

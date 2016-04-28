@@ -2,6 +2,8 @@ $(function(){
     $('.yii-debug-toolbar_position_bottom').hide();
 
     $('.op-qrcode').click(function(){
+        var modal = $('#loading').modal();
+
         $.getJSON('/shop/user/spread', function(data){
             var msg;
             if(data.result==0){
@@ -11,6 +13,8 @@ $(function(){
             }
 
             $('#alert-msg').text(msg);
+
+            modal.modal('close');
 
             $('#qrcode-alert').modal();
         });
