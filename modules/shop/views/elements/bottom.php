@@ -30,8 +30,8 @@ id="">
 <div class="am-modal am-modal-alert" tabindex="-1" id="qrcode-alert">
     <div class="am-modal-dialog">
         <div class="am-modal-bd">
-            <span id="alert-msg"><span><br/>
-            <button class="am-btn am-btn-primary" style="padding: 0.5em 3em" click="wx.closeWindow();">去看看</button>
+            <span id="alert-msg"></span><br/>
+            <button class="am-btn am-btn-primary" style="padding: 0.5em 3em" onclick="wx.closeWindow();">去看看</button>
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn">关闭</span>
