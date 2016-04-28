@@ -109,6 +109,9 @@ $config = [
         'settings' => [
             'class' => 'yii2mod\settings\components\Settings',
         ],
+        'assetManager' => [
+            'appendTimestamp' => true,
+        ],
     ],
     'params' => $params,
 ];
