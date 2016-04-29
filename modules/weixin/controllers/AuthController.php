@@ -56,8 +56,12 @@ class AuthController extends Controller
                 }
 
                 Yii::$app->user->login($user, 0);
-
-                $this->redirect("/shop/");
+                $url = Yii::$app->session->get('currentUrl');
+                if($url){
+                    $this->redirect($url);
+                }else{
+                    $this->redirect(['/shop/']);
+                }
             }else{
                 throw new Exception("save user error");
             }
