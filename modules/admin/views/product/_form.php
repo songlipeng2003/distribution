@@ -31,7 +31,8 @@ use app\models\Category;
             <div id="images" class="row">
                 <?php foreach ($model->getImages() as $image) {
                     if($image){ ?>
-                    <div class="col-sm-3 thumbnail" data-image-id="<?= $image->id ?>">
+                    <div class="col-sm-3 thumbnail" data-product-id="<?= $model->id ?>" data-image-id="<?= $image->id ?>">
+                        <i class="glyphicon glyphicon-remove" onclick="return removeImage(this)"></i>
                         <img src="<?= $image->getUrl('300px') ?>" alt="">
                     </div>
                 <?php 

@@ -3,11 +3,16 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Product;
-use app\models\search\ProductSearch;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
+
+use rico\yii2images\models\Image;
+
+use app\models\Product;
+use app\models\search\ProductSearch;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -99,6 +104,21 @@ class ProductController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionRemoveImage($id, $imageId)
+    {
+        $model = $this->findModel($id);
+
+        $img = Image::findOne($imageId);
+
+        $model->removeImage($img);
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        return [
+            'result' => 0,
+        ];
     }
 
     /**
