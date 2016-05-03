@@ -31,7 +31,7 @@ $js = Weixin::getApplication()->js;
             margin: 20px auto;
         }
         .page {
-            padding: 20px 15px 15px;
+            padding: 0 15px 15px;
         }
         h1{
             margin-bottom: 10px;
