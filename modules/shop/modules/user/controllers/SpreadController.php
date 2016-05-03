@@ -37,10 +37,10 @@ class SpreadController extends Controller
                 'template_id' => 'wQ3TiFpF4zRAKo4k04aYrym410gbG40t9ndoWRGfoBc',
                 'url' => $url,
                 'data' => [
-                    'first' => '您申请办理的业务已经成功',
-                    'keyword1' => '获取专属二维码海报',
+                    'first' => '您申请的个人专属二维码已经生成',
+                    'keyword1' => '专属推广二维码',
                     'keyword2' => date('Y年m月d日'),
-                    'remark' > '回复“二维码”即可获得当日二维码海报'
+                    'remark' > '点击进入查看专属二维码，长按屏幕保存为图片'
                 ]
             ]);
 
