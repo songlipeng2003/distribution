@@ -32,7 +32,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'createdAt',
             // 'updatedAt',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {preview}',
+                'buttons' => [
+                    'preview' => function($url, $model, $key){
+                        return Html::a('预览', ['/shop/news/view', 'id' => $model->id], ['target' => '_blank']);
+                    }
+                ]
+            ],
         ],
     ]); ?>
 

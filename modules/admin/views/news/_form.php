@@ -18,9 +18,9 @@ use kucha\ueditor\UEditor;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'author')->textInput(['maxlength' => true])->hint('不填写，默认为公众号名') ?>
+    <?= $form->field($model, 'author')->textInput(['maxlength' => true])->hint('可不用填写') ?>
 
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true])->hint('可不填写') ?>
+    <? //$form->field($model, 'url')->textInput(['maxlength' => true])->hint('可不填写') ?>
 
     <?= $form->field($model, 'content')->widget(UEditor::className(), []) ?>
 
