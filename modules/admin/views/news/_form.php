@@ -20,7 +20,7 @@ use kucha\ueditor\UEditor;
 
     <?= $form->field($model, 'author')->textInput(['maxlength' => true])->hint('可不用填写') ?>
 
-    <? //$form->field($model, 'url')->textInput(['maxlength' => true])->hint('可不填写') ?>
+    <?php //$form->field($model, 'url')->textInput(['maxlength' => true])->hint('可不填写') ?>
 
     <?= $form->field($model, 'content')->widget(UEditor::className(), []) ?>
 
