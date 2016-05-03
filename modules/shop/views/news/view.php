@@ -11,7 +11,7 @@ $js = Weixin::getApplication()->js;
     <title><?= Yii::$app->settings->get('system', 'weixinName') ?></title>
     <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript">
-        wx.config(<?php echo $js->config(array('closeWindow'), false) ?>);
+        wx.config(<?php echo $js->config(['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo'], false) ?>);
         wx.onMenuShareTimeline({
             title: '<?= $model->title ?>'
         });
