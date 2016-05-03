@@ -40,14 +40,21 @@ AdminAsset::register($this);
             #修改使用yii2-admin的菜单控制项
             'items' => [
                 ['label' => '用户', 'url' => ['/admin/user/index']],
+                ['label' => '员工', 'url' => ['/admin/employee/index']],
                 ['label' => '分类', 'url' => ['/admin/category/index']],
                 ['label' => '产品', 'url' => ['/admin/product/index']],
                 ['label' => '订单', 'url' => ['/admin/order/index']],
-                ['label' => '公告', 'url' => ['/admin/notice/index']],
-                ['label' => '员工', 'url' => ['/admin/employee/index']],
+                ['label' => '交易记录', 'url' => ['/admin/trading-record/index']],
                 ['label' => '提现', 'url' => ['/admin/extract/index']],
                 ['label' => '区域', 'url' => ['/admin/region/index']],
-                ['label' => '交易记录', 'url' => ['/admin/trading-record/index']],
+                [
+                    'label' => '内容',
+                    'url' => '#',
+                    'items' => [
+                        ['label' => '公告', 'url' => ['/admin/notice/index']],
+                        ['label' => '新闻', 'url' => ['/admin/news/index']],
+                    ]
+                ],
                 [
                     'label' => '系统',
                     'url' => '#',

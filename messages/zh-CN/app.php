@@ -19,4 +19,5 @@ return [
     'Trading Records' => '交易记录',
     'Users' => '用户',
     'Categories' => '分类',
+    'News' => '新闻',
 ];
