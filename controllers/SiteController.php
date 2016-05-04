@@ -68,7 +68,7 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if(Utils::isInWeixin()){
-            if (!\Yii::$app->user->isGuest) {
+            if (!Yii::$app->user->isGuest) {
                 return $this->redirect(['/shop/']);
             }else{
                 return $this->redirect(['weixin/auth/login']);
@@ -76,7 +76,12 @@ class SiteController extends Controller
         }else{
             $model = new LoginForm();
             if ($model->load(Yii::$app->request->post()) && $model->login()) {
-                return $this->goBack();
+                $url = Yii::$app->session->get('currentUrl');
+                if($url){
+                    $this->redirect($url);
+                }else{
+                    $this->redirect(['/shop/']);
+                }
             }
             return $this->render('login', [
                 'model' => $model,

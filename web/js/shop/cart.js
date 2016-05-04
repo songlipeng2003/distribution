@@ -35,13 +35,13 @@ $(function(){
     // 购买数量
     var number = $('#quantity').val();
     $('#op_plus').click(function(){
-        number ++;
+        number++;
         updateNumber();
     });
 
     $('#op_minus').click(function(){
-        number --;
-        number = number<1 ? number : 1;
+        number--;
+        number = number<1 ? 1 : number;
         updateNumber();
     });
 

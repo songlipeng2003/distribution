@@ -77,8 +77,10 @@ class PingxxController extends Controller
                 $redEnvelop = RedEnvelope::retrieve($object->id);
                 if($redEnvelop){
                     $extract = Extract::findOne($redEnvelop->order_no);
-                    $extract->transactionNo = $redEnvelop->transaction_no;
-                    $extract->finish();
+                    if($extract){
+                        $extract->transactionNo = $redEnvelop->transaction_no;
+                        $extract->finish();
+                    }
                 }
                 break;
             default:

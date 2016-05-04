@@ -20,7 +20,7 @@ $this->title = '个人中心';
 
 <div class="page am-cf">
     <div class="c100 p<?= (int)($user->getThisMonthRate() * 100) ?> big orange proccess-cicle">
-        <span class="title">本月代言费用（元）</span>
+        <span class="title">本月代言费（元）</span>
         <span class="number"><?= $user->monthLimit ?></span>
         <span class="arrow-up"></span>
         <span class="rect">本月剩余 <?= $user->monthLimit - $user->thisMonthIncome ?></span>
@@ -31,14 +31,14 @@ $this->title = '个人中心';
     </div>
 
     <div class="am-text-center">
-        本月累计获得<span class="orange"><?= $user->thisMonthIncome ?></span>元 <span class="orange">继续推广好友</span>
+        本月累计获得<span class="orange"><?= $user->thisMonthIncome ?></span>元 <span class="orange op-qrcode">继续推广好友</span>
     </div>
 </div>
 
 <div class="page userinfo-line">
     <div class="am-cf">
         <div class="am-u-sm-4">
-            <?= Html::img($weixinUser->getAvatarUrl(132), ['class' => 'am-img-thumbnail am-circle', 'style' => "width:80px;"]) ?>
+            <?= Html::img($weixinUser->getAvatarUrl(132), ['class' => 'am-img-thumbnail am-circle', 'style' => "width:80px;float:right;margin-right:15px;"]) ?>
         </div>
         <div class="am-u-sm-4">
             <h2 style="padding-top: 15px;"><?= $user->nickname ?><br/><?= $user->userTypeText ?></h2>
@@ -72,16 +72,21 @@ $this->title = '个人中心';
 <div class="page">
     <ul class="am-list" id="user-collapase">
       <li class="am-panel">
-        <a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}">
+        <a data-am-collapse="{target: '#user-nav'}">
             <i class="am-icon-angle-up am-margin-left-sm"></i>
+            <i class="am-icon-angle-down am-margin-left-sm"></i>
             累计获得代言费<span class="orange">￥<?= $user->totalIncome ?></span>
 
             <span class="am-fr fans-number">共<span class="orange"><?= $user->totalLevelNumber ?></span>位粉丝</span>
         </a>
         <ul class="am-list am-list-static am-collapse" id="user-nav">
-            <li>直接推广粉丝：<?= $user->level1Number ?>人 <span class="am-fr">推荐奖励(<?= Yii::$app->settings->get('system', 'level1Number', 0.08)*100 ?>)% <?= $user->level1Count ?>元</span></li>
-            <li>间接推广粉丝：<?= $user->level2Number ?>人 <span class="am-fr">推荐奖励(<?= Yii::$app->settings->get('system', 'level2Number', 0.07)*100 ?>%) <?= $user->level2Count ?>元</span></li>
-            <li>次级推广粉丝：<?= $user->level3Number ?>人 <span class="am-fr">推荐奖励(<?= Yii::$app->settings->get('system', 'level3Number', 0.08)*100 ?>%) <?= $user->level3Count ?>元</span></li>
+            <li>直接推广粉丝：<?= $user->level1Number ?>人 <span class="am-fr">推荐奖励(<?= $user->level1Rate*100 ?>%) <?= $user->level1Count ?>元</span></li>
+            <li>间接推广粉丝：<?= $user->level2Number ?>人 <span class="am-fr">推荐奖励(<?= $user->level2Rate*100 ?>%) <?= $user->level2Count ?>元</span></li>
+            <li>次级推广粉丝：<?= $user->level3Number ?>人 <span class="am-fr">推荐奖励(<?= $user->level3Rate*100 ?>%) <?= $user->level3Count ?>元</span></li>
+            <?php if($user->userType==User::USER_TYPE_UNLIMITED){ ?>
+            <li>4级推广粉丝：<?= $user->level4Number ?>人 <span class="am-fr">推荐奖励(<?= $user->level4Rate*100 ?>%) <?= $user->level4Count ?>元</span></li>
+            <li>5级推广粉丝：<?= $user->level5Number ?>人 <span class="am-fr">推荐奖励(<?= $user->level5Rate*100 ?>%) <?= $user->level5Count ?>元</span></li>
+            <?php } ?>
         </ul>
       </li>
     </ul>

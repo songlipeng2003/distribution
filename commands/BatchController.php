@@ -7,7 +7,7 @@ use yii\db\Expression;
 use app\models\User;
 use app\models\Employee;
 
-class BatchController extends Controller
+class BatchController extends LockController
 {
     public function actionMonth()
     {
@@ -17,7 +17,7 @@ class BatchController extends Controller
         ], ['userType' => User::USER_TYPE_MEMBER]);
 
         User::updateAll([
-            'monthLimit' => 999999),
+            'monthLimit' => 999999,
             'thisMonthIncome' => 0.0
         ], ['userType' => User::USER_TYPE_UNLIMITED]);
 

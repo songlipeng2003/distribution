@@ -20,18 +20,24 @@ id="">
             </a>
         </li>
         <li >
-            <a href="javascript:void(0)" id="nav-qrcode">
+            <a href="javascript:void(0)" class="op-qrcode">
                 <img src="/img/shop/nav/qrcode.png" alt="">
             </a>
         </li>
     </ul>
 </div>
 
+<div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="loading">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">正在生成中，可能大概需要5-10秒，请稍等...</div>
+    </div>
+</div>
+
 <div class="am-modal am-modal-alert" tabindex="-1" id="qrcode-alert">
     <div class="am-modal-dialog">
         <div class="am-modal-bd">
-            你的专属推广海报已发送！请前往眯糊时光查看<br/>
-            <button class="am-btn am-btn-primary" style="padding: 0.5em 3em" click="wx.closeWindow();">去看看</button>
+            <span id="alert-msg"></span><br/>
+            <button class="am-btn am-btn-primary" style="padding: 0.5em 3em" onclick="wx.closeWindow();">去看看</button>
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn">关闭</span>

@@ -17,40 +17,34 @@ $this->title = $model->name;
     <ul class="am-slides">
         <?php foreach ($images as $key => $image) { ?>
         <li>
-            <?= Html::img($image->getUrl('300*300')) ?>
+            <?= Html::img($image->getUrl()) ?>
         </li>
         <?php } ?>
     </ul>
 </div>
 <div class="page">
     <h1><?= $model->name ?></h1>
-    <?= $model->slogan ?>
+    <span style="color:#6a6968"><?= $model->slogan ?></span>
     <br/><br/>
 
-    <span class="orange">累计销量：</span><?= $model->saledNumber ?>
-    <span class="orange am-fr">购买一份成为代言人</span>
-
-    <div class="price-line">
-        <span class="price">￥<?= $model->price ?></span>
-        <?php if($model->originalPrice){ ?>
-        <del>￥
-            <?= $model->originalPrice ?>
-        </del>
-        <?php } ?>
-        <br/>
-    </div>
+    <span class="orange">累计销量:</span> <?= $model->saledNumber ?>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">快递:</span> 0.00
+    <span class="orange am-fr">购买 <span style="color:black;">1</span> 份成为代言人</span>
 </div>
 
-<div class="page">
+<div class="page product-content">
     <?= $model->content ?>
 </div>
 
-<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default " id="">
-    <ul class="am-navbar-nav am-cf am-avg-sm-1">
-        <li>
-            <a href="<?= Url::to(['cart/quick-checkout', 'id' => $model->id]) ?>" class="">
-                <span class="am-navbar-label">立即购买并成为合伙人</span>
-            </a>
-        </li>
-    </ul>
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default" id="product-buy-bar">
+    <div class="am-u-sm-5">
+        <a href="<?= Url::to(['cart/quick-checkout', 'id' => $model->id]) ?>" class="">
+            <span class="am-navbar-label">活动价仅<?= $model->price ?>元</span>
+        </a>
+    </div>
+    <div class="am-u-sm-7">
+        <a href="<?= Url::to(['cart/quick-checkout', 'id' => $model->id]) ?>" class="">
+            <span class="am-navbar-label">立即购买并成为代言人</span>
+        </a>
+    </div>
 </div>

@@ -8,6 +8,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 use app\models\behaviors\SnBehavior;
+use app\modules\weixin\models\WeixinTemplateMessage;
 
 /**
  * This is the model class for table "order".
@@ -200,6 +201,11 @@ class Order extends BaseModel
             $this->saveAndCheckResult();
 
             $this->product->updateCounters(['saledNumber' => 1]);
+            $user = $this->user;
+            if($user->userType==User::USER_TYPE_NORMAL){
+                $user->userType = User::USER_TYPE_MEMBER;
+                $user->saveAndCheckResult();
+            }
 
             $this->finance();
 
@@ -222,6 +228,18 @@ class Order extends BaseModel
                 $this->status = Order::STATUS_SENDED;
                 $this->sendedAt = date('Y-m-d H:i:s');
                 $this->saveAndCheckResult();
+
+                $data = [
+                    'first' => '您好，您有一个订单已经发货，请及时查看并收货',
+                    'keyword1' => $this->sn,
+                    'keyword2' => $this->statusText,
+                    'keyword3' => date('Y年m月d日 H:i:s'),
+                    'keyword4' => $this->address,
+                    'remark' => '如有疑问，请联系我们。'
+                ];
+
+                WeixinTemplateMessage::send($this->user->weixin, '0FTHOKyLq-YeopYDptUstLD9s-_JUfEa3lHMn-5WWKk', $data);
+
                 return true;
             });
         }
@@ -272,7 +290,7 @@ class Order extends BaseModel
             Yii::$app->settings->get('system', 'level3Number', 0.08)
         ];
 
-        while($parent && $level<10){
+        while($parent && $level<5){
             if($parent->userType==User::USER_TYPE_MEMBER){
                 // 层级限制
                 if($level<3){
@@ -296,7 +314,18 @@ class Order extends BaseModel
 
                         $data['level' . ($level + 1) . 'Count'] = $tradingRecord->amount;
 
-                        $parent->updateCounters();
+                        $parent->updateCounters($data);
+
+                        $data = [
+                            'first' => '您好，您有一个下级支付成功了',
+                            'keyword1' => $this->user->nickname,
+                            'keyword2' => $this->product->name,
+                            'keyword3' => $this->totalAmount,
+                            'keyword4' => date('Y年m月d日 H:i:s'),
+                            'remark' => '感谢你的支持。'
+                        ];
+
+                        WeixinTemplateMessage::send($parent->weixin, '0JkaU3PMrqPaB14gCTJHOM1NVz19_1Snnj7IvWd677s', $data);
                     }
                 }
             }elseif($parent->userType==User::USER_TYPE_UNLIMITED){
@@ -311,10 +340,25 @@ class Order extends BaseModel
                 $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
                 $tradingRecord->saveAndCheckResult();
 
-                $parent->updateCounters([
+                $data = [
                     'thisMonthIncome' => $tradingRecord->amount,
                     'totalIncome' => $tradingRecord->amount
-                ]);
+                ];
+
+                $data['level' . ($level + 1) . 'Count'] = $tradingRecord->amount;
+
+                $parent->updateCounters($data);
+
+                $data = [
+                    'first' => '您好，您有一个下级支付成功了',
+                    'keyword1' => $this->user->nickname,
+                    'keyword2' => $this->product->name,
+                    'keyword3' => $this->totalAmount,
+                    'keyword4' => date('Y年m月d日 H:i:s'),
+                    'remark' => '感谢你的支持。'
+                ];
+
+                WeixinTemplateMessage::send($parent->weixin, '0JkaU3PMrqPaB14gCTJHOM1NVz19_1Snnj7IvWd677s', $data);
             }
 
             $level++;

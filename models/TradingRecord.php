@@ -37,14 +37,20 @@ class TradingRecord extends BaseModel
     // 提现 -
     const TRADING_RECORD_EXTRACT = 3;
 
+    // 红包 +
+    const TRADING_RECORD_RED_PAPER = 4;
+
     const ITEM_TYPE_ORDER = 'order';
 
     const ITEM_TYPE_EXTRACT = 'extract';
 
+    const ITEM_TYPE_USER = 'user';
+
     public static $tradingTypes = [
         self::TRADING_RECORD_INCOME => '收入',
         self::TRADING_RECORD_EXPENSE => '支出',
-        self::TRADING_RECORD_EXTRACT => '提现'
+        self::TRADING_RECORD_EXTRACT => '提现',
+        self::TRADING_RECORD_RED_PAPER => '红包收入'
     ];
 
     /**

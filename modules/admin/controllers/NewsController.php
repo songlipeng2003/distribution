@@ -3,21 +3,16 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-
+use app\models\News;
+use app\models\search\NewsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\Response;
-
-use rico\yii2images\models\Image;
-
-use app\models\Product;
-use app\models\search\ProductSearch;
 
 /**
- * ProductController implements the CRUD actions for Product model.
+ * NewsController implements the CRUD actions for News model.
  */
-class ProductController extends Controller
+class NewsController extends Controller
 {
     public function behaviors()
     {
@@ -36,19 +31,19 @@ class ProductController extends Controller
             'upload' => [
                 'class' => 'kucha\ueditor\UEditorAction',
                 'config' => [
-                    "imagePathFormat" => "/uploads/editor/image/{yyyy}{mm}{dd}/{time}{rand:6}"
+                    "imagePathFormat" => "/uploads/editor/news/{yyyy}{mm}{dd}/{time}{rand:6}"
                 ]
             ]
         ];
     }
 
     /**
-     * Lists all Product models.
+     * Lists all News models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProductSearch();
+        $searchModel = new NewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -58,7 +53,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Displays a single Product model.
+     * Displays a single News model.
      * @param integer $id
      * @return mixed
      */
@@ -70,13 +65,13 @@ class ProductController extends Controller
     }
 
     /**
-     * Creates a new Product model.
+     * Creates a new News model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Product();
+        $model = new News();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -88,7 +83,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Updates an existing Product model.
+     * Updates an existing News model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -106,23 +101,8 @@ class ProductController extends Controller
         }
     }
 
-    public function actionRemoveImage($id, $imageId)
-    {
-        $model = $this->findModel($id);
-
-        $img = Image::findOne($imageId);
-
-        $model->removeImage($img);
-
-        Yii::$app->response->format = Response::FORMAT_JSON;
-
-        return [
-            'result' => 0,
-        ];
-    }
-
     /**
-     * Deletes an existing Product model.
+     * Deletes an existing News model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -135,15 +115,15 @@ class ProductController extends Controller
     }
 
     /**
-     * Finds the Product model based on its primary key value.
+     * Finds the News model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Product the loaded model
+     * @return News the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Product::findOne($id)) !== null) {
+        if (($model = News::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

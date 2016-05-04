@@ -141,6 +141,16 @@ class WeixinRule extends \yii\db\ActiveRecord
                         $parent = User::findOne($parentId);
                         if($parent){
                             $user->parentId = $parent->id;
+                            $user->grandparentId = $parent->parentId;
+
+                            $data = [
+                                'first' => '您好，您有下级会员注册成功。',
+                                'keyword1' => $userInfo->nickname,
+                                'keyword2' => date('Y年m月d日H:i:s'),
+                                'remark' => '您已有下级代言人注册了，快去教他成为代言人吧！'
+                            ];
+
+                            WeixinTemplateMessage::send($parent->weixin, 'LPvczo4tfNWkgFEUpKSRHzS1wpX7-ReKEmLTdEkkRh0', $data);
                         }
                     } 
                 }
@@ -151,9 +161,10 @@ class WeixinRule extends \yii\db\ActiveRecord
             }
         }
 
-        $url = Yii::$app->settings->get('system', 'siteUrl', 'http://mihutime.com/shop/');
+        // $url = Yii::$app->settings->get('system', 'siteUrl', 'http://mihutime.com/shop/');
+        $url = 'http://mihutime.com/shop/news/view?id=1';
 
-        $msg = "欢迎关注“吃货榜样”！我们为你准备了吃货们无法拒绝的进口零食大礼包——“世界这么大，带你吃掉它”，同时也恭喜你成为我们第{$user->id}合伙候选人，你仅需购买一盒大礼包即可获得" . $user->monthLimit . "元合伙人现金奖励，想到现在领取请点击<a href=\"{$url}\">了解更多</a>";
+        $msg = "欢迎关注“眯糊时光”！我们是一个好吃又好玩的零食分销品牌，可以让你在享受零食之余利用闲余时间兼职推广获得高额推广收入。经过系统对你个人影响力的评估，你的每月代言费额度为：【{$user->monthLimit}】元！开启你的“边吃边赚”之路吧！详情请点击<a href=\"{$url}\">了解更多</a>";
         
         $text = new Text();
         $text->content = $msg;

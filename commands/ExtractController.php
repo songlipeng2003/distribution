@@ -5,7 +5,7 @@ use yii\console\Controller;
 
 use app\models\Extract;
 
-class ExtractController extends Controller
+class ExtractController extends LockController
 {
     public function actionIndex()
     {

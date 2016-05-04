@@ -17,7 +17,7 @@ class AuthController extends Controller
         $app = Weixin::getApplication();
         $oauth = $app->oauth;
         if(Yii::$app->user->isGuest){
-            return $oauth->redirect();
+            $oauth->redirect()->send();
         }else{
             return $this->redirect("/shop/");
         }
@@ -47,6 +47,8 @@ class AuthController extends Controller
                 if(!$user){
                     $user = new User();
                     $user->weixin = $openid;
+                    $user->nickname = $oauthUser->getNickname();
+                    $user->avatar = $oauthUser->getAvatar();
                     $user->save();
                 }else{
                     $user->lastLoginedAt = date('Y-m-d H:i:s');
@@ -54,8 +56,12 @@ class AuthController extends Controller
                 }
 
                 Yii::$app->user->login($user, 0);
-
-                $this->redirect("/shop/");
+                $url = Yii::$app->session->get('currentUrl');
+                if($url){
+                    $this->redirect($url);
+                }else{
+                    $this->redirect(['/shop/']);
+                }
             }else{
                 throw new Exception("save user error");
             }

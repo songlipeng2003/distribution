@@ -34,7 +34,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('runtime', 'web/assets', 'web/upl
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :copy_files, ['vendor']
+set :copy_files, ['vendor', 'web/lib']
 
 namespace :deploy do
   task :clear_cache do
@@ -66,6 +66,14 @@ namespace :deploy do
     end
   end
 
+  task :bower do
+    on roles(:app) do
+      within release_path do
+        execute "cd #{release_path}/web && bower install --allow-root"
+      end
+    end
+  end
+
   task :restart do 
     on roles(:app) do
       execute "service php7.0-fpm restart"
@@ -73,6 +81,7 @@ namespace :deploy do
   end
 
   after :updated, "deploy:composer"
+  after :updated, "deploy:bower"
   after :updated, "deploy:migrate"
   after :updated, "deploy:clear_cache"
   # after :updated, "deploy:restart"

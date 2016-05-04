@@ -10,6 +10,8 @@ use Pingpp\Pingpp;
 use Pingpp\RedEnvelope;
 
 use app\models\Finance;
+use app\models\behaviors\SnBehavior;
+use app\modules\weixin\models\WeixinTemplateMessage;
 
 /**
  * 提现
@@ -80,12 +82,15 @@ class Extract extends BaseModel
 
     public function behaviors(){
         return [
-            'timestamp' => [
+            [
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'createdAt',
                 'updatedAtAttribute' => null,
                 'value' => function() { return date('Y-m-d H:i:s'); }
             ],
+            [
+                'class' => SnBehavior::className()
+            ]
         ];
     }
 
@@ -113,6 +118,21 @@ class Extract extends BaseModel
             $tradingRecord->amount = - $this->amount;
             $tradingRecord->name = "提现{$this->amount}元";
             $tradingRecord->saveAndCheckResult();
+
+
+            $finance = Finance::getByUser(Finance::USER_TYPE_USER, $this->userId);
+
+            $data = [
+                'first' => '您好，您刚刚申请提现已经成功',
+                'keyword1' => $this->user->nickname,
+                'keyword2' => date('Y年m月d日 H:i:s'),
+                'keyword3' => $this->amount,
+                'keyword4' => $finance->balance,
+                'keyword5' => '提现',
+                'remark' => '感谢你的使用。'
+            ];
+
+            WeixinTemplateMessage::send($this->user->weixin, 'AcpmPoQ99iu82lK-8UvsXQ1v9dhLp43Qq4N71aHjxHE', $data);
         }
     }
 
@@ -127,7 +147,7 @@ class Extract extends BaseModel
 
         Pingpp::setApiKey($_ENV['PINGXX_APIKEY']);
         $redEnvelope = RedEnvelope::create([
-            'order_no'    => $this->id,
+            'order_no'    => $this->sn,
             'app'         => ['id' => $_ENV['PINGXX_APPKEY']],
             'channel'     => 'wx_pub',//红包基于微信公众帐号，所以渠道是 wx_pub
             'amount'      => $this->toAmount * 100,//金额在 100-20000 之间

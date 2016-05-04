@@ -40,7 +40,8 @@ class User extends BaseModel implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            ['userType', 'integer']
+            ['userType', 'integer'],
+            ['monthLimit', 'integer', 'min' => 1, 'max' => 999999]
         ];
     }
 
@@ -151,9 +152,19 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         return $this->hasOne(User::className(), ['id' => 'parentId']);
     }
 
+    public function getGrandparent()
+    {
+        return $this->hasOne(User::className(), ['id' => 'grandparentId']);
+    }
+
     public function getChildren()
     {
         return $this->hasMany(User::className(), ['parentId' => 'id']);
+    }
+
+    public function getGrandchildren()
+    {
+        return $this->hasMany(User::className(), ['grandparentId' => 'id']);
     }
 
     public function beforeSave($insert)
@@ -162,7 +173,6 @@ class User extends BaseModel implements \yii\web\IdentityInterface
             if($insert){
                 $this->monthLimit = rand(8000, 38888);
             }
-
 
             if($this->userType==self::USER_TYPE_UNLIMITED){
                 $this->monthLimit = 999999;
@@ -179,18 +189,29 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         parent::afterSave($insert, $changedAttributes);
 
         if($insert){
-            if($this->parent){
-                $this->parent->updateLevel1Number();
+            $parent = $this->parent;
+            $i = 1;
 
-                if($this->parent->parent){
-                    $this->parent->parent->updateLevel2Number();
+            while($parent && $i<=5){
+                $method = "updateLevel{$i}Number";
+                $parent->$method();
 
-                    if($this->parent->parent->parent){
-                        $this->parent->parent->parent->updateLevel3Number();
-                    }
-                }
+                $i++;
+                $parent = $parent->parent;
             }
+
+            $tradingRecord = new TradingRecord;
+            $tradingRecord->userId = $this->id;
+            $tradingRecord->userType = Finance::USER_TYPE_USER;
+            $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_RED_PAPER;
+            $tradingRecord->itemId = $this->id;
+            $tradingRecord->itemType = TradingRecord::ITEM_TYPE_USER;
+            $tradingRecord->amount = rand(10, 100) / 100;
+            $tradingRecord->name = "红包收入{$tradingRecord->amount}元";
+            $tradingRecord->saveAndCheckResult();
         }
+
+        //if(isset($changedAttributes['userType'])
     }
 
     public function updateLevel1Number()
@@ -201,16 +222,28 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
     public function updateLevel2Number()
     {
-        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.parentId')->where(['parent.parentId' => $this->id])->count();
+        $number = $this->getGrandchildren()->count();
         return self::updateAll(['level2Number' => $number], ['id' => $this->id]);
     }
 
     public function updateLevel3Number()
     {
-        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.parentId')
-            ->leftJoin('user AS parent2', 'parent2.id=parent.parentId')
-            ->where(['parent2.parentId' => $this->id])->count();
+        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.grandparentId')->where(['parent.parentId' => $this->id])->count();
         return self::updateAll(['level3Number' => $number], ['id' => $this->id]);
+    }
+
+    public function updateLevel4Number()
+    {
+        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.grandparentId')->where(['parent.grandparentId' => $this->id])->count();
+        return self::updateAll(['level4Number' => $number], ['id' => $this->id]);
+    }
+
+    public function updateLevel5Number()
+    {
+        $number = self::find()->leftJoin('user AS parent', 'parent.id=user.grandparentId')
+            ->leftJoin('user AS parent2', 'parent2.id=parent.grandparentId')
+            ->where(['parent2.parentId' => $this->id])->count();
+        return self::updateAll(['level5Number' => $number], ['id' => $this->id]);
     }
 
     public function getOpenid()
@@ -267,15 +300,36 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         $font = Yii::$app->basePath . "/web/font/Yahei.ttf";
         $boldFont = Yii::$app->basePath . "/web/font/Yahei Bold.ttf";
 
-        imagettftext($im, 36, 0, 90, 645, $fontColor, $boldFont, "¥ " . $this->totalIncome);
+        // 总收入
+        imagettftext($im, 36, 0, 90, 645, $fontColor, $boldFont, "¥ " . $this->monthLimit);
 
+        // 名次
         imagettftext($im, 36, 0, 410, 645, $fontColor, $boldFont,  rand(70, 90) . "%");
 
+        // 编号
         imagettftext($im, 18, 0, 195, 696, $fontColor, $font, $this->id);
 
+        // Nickname
         imagettftext($im, 18, 0, 410, 696, $fontColor, $font, $this->nickname);
 
-        $avatar = imagecreatefrompng($this->weixinUser->getAvatarUrl(132));
+        // 头像
+        imagefilledrectangle($im, 256, 382, 256+150+4, 382+150+4, $fontColor);
+
+        $avatar = $this->weixinUser->getAvatarUrl(132);
+
+        if($avatar){
+            $imageType = exif_imagetype($avatar);
+
+            if($imageType==IMAGETYPE_JPEG){
+                $avatar = imagecreatefromjpeg($avatar);
+            }elseif($imageType==IMAGETYPE_PNG){
+                $avatar = imagecreatefrompng($avatar);
+            }elseif($imageType==IMAGETYPE_GIF){
+                $avatar = imagecreatefromgif($avatar);
+            }
+
+            imagecopyresized($im, $avatar, 258, 384, 0, 0, 150, 150, 132, 132);
+        }
 
         // $color = 'FFFFFF';
         // $radius = 66;
@@ -296,8 +350,7 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
         // imagecopymerge($avatar, $cornerImage, 132-$radius, 0, 0, 0, $radius, $radius, 100);
 
-        imagecopyresized($im, $avatar, 258, 384, 0, 0, 150, 150, 132, 132);
-
+        // 二维码
         $tmpPath = Yii::$app->basePath . '/web/uploads/tmp/';
         if(!file_exists($tmpPath)){
             mkdir($tmpPath, 0777, true);
@@ -331,6 +384,45 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
     public function getTotalLevelNumber()
     {
-        return $this->level1Number+$this->level2Number+$this->level3Number;
+        if($this->userType==self::USER_TYPE_UNLIMITED){
+            return $this->level1Number+$this->level2Number+$this->level3Number+$this->level4Number+$this->level5Number;
+        }else{
+            return $this->level1Number+$this->level2Number+$this->level3Number;
+        }
+    }
+
+    public function getLevel1Rate()
+    {
+        return $this->userType==self::USER_TYPE_UNLIMITED ? 
+            Yii::$app->settings->get('system', 'unlimitedNumber', 0.05) :
+            Yii::$app->settings->get('system', 'level1Number', 0.08);
+    }
+
+    public function getLevel2Rate()
+    {
+        return $this->userType==self::USER_TYPE_UNLIMITED ? 
+            Yii::$app->settings->get('system', 'unlimitedNumber', 0.05) :
+            Yii::$app->settings->get('system', 'level2Number', 0.07);
+    }
+
+    public function getLevel3Rate()
+    {
+        return $this->userType==self::USER_TYPE_UNLIMITED ? 
+            Yii::$app->settings->get('system', 'unlimitedNumber', 0.05) :
+            Yii::$app->settings->get('system', 'level3Number', 0.08);
+    }
+
+    public function getLevel4Rate()
+    {
+        return $this->userType==self::USER_TYPE_UNLIMITED ? 
+            Yii::$app->settings->get('system', 'unlimitedNumber', 0.05) :
+            Yii::$app->settings->get('system', 'level4Number');
+    }
+
+    public function getLevel5Rate()
+    {
+        return $this->userType==self::USER_TYPE_UNLIMITED ? 
+            Yii::$app->settings->get('system', 'unlimitedNumber', 0.05) :
+            Yii::$app->settings->get('system', 'level5Number');
     }
 }

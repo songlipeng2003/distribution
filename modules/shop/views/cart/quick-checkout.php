@@ -19,7 +19,7 @@ $this->title = '快速结账';
     <ul class="am-slides">
         <?php foreach ($images as $key => $image) { ?>
         <li>
-            <?= Html::img($image->getUrl('300*300')) ?>
+            <?= Html::img($image->getUrl()) ?>
         </li>
         <?php } ?>
     </ul>
@@ -29,18 +29,17 @@ $this->title = '快速结账';
     <h1>
         <?= $model->name ?>
         <div class="am-fr">
-            <img src="/img/shop/minus.jpg" alt="" id="op_minus" style="width: 35px;">
-            <span data-number style="font-size: 26px; padding: 4px 5px;">1</span>
-            <img src="/img/shop/plus.jpg" alt="" id="op_plus" style="width: 35px;">
+            <img src="/img/shop/minus.jpg" alt="" id="op_minus" style="width: 30px;">
+            <span data-number style="font-size: 26px; padding: 5px;">1</span>
+            <img src="/img/shop/plus.jpg" alt="" id="op_plus" style="width: 30px;">
         </div>
     </h1>
 
     购物总计：已选<span class="orange" data-number>1</span>份
     共计 <span class="orange" data-price="<?= $model->price ?>" data-total-price><?= $model->price ?></span>元
 
-    <hr>
     <h3>购买须知</h3>
-    <p>
+    <p style="color:#a5a5a5;">
     感谢您对眯糊时光的支持，同时也恭喜您购买成功后就成为我们的代言人
     ，可以在帮助我们推广品牌的同时获得不菲的代言费回报。请您在购买时
     填写详细的收货地址信息和电话，以确保能快速的收到货物
@@ -95,7 +94,7 @@ $this->title = '快速结账';
     <div class="am-form-group">
         <label class="am-u-sm-4 am-form-label">备注</label>
         <div class="am-u-sm-8">
-            <input type="text" name="QuickCheckoutForm[remark]" placeholder="">
+            <input type="text" name="QuickCheckoutForm[remark]" placeholder="非必填">
         </div>
     </div>
 </form>
@@ -105,7 +104,7 @@ $this->title = '快速结账';
     <ul class="am-navbar-nav am-cf am-avg-sm-1">
         <li>
             <a id="checkout" href="<?= Url::to(['cart/quick-checkout', 'id' => $model->id]) ?>" class="">
-                <span class="am-navbar-label">立即支付<span data-total-price></span>成为代言人</span>
+                <span class="am-navbar-label">立即支付<span data-total-price><?= $model->price ?></span>成为代言人</span>
             </a>
         </li>
     </ul>
