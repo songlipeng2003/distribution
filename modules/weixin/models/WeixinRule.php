@@ -164,9 +164,7 @@ class WeixinRule extends \yii\db\ActiveRecord
         // $url = Yii::$app->settings->get('system', 'siteUrl', 'http://mihutime.com/shop/');
         $url = 'http://mihutime.com/shop/news/view?id=1';
 
-        $msg = "欢迎关注“眯糊时光”！
-        我们是一个好吃又好玩的零食分销品牌，可以让你在享受零食之余利用闲余时间兼职推广获得高额推广收入。经过系统对你个人影响力的评估，你的每月代言费额度为：【{$user->monthLimit}】元！
-        开启你的“边吃边赚”之路吧！详情请点击<a href=\"{$url}\">了解更多</a>";
+        $msg = "欢迎关注“眯糊时光”！我们是一个好吃又好玩的零食分销品牌，可以让你在享受零食之余利用闲余时间兼职推广获得高额推广收入。经过系统对你个人影响力的评估，你的每月代言费额度为：【{$user->monthLimit}】元！开启你的“边吃边赚”之路吧！详情请点击<a href=\"{$url}\">了解更多</a>";
         
         $text = new Text();
         $text->content = $msg;
