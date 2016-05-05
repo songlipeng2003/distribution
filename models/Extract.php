@@ -142,28 +142,30 @@ class Extract extends BaseModel
             throw new \Exception("error extract status");
         }
 
-        $this->toAmount = $this->amount - 1;
-        $this->status = self::STATUS_PROCESSED;
+        return Yii::$app->db->transaction(function(){
+            $this->toAmount = $this->amount - 1;
+            $this->status = self::STATUS_PROCESSED;
 
-        Pingpp::setApiKey($_ENV['PINGXX_APIKEY']);
-        $redEnvelope = RedEnvelope::create([
-            'order_no'    => $this->sn,
-            'app'         => ['id' => $_ENV['PINGXX_APPKEY']],
-            'channel'     => 'wx_pub',//红包基于微信公众帐号，所以渠道是 wx_pub
-            'amount'      => $this->toAmount * 100,//金额在 100-20000 之间
-            'currency'    => 'cny',
-            'subject'     => '提现',
-            'body'        => '提现',
-            'extra'       => [
-                "nick_name" => "提现",
-                "send_name" => "眯糊时光"
-            ],//extra 需填入的参数请参阅 API 文档
-            'recipient'   => $this->user->weixin,//指定用户的 open_id
-            'description' => '提现'
-        ]);
+            Pingpp::setApiKey($_ENV['PINGXX_APIKEY']);
+            $redEnvelope = RedEnvelope::create([
+                'order_no'    => $this->sn,
+                'app'         => ['id' => $_ENV['PINGXX_APPKEY']],
+                'channel'     => 'wx_pub',//红包基于微信公众帐号，所以渠道是 wx_pub
+                'amount'      => $this->toAmount * 100,//金额在 100-20000 之间
+                'currency'    => 'cny',
+                'subject'     => '提现',
+                'body'        => '提现',
+                'extra'       => [
+                    "nick_name" => "提现",
+                    "send_name" => "眯糊时光"
+                ],//extra 需填入的参数请参阅 API 文档
+                'recipient'   => $this->user->weixin,//指定用户的 open_id
+                'description' => '提现'
+            ]);
 
-        $this->weixinRedEnvelope = $redEnvelope->id;
-        return $this->save();
+            $this->weixinRedEnvelope = $redEnvelope->id;
+            return $this->saveAndCheckResult();
+        });
     }
 
     public function finish()
