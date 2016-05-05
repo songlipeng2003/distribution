@@ -55,7 +55,7 @@ class Extract extends BaseModel
             [['amount'], 'integer', 'min' => 5, 'max' => 200],
             ['amount', function($attribute, $params){
                 $finance = Finance::getByUser(Finance::USER_TYPE_USER, $this->userId);
-                if($finance->balance<$this->amount){
+                if($this->isNewRecord && $finance->balance<$this->amount){
                     $this->addError($attribute, "余额不足");
                 }
             }]
