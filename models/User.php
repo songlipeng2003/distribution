@@ -401,7 +401,7 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         if($this->userType==self::USER_TYPE_UNLIMITED){
             return Yii::$app->settings->get('system', 'unlimitedNumber', 0.05);
         }elseif($this->userType==self::USER_TYPE_OFFICIAL){
-            return Yii::$app->settings->get('system', 'levelOfficialNumber', 0.05);
+            return Yii::$app->settings->get('system', 'levelOfficialNumber', 0.20);
         }else{
             return Yii::$app->settings->get('system', 'level1Number', 0.08);
         }   

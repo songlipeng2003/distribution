@@ -303,7 +303,7 @@ class Order extends BaseModel
                         $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
                         $tradingRecord->itemId = $this->id;
                         $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
-                        $tradingRecord->amount = $this->totalAmount * Yii::$app->settings->get('system', 'levelOfficialNumber', 0.05);
+                        $tradingRecord->amount = $this->totalAmount * Yii::$app->settings->get('system', 'levelOfficialNumber', 0.20);
                         $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
                         $tradingRecord->saveAndCheckResult();
 
