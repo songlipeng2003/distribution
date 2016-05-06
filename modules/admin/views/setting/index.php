@@ -68,6 +68,8 @@ $this->title = '系统配置';
                     <?= $form->field($model, 'level3Number')->textInput() ?>
 
                     <?= $form->field($model, 'levelUnlimitedNumber')->textInput() ?>
+
+                    <?= $form->field($model, 'levelOfficialNumber')->textInput() ?>
                 </div>
             </div>
 

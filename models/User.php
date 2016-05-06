@@ -20,10 +20,13 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
     const USER_TYPE_UNLIMITED = 3;
 
+    const USER_TYPE_OFFICIAL = 4;
+
     public static $userTypes = [
         self::USER_TYPE_NORMAL => '代言人候选人',
         self::USER_TYPE_MEMBER => '代言人',
         self::USER_TYPE_UNLIMITED => '超级代言人',
+        self::USER_TYPE_OFFICIAL => '官方代言人'
     ];
 
     /**
@@ -386,6 +389,8 @@ class User extends BaseModel implements \yii\web\IdentityInterface
     {
         if($this->userType==self::USER_TYPE_UNLIMITED){
             return $this->level1Number+$this->level2Number+$this->level3Number+$this->level4Number+$this->level5Number;
+        }elseif($this->userType==self::USER_TYPE_OFFICIAL){
+            return $this->level1Number;
         }else{
             return $this->level1Number+$this->level2Number+$this->level3Number;
         }
@@ -393,9 +398,13 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
     public function getLevel1Rate()
     {
-        return $this->userType==self::USER_TYPE_UNLIMITED ? 
-            Yii::$app->settings->get('system', 'unlimitedNumber', 0.05) :
-            Yii::$app->settings->get('system', 'level1Number', 0.08);
+        if($this->userType==self::USER_TYPE_UNLIMITED){
+            return Yii::$app->settings->get('system', 'unlimitedNumber', 0.05);
+        }elseif($this->userType==self::USER_TYPE_OFFICIAL){
+            return Yii::$app->settings->get('system', 'levelOfficialNumber', 0.05);
+        }else{
+            return Yii::$app->settings->get('system', 'level1Number', 0.08);
+        }   
     }
 
     public function getLevel2Rate()

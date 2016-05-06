@@ -294,8 +294,42 @@ class Order extends BaseModel
             if($parent->userType==User::USER_TYPE_MEMBER){
                 // 层级限制
                 if($level<3){
-                    // 每月限额限制
-                    if($parent->monthLimit > $parent->thisMonthIncome + $this->totalAmount * $levels[$level]){
+                    // 官方用户
+                    if($this->userType==User::USER_TYPE_OFFICIAL && $level==1){
+                        // 官方用户交易流水
+                        $tradingRecord = new TradingRecord;
+                        $tradingRecord->userId = $parent->id;
+                        $tradingRecord->userType = Finance::USER_TYPE_USER;
+                        $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
+                        $tradingRecord->itemId = $this->id;
+                        $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
+                        $tradingRecord->amount = $this->totalAmount * Yii::$app->settings->get('system', 'levelOfficialNumber', 0.05);
+                        $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
+                        $tradingRecord->saveAndCheckResult();
+
+                        $data = [
+                            'thisMonthIncome' => $tradingRecord->amount,
+                            'totalIncome' => $tradingRecord->amount
+                        ];
+
+                        $data['level' . ($level + 1) . 'Count'] = $tradingRecord->amount;
+
+                        $parent->updateCounters($data);
+
+                        $data = [
+                            'first' => '您好，您有一个下级支付成功了',
+                            'keyword1' => $this->user->nickname,
+                            'keyword2' => $this->product->name,
+                            'keyword3' => $this->totalAmount,
+                            'keyword4' => date('Y年m月d日 H:i:s'),
+                            'remark' => '感谢你的支持。'
+                        ];
+
+                        WeixinTemplateMessage::send($parent->weixin, '0JkaU3PMrqPaB14gCTJHOM1NVz19_1Snnj7IvWd677s', $data);
+                    }
+
+                    // 每月限额限制 会员用户
+                    if($this->userType == User::USER_TYPE_MEMBER && $parent->monthLimit > $parent->thisMonthIncome + $this->totalAmount * $levels[$level]){
                         // 用户交易流水
                         $tradingRecord = new TradingRecord;
                         $tradingRecord->userId = $parent->id;

@@ -81,8 +81,12 @@ $this->title = '个人中心';
         </a>
         <ul class="am-list am-list-static am-collapse" id="user-nav">
             <li>直接推广粉丝：<?= $user->level1Number ?>人 <span class="am-fr">推荐奖励(<?= $user->level1Rate*100 ?>%) <?= $user->level1Count ?>元</span></li>
+
+            <?php if($user->userType==User::USER_TYPE_MEMBER){ ?>
             <li>间接推广粉丝：<?= $user->level2Number ?>人 <span class="am-fr">推荐奖励(<?= $user->level2Rate*100 ?>%) <?= $user->level2Count ?>元</span></li>
             <li>次级推广粉丝：<?= $user->level3Number ?>人 <span class="am-fr">推荐奖励(<?= $user->level3Rate*100 ?>%) <?= $user->level3Count ?>元</span></li>
+            <?php } ?>
+            
             <?php if($user->userType==User::USER_TYPE_UNLIMITED){ ?>
             <li>4级推广粉丝：<?= $user->level4Number ?>人 <span class="am-fr">推荐奖励(<?= $user->level4Rate*100 ?>%) <?= $user->level4Count ?>元</span></li>
             <li>5级推广粉丝：<?= $user->level5Number ?>人 <span class="am-fr">推荐奖励(<?= $user->level5Rate*100 ?>%) <?= $user->level5Count ?>元</span></li>
