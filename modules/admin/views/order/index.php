@@ -55,15 +55,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {send}',
+                'template' => '{view} {send} {print}',
                 'buttons' => [
                     'send' => function($url, $model, $key){
                         return Html::a('发货', $url);
+                    },
+                    'print' => function($url, $model, $key){
+                        return Html::a('打印快递单', $url);
                     }
                 ],
                 'visibleButtons' => [
                     'send' => function($model){
                         return $model->status==Order::STATUS_PAYED;
+                    },
+                    'print' => function($model){
+                        return $model->status!=Order::STATUS_UNPAYED;
                     },
                 ]
             ],
