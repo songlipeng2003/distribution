@@ -295,7 +295,7 @@ class Order extends BaseModel
                 // 层级限制
                 if($level<3){
                     // 每月限额限制 会员用户
-                    if($this->userType == User::USER_TYPE_MEMBER && $parent->monthLimit > $parent->thisMonthIncome + $this->totalAmount * $levels[$level]){
+                    if($parent->monthLimit > $parent->thisMonthIncome + $this->totalAmount * $levels[$level]){
                         // 用户交易流水
                         $tradingRecord = new TradingRecord;
                         $tradingRecord->userId = $parent->id;
@@ -359,7 +359,7 @@ class Order extends BaseModel
                 ];
 
                 WeixinTemplateMessage::send($parent->weixin, '0JkaU3PMrqPaB14gCTJHOM1NVz19_1Snnj7IvWd677s', $data);
-            }elseif($this->userType==User::USER_TYPE_OFFICIAL){
+            }elseif($parent->userType==User::USER_TYPE_OFFICIAL){
                 if($level==1){
                     // 官方用户交易流水
                     $tradingRecord = new TradingRecord;
