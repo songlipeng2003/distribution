@@ -21,7 +21,7 @@ $this->title = '吃货榜样';
 </div> -->
 <?php } ?>
 
-<img src="/img/shop/notice-1.jpg" alt="" style="margin-bottom: 10px;">
+<img src="/img/shop/notice-2.jpg" alt="" style="margin-bottom: 10px;">
 
 <?php foreach ($products as $product) { ?>
     <div class="product-item">
