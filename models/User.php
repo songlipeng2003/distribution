@@ -294,7 +294,7 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
     public function genPoster()
     {
-        $img = Yii::$app->basePath . '/web/img/shop/qrcode-bg.jpg';
+        $img = Yii::$app->basePath . '/web/img/shop/poster-bg.jpg';
 
         $im = imagecreatefromjpeg($img);
 
@@ -304,19 +304,19 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         $boldFont = Yii::$app->basePath . "/web/font/Yahei Bold.ttf";
 
         // 总收入
-        imagettftext($im, 36, 0, 90, 645, $fontColor, $boldFont, "¥ " . $this->monthLimit);
+        // imagettftext($im, 36, 0, 90, 645, $fontColor, $boldFont, "¥ " . $this->monthLimit);
 
         // 名次
-        imagettftext($im, 36, 0, 410, 645, $fontColor, $boldFont,  rand(70, 90) . "%");
+        // imagettftext($im, 36, 0, 410, 645, $fontColor, $boldFont,  rand(70, 90) . "%");
 
         // 编号
-        imagettftext($im, 18, 0, 195, 696, $fontColor, $font, $this->id);
+        // imagettftext($im, 18, 0, 195, 696, $fontColor, $font, $this->id);
 
         // Nickname
-        imagettftext($im, 18, 0, 410, 696, $fontColor, $font, $this->nickname);
+        // imagettftext($im, 18, 0, 410, 696, $fontColor, $font, $this->nickname);
 
         // 头像
-        imagefilledrectangle($im, 256, 382, 256+150+4, 382+150+4, $fontColor);
+        // imagefilledrectangle($im, 131, 529, 132+59+2, 530+59+2, $fontColor);
 
         $avatar = $this->weixinUser->getAvatarUrl(132);
 
@@ -331,7 +331,7 @@ class User extends BaseModel implements \yii\web\IdentityInterface
                 $avatar = imagecreatefromgif($avatar);
             }
 
-            imagecopyresized($im, $avatar, 258, 384, 0, 0, 150, 150, 132, 132);
+            imagecopyresized($im, $avatar, 132, 531, 0, 0, 59, 59, 132, 132);
         }
 
         // $color = 'FFFFFF';
@@ -365,7 +365,7 @@ class User extends BaseModel implements \yii\web\IdentityInterface
 
         $qrcode = imagecreatefrompng($tmp);
 
-        imagecopyresized($im, $qrcode, 97, 833, 0, 0, 214, 214, 350, 350);
+        imagecopyresized($im, $qrcode, 220, 690, 0, 0, 198, 198, 350, 350);
 
         $filename = uniqid() . '.jpg';
         $path = Yii::$app->basePath . '/web/images/qrcode/';
