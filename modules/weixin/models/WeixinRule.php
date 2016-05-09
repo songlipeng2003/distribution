@@ -161,11 +161,10 @@ class WeixinRule extends \yii\db\ActiveRecord
             }
         }
 
-        // $url = Yii::$app->settings->get('system', 'siteUrl', 'http://mihutime.com/shop/');
         $url = 'http://mihutime.com/shop/news/view?id=1';
-
-        $msg = "欢迎关注“眯糊时光”！
-{$user->nickname}，我们正在招募兼职代言人帮助我们推广，你只需要在闲余时间在网上推广好友购买就可以获得高额推广工资！经过系统对你的微信朋友圈影响力的分析，我们愿意以每月【{$user->monthLimit}】元的工资聘请你为我们的品牌代言人，成为代言人请点<a href=\"{$url}\">了解更多！</a>";
+        $msg = "欢迎关注，恭喜你成为眯糊时光第【{$user->id}】位代言人候选人，
+我们为你准备了吃货不能抗拒的全球22款畅销零食大礼包，选购零食<a href='http://mihutime.com/shop/'>点击这里</a>，如果想了解我们的代言
+人模式<a href=\"{$url}\">请点击这里</a>。";
         
         $text = new Text();
         $text->content = $msg;
