@@ -31,7 +31,7 @@ $this->title = '个人中心';
     </div>
 
     <div class="am-text-center">
-        本月累计获得<span class="orange"><?= $user->thisMonthIncome ?></span>元 <span class="orange op-qrcode">继续推广好友</span>
+        本月获得推广奖励<span class="orange"><?= $user->thisMonthIncome ?></span>元 <span class="orange op-qrcode">继续推广好友</span>
     </div>
 </div>
 
@@ -61,7 +61,7 @@ $this->title = '个人中心';
 
 <div class="page extract-line">
     <img src="/img/shop/extract.png" alt=""style="height: 18px; width: auto">
-    代言费余额（元）<span class="orange"><?= $finance->balance ?></span>
+    我的余额（元）<span class="orange"><?= $finance->balance ?></span>
     
     <a class="am-fr" href="<?= Url::to(['/shop/user/extract/create']) ?>">
         提现
@@ -75,7 +75,7 @@ $this->title = '个人中心';
         <a data-am-collapse="{target: '#user-nav'}">
             <i class="am-icon-angle-up am-margin-left-sm"></i>
             <i class="am-icon-angle-down am-margin-left-sm"></i>
-            累计获得代言费<span class="orange">￥<?= $user->totalIncome ?></span>
+            累计获得奖励<span class="orange">￥<?= $user->totalIncome ?></span>
 
             <span class="am-fr fans-number">共<span class="orange"><?= $user->totalLevelNumber ?></span>位粉丝</span>
         </a>
