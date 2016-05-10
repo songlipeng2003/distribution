@@ -294,39 +294,38 @@ class Order extends BaseModel
             if($parent->userType==User::USER_TYPE_MEMBER){
                 // 层级限制
                 if($level<3){
-                    // 每月限额限制 会员用户
-                    if($parent->monthLimit > $parent->thisMonthIncome + $this->totalAmount * $levels[$level]){
-                        // 用户交易流水
-                        $tradingRecord = new TradingRecord;
-                        $tradingRecord->userId = $parent->id;
-                        $tradingRecord->userType = Finance::USER_TYPE_USER;
-                        $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
-                        $tradingRecord->itemId = $this->id;
-                        $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
-                        $tradingRecord->amount = $this->totalAmount * $levels[$level];
-                        $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
-                        $tradingRecord->saveAndCheckResult();
+                    // 用户交易流水
+                    $tradingRecord = new TradingRecord;
+                    $tradingRecord->userId = $parent->id;
+                    $tradingRecord->userType = Finance::USER_TYPE_USER;
+                    $tradingRecord->tradingType = TradingRecord::TRADING_RECORD_INCOME;
+                    $tradingRecord->itemId = $this->id;
+                    $tradingRecord->itemType = TradingRecord::ITEM_TYPE_ORDER;
+                    $tradingRecord->amount = $this->totalAmount * $levels[$level];
+                    $tradingRecord->name = "收入订单{$tradingRecord->amount}元分成收入";
+                    $tradingRecord->saveAndCheckResult();
 
-                        $data = [
-                            'thisMonthIncome' => $tradingRecord->amount,
-                            'totalIncome' => $tradingRecord->amount
-                        ];
+                    $data = [
+                        'thisMonthIncome' => $tradingRecord->amount,
+                        'totalIncome' => $tradingRecord->amount,
+                        'thisMonthSaleroom' => $this->totalAmount,
+                        'totalSaleroom' => $this->totalAmount,
+                    ];
 
-                        $data['level' . ($level + 1) . 'Count'] = $tradingRecord->amount;
+                    $data['level' . ($level + 1) . 'Count'] = $tradingRecord->amount;
 
-                        $parent->updateCounters($data);
+                    $parent->updateCounters($data);
 
-                        $data = [
-                            'first' => '您好，您有一个下级支付成功了',
-                            'keyword1' => $this->user->nickname,
-                            'keyword2' => $this->product->name,
-                            'keyword3' => $this->totalAmount,
-                            'keyword4' => date('Y年m月d日 H:i:s'),
-                            'remark' => '感谢你的支持。'
-                        ];
+                    $data = [
+                        'first' => '您好，您有一个下级支付成功了',
+                        'keyword1' => $this->user->nickname,
+                        'keyword2' => $this->product->name,
+                        'keyword3' => $this->totalAmount,
+                        'keyword4' => date('Y年m月d日 H:i:s'),
+                        'remark' => '感谢你的支持。'
+                    ];
 
-                        WeixinTemplateMessage::send($parent->weixin, '0JkaU3PMrqPaB14gCTJHOM1NVz19_1Snnj7IvWd677s', $data);
-                    }
+                    WeixinTemplateMessage::send($parent->weixin, '0JkaU3PMrqPaB14gCTJHOM1NVz19_1Snnj7IvWd677s', $data);
                 }
             }elseif($parent->userType==User::USER_TYPE_UNLIMITED){
                 // 无限级用户 ，其实是最多10级
@@ -342,7 +341,9 @@ class Order extends BaseModel
 
                 $data = [
                     'thisMonthIncome' => $tradingRecord->amount,
-                    'totalIncome' => $tradingRecord->amount
+                    'totalIncome' => $tradingRecord->amount,
+                    'thisMonthSaleroom' => $this->totalAmount,
+                    'totalSaleroom' => $this->totalAmount,
                 ];
 
                 $data['level' . ($level + 1) . 'Count'] = $tradingRecord->amount;
@@ -374,7 +375,9 @@ class Order extends BaseModel
 
                     $data = [
                         'thisMonthIncome' => $tradingRecord->amount,
-                        'totalIncome' => $tradingRecord->amount
+                        'totalIncome' => $tradingRecord->amount,
+                        'thisMonthSaleroom' => $this->totalAmount,
+                        'totalSaleroom' => $this->totalAmount,
                     ];
 
                     $data['level' . ($level + 1) . 'Count'] = $tradingRecord->amount;

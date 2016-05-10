@@ -56,10 +56,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->employee ? $model->employee->name : null;
                 }
             ],
-            [
-                'attribute' =>'monthLimit',
-                'headerOptions' => ['style' => 'width:50px']
-            ],
+            // [
+            //     'attribute' =>'monthLimit',
+            //     'headerOptions' => ['style' => 'width:50px']
+            // ],
             [
                 'attribute' =>'thisMonthIncome',
                 'headerOptions' => ['style' => 'width:50px']

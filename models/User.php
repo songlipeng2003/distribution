@@ -44,7 +44,7 @@ class User extends BaseModel implements \yii\web\IdentityInterface
     {
         return [
             ['userType', 'integer'],
-            ['monthLimit', 'integer', 'min' => 1, 'max' => 999999]
+            // ['monthLimit', 'integer', 'min' => 1, 'max' => 999999]
         ];
     }
 
@@ -72,7 +72,9 @@ class User extends BaseModel implements \yii\web\IdentityInterface
             'level2Number' => '2级下线数',
             'level3Number' => '3级下线数',
             'nickname' => '昵称',
-            'employeeId' => '员工'
+            'employeeId' => '员工',
+            'thisMonthSaleroom' => '本月销售额',
+            'totalSaleroom' => '总销售额'
         ];
     }
 
@@ -173,13 +175,13 @@ class User extends BaseModel implements \yii\web\IdentityInterface
     public function beforeSave($insert)
     {
         if(parent::beforeSave($insert)){
-            if($insert){
-                $this->monthLimit = rand(8000, 38888);
-            }
+            // if($insert){
+            //     $this->monthLimit = rand(8000, 38888);
+            // }
 
-            if($this->userType==self::USER_TYPE_UNLIMITED){
-                $this->monthLimit = 999999;
-            }
+            // if($this->userType==self::USER_TYPE_UNLIMITED){
+            //     $this->monthLimit = 999999;
+            // }
 
             return true;
         }
@@ -269,10 +271,10 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         return $this->hasMany(Order::className(), ['userId' => 'id']);
     }
 
-    public function getThisMonthRate()
-    {
-        return $this->thisMonthIncome / $this->monthLimit;
-    }
+    // public function getThisMonthRate()
+    // {
+    //     return $this->thisMonthIncome / $this->monthLimit;
+    // }
 
     public function getUserTypeText()
     {

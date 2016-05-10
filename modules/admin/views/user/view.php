@@ -40,9 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'level2Number',
             'level3Number',
             'employeeId',
-            'monthLimit',
+            // 'monthLimit',
             'thisMonthIncome',
             'totalIncome',
+            'thisMonthSaleroom',
+            'totalSaleroom',
             [
                 'attribute' => 'userType',
                 'value' => $model->userTypeText

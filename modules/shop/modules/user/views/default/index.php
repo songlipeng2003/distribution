@@ -19,11 +19,11 @@ $this->title = '个人中心';
 </header>
 
 <div class="page am-cf">
-    <div class="c100 p<?= (int)($user->getThisMonthRate() * 100) ?> big orange proccess-cicle">
-        <span class="title">本月代言费（元）</span>
-        <span class="number"><?= $user->monthLimit ?></span>
+    <div class="c100 p00 big orange proccess-cicle">
+        <span class="title">本月销售额（元）</span>
+        <span class="number"><?= $user->thisMonthSaleroom ?></span>
         <span class="arrow-up"></span>
-        <span class="rect">本月剩余 <?= $user->monthLimit - $user->thisMonthIncome ?></span>
+        <span class="rect">累计销售额 <?= $user->totalSaleroom ?></span>
         <div class="slice">
             <div class="bar"></div>
             <div class="fill"></div>
@@ -95,11 +95,5 @@ $this->title = '个人中心';
       </li>
     </ul>
 </div>
-<!-- 
-分红完成度 <?= number_format($user->getThisMonthRate() * 100, 2) ?>% 总计<span class="price"><?= $user->monthLimit ?></span>元分红
-<div class="am-progress am-progress-xs">
-    <div class="am-progress-bar" style="width: <?= number_format($user->getThisMonthRate() * 100, 2) ?>%"></div>
-</div>
-累计获得：<?= $user->totalIncome ?>元 剩余可获得 <?= $user->monthLimit - $user->thisMonthIncome ?>元 -->
 
 <?= $this->render('../elements/bottom') ?>

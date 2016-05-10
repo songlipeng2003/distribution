@@ -23,6 +23,9 @@ $config = [
             ],
         ],
         'db' => $db,
+        'settings' => [
+            'class' => 'yii2mod\settings\components\Settings',
+        ],
     ],
     'params' => $params,
     /*
