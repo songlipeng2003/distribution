@@ -161,7 +161,7 @@ class WeixinRule extends \yii\db\ActiveRecord
             }
         }
 
-        $url = 'http://mihutime.com/shop/news/view?id=1';
+        $url = 'http://mihutime.com/shop/news/view?id=4';
         $msg = "欢迎关注，恭喜你成为眯糊时光第【{$user->id}】位代言人候选人，
 我们为你准备了吃货不能抗拒的全球22款畅销零食大礼包，选购零食<a href='http://mihutime.com/shop/'>点击这里</a>，如果想了解我们的代言
 人模式<a href=\"{$url}\">请点击这里</a>。";
